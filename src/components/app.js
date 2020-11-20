@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import Header from '../components/header';
+import Header from './Header';
 
-import PageMap from '../components/page-map';
-import PageLogin from '../components/page-login';
-import PageProfile from '../components/page-profile';
-import PageReg from '../components/page-registration';
-import {navUrl as navPath} from '../components/nav';
+import PageMap from './PageMap';
+import PageLogin from './PageLogin';
+import PageProfile from './PageProfile';
+import PageReg from './PageRegistration';
+import {navUrl as navPath} from './Nav';
 
 const REDIRECT_URL = navPath.MAP.path;
 
@@ -15,15 +15,15 @@ export default class App extends Component {
     navUrl: REDIRECT_URL,
   };
 
-  handleNavClick = (navUrl, evt) => {
-    evt.preventDefault();
+  handleNavClick = (e, navUrl) => {
+    e.preventDefault();
     this.setState({
       navUrl: navUrl,
     });
   };
 
-  handleFormSubmit = (evt) => {
-    evt.preventDefault();
+  handleFormSubmit = (e) => {
+    e.preventDefault();
     this.setState({
       navUrl: REDIRECT_URL,
     });
@@ -32,28 +32,17 @@ export default class App extends Component {
   render() {
     const {navUrl} = this.state;
 
+    const pagesWithoutHeader = new Set([navPath.LOGIN.path, navPath.REGISTRATION.path]);
+    const layoutWithoutHeader = pagesWithoutHeader.has(navUrl) ? ' layout--without_header' : '';
+
     return (
-      <div className={ 'container' +
-            ((navUrl === navPath.LOGIN.path || navUrl === navPath.REGISTRATION.path)
-              ? ' container--column'
-              : '')}
-      >
+      <div className={'layout' + layoutWithoutHeader}>
         <Header handleNavClick={this.handleNavClick} navUrl={navUrl} />
         <main className="main">
-          {(() => {
-            switch (navUrl) {
-              case navPath.MAP.path:
-                return <PageMap />;
-              case navPath.PROFILE.path:
-                return <PageProfile handleFormSubmit={this.handleFormSubmit} />;
-              case navPath.LOGIN.path:
-                return <PageLogin handleFormSubmit={this.handleFormSubmit} />;
-              case navPath.REGISTRATION.path:
-                return <PageReg handleFormSubmit={this.handleFormSubmit} />;
-              default:
-                return <div>404</div>;
-            }
-          })()}
+          {navUrl === navPath.MAP.path && <PageMap />}
+          {navUrl === navPath.PROFILE.path && <PageProfile handleFormSubmit={this.handleFormSubmit} />}
+          {navUrl === navPath.LOGIN.path && <PageLogin handleFormSubmit={this.handleFormSubmit} />}
+          {navUrl === navPath.REGISTRATION.path && <PageReg handleFormSubmit={this.handleFormSubmit} />}
         </main>
       </div>
     );

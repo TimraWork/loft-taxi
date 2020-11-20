@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBoundary from '../components/error-boundary';
+import ErrorBoundary from './ErrorBoundary';
 
 export const navUrl = {
   MAP: {
@@ -22,23 +22,21 @@ export const navUrl = {
 
 const NAVIGATION_ITEMS = Object.values(navUrl);
 
-const Nav = ({handleNavClick, navUrl}) => {
-  return (
-    <ErrorBoundary>
-      <nav className="nav">
-        {NAVIGATION_ITEMS.map((item) => (
-          <a
-            href={item.path}
-            className={'nav__item' + (navUrl === item.path ? ' nav__item--active' : '')}
-            key={item.path}
-            onClick={(evt) => handleNavClick(item.path, evt)}
-          >
-            {item.name}
-          </a>
-        ))}
-      </nav>
-    </ErrorBoundary>
-  );
-};
+const Nav = ({handleNavClick, navUrl}) => (
+  <ErrorBoundary>
+    <nav className="nav">
+      {NAVIGATION_ITEMS.map((item) => (
+        <a
+          href={item.path}
+          className={'nav__item' + (navUrl === item.path ? ' nav__item--active' : '')}
+          key={item.path}
+          onClick={(e) => handleNavClick(e, item.path)}
+        >
+          {item.name}
+        </a>
+      ))}
+    </nav>
+  </ErrorBoundary>
+);
 
 export default Nav;

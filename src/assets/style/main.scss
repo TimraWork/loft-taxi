@@ -61,17 +61,24 @@ a {
 }
 
 .w {
-  &--580 {
-    width: 580px;
-  }
   &--350 {
-    width: 350px;
+    width: 350px !important;
+  }
+  &--580 {
+    width: 580px !important;
   }
   &--600 {
-    width: 600px;
+    width: 600px !important;
   }
   &--880 {
-    width: 880px;
+    width: 880px !important;
+  }
+}
+
+.mr {
+  &--auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
@@ -146,13 +153,13 @@ main {
   justify-content: center;
 }
 
-.container {
+.layout {
   display: flex;
   flex-direction: column;
   background: url('../img/map.jpg') no-repeat 50% 50%;
   background-size: cover;
   height: 100vh;
-  &--column {
+  &--without_header {
     flex-direction: row;
     header {
       height: 100vh;
@@ -214,9 +221,10 @@ main {
   }
   &__submit {
     font: 21px $defaultFont;
+    color: $black;
     width: 100%;
     background: $accent;
-    padding: 15px;
+    padding: 15px 50px;
     border: none;
     border-radius: 70px;
     transition: all 0.3s ease-in-out;
@@ -225,6 +233,43 @@ main {
     &:hover,
     &:focus {
       background: $accentHover;
+      color: $black;
     }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  justify-content: center;
+  align-items: center;
+  &--col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.card {
+  position: relative;
+  padding: 80px 18px;
+  background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/сard-chip.svg') no-repeat 18px calc(100% - 18px),
+    url('../img/card-circles.svg') no-repeat calc(100% - 18px) calc(100% - 18px);
+  &__expiration {
+    position: absolute;
+    right: 18px;
+    top: 26px;
+    font-size: 12px;
+  }
+  &__number {
+    font-size: 21px;
   }
 }
