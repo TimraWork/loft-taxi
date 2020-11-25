@@ -41,6 +41,7 @@
     "@emotion/react": "11.1.1",
     "@emotion/styled": "11.0.0",
     "@material-ui/core": "5.0.0-alpha.17",
-    "loft-taxi-mui-theme": "1.2.0"
+    "loft-taxi-mui-theme": "1.2.0",
+    "mapbox-gl": "1.13.0"
   }
 }
