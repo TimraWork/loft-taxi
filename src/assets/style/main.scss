@@ -1,4 +1,4 @@
-@import './normalize';
+@import-normalize;
 
 $accent: #fdbf5a;
 $accentHover: #ffa842;
@@ -10,6 +10,10 @@ $defaultFont: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 body {
@@ -260,7 +264,7 @@ main {
 .card {
   position: relative;
   padding: 80px 18px;
-  background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/сard-chip.svg') no-repeat 18px calc(100% - 18px),
+  background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/card-chip.svg') no-repeat 18px calc(100% - 18px),
     url('../img/card-circles.svg') no-repeat calc(100% - 18px) calc(100% - 18px);
   &__expiration {
     position: absolute;
