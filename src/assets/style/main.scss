@@ -263,7 +263,10 @@ main {
 
 .card {
   position: relative;
-  padding: 80px 18px;
+  min-height: 200px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
   background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/card-chip.svg') no-repeat 18px calc(100% - 18px),
     url('../img/card-circles.svg') no-repeat calc(100% - 18px) calc(100% - 18px);
   &__expiration {

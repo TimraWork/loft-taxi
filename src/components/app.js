@@ -8,7 +8,7 @@ import PageProfile from './PageProfile';
 import PageReg from './PageRegistration';
 import {navUrl as navPath} from './Nav';
 
-const REDIRECT_URL = navPath.MAP.path;
+const REDIRECT_URL = navPath.PROFILE.path;
 
 export default class App extends Component {
   state = {
