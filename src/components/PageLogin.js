@@ -9,11 +9,11 @@ const PageLogin = ({handleFormSubmit}) => {
           <label className="form__label" htmlFor="email">
             Email
           </label>
-          <input className="form__input" id="email" type="email" placeholder="mail@mail.ru" />
+          <input className="form__input" id="email" name="email" type="email" placeholder="mail@mail.ru" />
           <label className="form__label" htmlFor="password">
             Пароль
           </label>
-          <input className="form__input" id="password" type="password" placeholder="*************" />
+          <input className="form__input" id="password" name="password" type="password" placeholder="*************" />
           <div className="form__text text--right mb--40">
             <a href="/" className="form__link">
               Забыли пароль?

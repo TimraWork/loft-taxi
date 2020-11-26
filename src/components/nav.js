@@ -1,5 +1,6 @@
 import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
+import PropTypes from 'prop-types';
 
 export const navUrl = {
   MAP: {
@@ -17,6 +18,10 @@ export const navUrl = {
   PROFILE: {
     name: 'Профиль',
     path: '/profile/',
+  },
+  LOGOUT: {
+    name: 'Выйти',
+    path: '/logout/',
   },
 };
 
@@ -38,5 +43,10 @@ const Nav = ({handleNavClick, navUrl}) => (
     </nav>
   </ErrorBoundary>
 );
+
+const PATHS = NAVIGATION_ITEMS.map((item) => item.path);
+Nav.propTypes = {
+  navUrl: PropTypes.oneOf(PATHS),
+};
 
 export default Nav;

@@ -16,6 +16,7 @@ export default class App extends Component {
   };
 
   handleNavClick = (e, navUrl) => {
+    console.log('🚀 ~ file: app.js ~ line 19 ~ App ~ e', e.target.href);
     e.preventDefault();
     this.setState({
       navUrl: navUrl,
@@ -23,6 +24,7 @@ export default class App extends Component {
   };
 
   handleFormSubmit = (e) => {
+    console.log('🚀 email, pass', e.target.email.value, e.target.password.value);
     e.preventDefault();
     this.setState({
       navUrl: REDIRECT_URL,

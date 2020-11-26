@@ -1,8 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import mapboxgl from 'mapbox-gl';
+import ErrorBoundary from './ErrorBoundary';
 
 const PageMap = () => {
-  const mapRef = useRef();
+  let mapRef = useRef();
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoidGltcmF3b3JrMTIzIiwiYSI6ImNraHhoZjB6ODAxMnQycnM3b2lvcWlwemYifQ.vsaprJd2gGI-DvkUfwxDeA';
@@ -16,7 +17,11 @@ const PageMap = () => {
     };
   }, []);
 
-  return <div className="map" ref={mapRef} />;
+  return (
+    <ErrorBoundary>
+      <div className="map" ref={mapRef} />
+    </ErrorBoundary>
+  );
 };
 
 export default PageMap;
