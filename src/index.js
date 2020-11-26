@@ -6,10 +6,13 @@ import {MuiThemeProvider} from '@material-ui/core/styles';
 import './assets/style/main.scss';
 
 import App from './components/App';
+import {AuthProvider} from './components/hoc/AuthContext';
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </MuiThemeProvider>,
   document.getElementById('root')
 );

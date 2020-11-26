@@ -7,14 +7,6 @@ export const navUrl = {
     name: 'Карта',
     path: '/map/',
   },
-  LOGIN: {
-    name: 'Логин',
-    path: '/login/',
-  },
-  REGISTRATION: {
-    name: 'Регистрация',
-    path: '/registration/',
-  },
   PROFILE: {
     name: 'Профиль',
     path: '/profile/',
