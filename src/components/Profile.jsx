@@ -1,3 +1,4 @@
+import { Button, FormControl, Grid, Input, InputLabel, Paper, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import PaymentCard from "./PaymentCard";
 
@@ -6,44 +7,50 @@ const Profile = ({ handleFormSubmit }) => {
   const [expiration, setExpiration] = useState("05/08");
 
   return (
-    <form className="form" onSubmit={handleFormSubmit}>
-      <div className="text--center">
-        <h1 className="title title--h1 mb--15">Профиль</h1>
-        <div className="form__text">Введите платежные данные</div>
-      </div>
-      <div className="row">
-        <div className="row--col">
-          <label className="form__label" htmlFor="name">
-            Имя владельца
-          </label>
-          <input className="form__input" id="name" type="text" placeholder="Loft" />
-          <label className="form__label" htmlFor="number">
-            Номер карты
-          </label>
-          <input className="form__input mb--50" id="number" type="text" placeholder={number} onChange={(e) => setNumber(e.target.value)} />
-          <div className="row mb--30">
-            <div className="row--col">
-              <label className="form__label" htmlFor="expiration">
-                MM/YY
-              </label>
-              <input className="form__input" id="expiration" type="text" placeholder={expiration} onChange={(e) => setExpiration(e.target.value)} />
-            </div>
-            <div className="row--col">
-              <label className="form__label" htmlFor="cvc">
-                CVC
-              </label>
-              <input className="form__input" id="name" type="text" placeholder="667" />
-            </div>
-          </div>
+    <Paper className="text--center w--880">
+      <form className="form" onSubmit={handleFormSubmit}>
+        <div align="center">
+          <Typography variant="h1" align="center">
+            Профиль
+          </Typography>
+          <Typography variant="subtitle1" align="center">
+            Введите платежные данные
+          </Typography>
         </div>
-        <div className="row--col">
-          <PaymentCard number={number} expiration={expiration} />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <FormControl>
+              <InputLabel htmlFor="name">Имя владельца</InputLabel>
+              <Input id="name" name="name" placeholder="Loft" />
+            </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="number">Номер карты</InputLabel>
+              <Input id="number" name="number" placeholder={number} onChange={(e) => setNumber(e.target.value)} />
+            </FormControl>
+            <Grid container spacing={3} className="mb--30">
+              <Grid item xs={12} sm={6}>
+                <FormControl>
+                  <InputLabel htmlFor="expiration">MM/YY</InputLabel>
+                  <Input id="expiration" name="expiration" placeholder={expiration} onChange={(e) => setExpiration(e.target.value)} />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl>
+                  <InputLabel htmlFor="cvc">CVC</InputLabel>
+                  <Input id="cvc" name="cvc" placeholder="667" />
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <PaymentCard number={number} expiration={expiration} />
+          </Grid>
+        </Grid>
+        <div align="center">
+          <Button className="w--350">Сохранить</Button>
         </div>
-      </div>
-      <div className="text--center">
-        <input className="form__submit w--350 mr--auto" type="submit" value="Сохранить" />
-      </div>
-    </form>
+      </form>
+    </Paper>
   );
 };
 

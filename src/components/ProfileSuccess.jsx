@@ -1,15 +1,18 @@
-import React from 'react';
+import { Button, Paper, Typography } from "@material-ui/core";
+import React from "react";
 
 const ProfileSuccess = () => (
-  <div className="center_block bg--cover">
-    <div className="white_container text--center w--880">
-      <h1 className="title title--h1 mb--15">Профиль</h1>
-      <div className="form__text mb--40">Платёжные данные обновлены. Теперь вы можете заказывать такси.</div>
-      <a href="/map/" className="form__submit">
-        Перейти на карту
-      </a>
-    </div>
-  </div>
+  <Paper className="text--center w--880">
+    <Typography variant="h1" align="center">
+      Профиль
+    </Typography>
+    <Typography variant="subtitle1" align="center">
+      Платёжные данные обновлены. Теперь вы можете заказывать такси.
+    </Typography>
+    <Button className="w--350" href="/map/">
+      Перейти на карту
+    </Button>
+  </Paper>
 );
 
 export default ProfileSuccess;

@@ -8,7 +8,7 @@ import PageProfile from "./PageProfile";
 import { navUrl as navPath } from "./Nav";
 import { authHOC } from "./hoc/AuthContext";
 
-let REDIRECT_URL = navPath.LOGOUT.path;
+let REDIRECT_URL = navPath.PROFILE.path;
 
 class App extends Component {
   state = {
