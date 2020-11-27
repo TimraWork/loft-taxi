@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import PaymentCard from '../components/PaymentCard';
+import React, { useState } from "react";
+import PaymentCard from "./PaymentCard";
 
-const Profile = ({handleFormSubmit}) => {
-  const [number, setNumber] = useState('5545  2300  3432  4521');
-  const [expiration, setExpiration] = useState('05/08');
+const Profile = ({ handleFormSubmit }) => {
+  const [number, setNumber] = useState("5545  2300  3432  4521");
+  const [expiration, setExpiration] = useState("05/08");
 
   return (
     <form className="form" onSubmit={handleFormSubmit}>
