@@ -1,7 +1,6 @@
 import React from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import PropTypes from "prop-types";
-import { Button, Menu } from "@material-ui/core";
 
 export const navUrl = {
   MAP: {
@@ -38,8 +37,10 @@ const Nav = ({ handleNavClick, navUrl }) => (
 );
 
 const PATHS = NAVIGATION_ITEMS.map((item) => item.path);
+
 Nav.propTypes = {
   navUrl: PropTypes.oneOf(PATHS),
+  handleFormSubmit: PropTypes.func,
 };
 
 export default Nav;

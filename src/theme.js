@@ -5,8 +5,7 @@ const ACCENT = "#FDBF5A";
 const ACCENT_HOVER = "#FFA842";
 const TEXT = "#1C1A19";
 const GRAY = "#7B7B7B";
-// $gray: #828282;
-// $grayLight: #e4e4e4;
+const GRAY_LIGHT = "#E0E0E0";
 
 export const theme = createMuiTheme({
   palette: {
@@ -18,7 +17,7 @@ export const theme = createMuiTheme({
     },
   },
   shape: {
-    borderRadius: 20,
+    borderRadius: 10,
   },
   status: {
     danger: orange[500],
@@ -44,15 +43,24 @@ export const theme = createMuiTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          padding: "90px",
+          // padding: "90px",
+          position: "relative",
+          boxShadow: "0px 3px 20px rgba(0, 0, 0, 0.2) !important",
         },
       },
     },
     MuiFormControl: {
       styleOverrides: {
         root: {
-          marginBottom: 30,
+          marginBottom: 20,
           width: "100%",
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 10,
         },
       },
     },
@@ -62,6 +70,15 @@ export const theme = createMuiTheme({
           "&.Mui-focused": {
             fontWeight: 700,
             fontSize: 16,
+          },
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        underline: {
+          "&:before": {
+            borderBottom: `1px solid ${GRAY_LIGHT}`,
           },
         },
       },
@@ -77,12 +94,6 @@ export const theme = createMuiTheme({
       fontSize: 32,
       fontWeight: 700,
       marginBottom: 20,
-      // "@media (min-width:600px)": {
-      //   fontSize: "1.5rem",
-      // },
-      //   [createMuiTheme.breakpoints.up('md')]: {
-      //     fontSize: '2.4rem',
-      //   },
     },
   },
 });

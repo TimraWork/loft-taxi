@@ -8,7 +8,7 @@ import PageProfile from "./PageProfile";
 import { navUrl as navPath } from "./Nav";
 import { authHOC } from "./hoc/AuthContext";
 
-let REDIRECT_URL = navPath.PROFILE.path;
+let REDIRECT_URL = navPath.MAP.path;
 
 class App extends Component {
   state = {
@@ -26,11 +26,9 @@ class App extends Component {
   };
 
   handleFormSubmit = (e) => {
-    console.log("isLoggedIn = ", this.props.isLoggedIn);
-
     e.preventDefault();
+
     const { email, password } = e.target;
-    console.log("🚀 ~ file: App.jsx ~ line 33 ~ App ~ email, password", email.value, password.value);
     if (email.value === "test@test.com" && password.value === "123") {
       this.props.login();
       REDIRECT_URL = navPath.MAP.path;

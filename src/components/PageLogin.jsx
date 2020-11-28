@@ -5,7 +5,7 @@ import { Box, Button, FormControl, Input, InputLabel, Link, Typography } from "@
 const PageLogin = ({ handleFormSubmit }) => {
   return (
     <div className="center_block">
-      <Paper>
+      <Paper style={{ padding: "70px" }}>
         <form className="form w--350" onSubmit={handleFormSubmit}>
           <Typography variant="h1" align="center">
             Войти
