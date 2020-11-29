@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import mapboxgl from 'mapbox-gl';
 
-const Map = () => {
+export const Map = () => {
   let mapRef = useRef();
 
   useEffect(() => {
@@ -20,5 +20,3 @@ const Map = () => {
 
   return <div className="map" ref={mapRef} />;
 };
-
-export default Map;

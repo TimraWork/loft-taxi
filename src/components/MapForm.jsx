@@ -15,16 +15,18 @@ const LOCATIONS_TO = [
   {label: 'Лесная поляна 34, п.8', year: 1994},
 ];
 
-const MapForm = () => (
+export const MapForm = () => (
   <form className="car form container--left w--400">
     <Paper style={{padding: '25px', marginBottom: '10px'}}>
       <Autocomplete
         options={LOCATIONS_FROM}
+        id="from"
         renderInput={(params) => (
           <TextField
             {...params}
             placeholder="Откуда"
             variant="standard"
+            name="from"
             InputProps={{
               ...params.InputProps,
               startAdornment: <FiberManualRecordIcon fontSize="small" />,
@@ -35,11 +37,13 @@ const MapForm = () => (
       />
       <Autocomplete
         options={LOCATIONS_TO}
+        id="to"
         renderInput={(params) => (
           <TextField
             {...params}
             placeholder="Куда"
             variant="standard"
+            name="to"
             InputProps={{
               ...params.InputProps,
               startAdornment: <SendIcon fontSize="small" color="secondary" />,
@@ -94,9 +98,7 @@ const MapForm = () => (
           </Card>
         </Grid>
       </Grid>
-      <Button>Заказать</Button>
+      <Button id="order-button">Заказать</Button>
     </Paper>
   </form>
 );
-
-export default MapForm;
