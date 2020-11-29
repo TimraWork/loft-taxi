@@ -11,22 +11,24 @@ const PageLogin = ({ handleFormSubmit }) => {
             Войти
           </Typography>
           <FormControl>
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Input id="email" name="email" type="email" placeholder="mail@mail.ru" />
+            <InputLabel htmlFor="email">Email*</InputLabel>
+            <Input id="email" name="email" type="email" placeholder="mail@mail.ru" required />
           </FormControl>
           <FormControl>
-            <InputLabel htmlFor="password">Пароль</InputLabel>
-            <Input id="password" name="password" type="password" placeholder="*************" />
+            <InputLabel htmlFor="password">Пароль*</InputLabel>
+            <Input id="password" name="password" type="password" placeholder="*************" required />
           </FormControl>
           <Box sx={{ mb: 5, textAlign: "right" }}>
             <Link href="#" color="secondary">
               Забыли пароль?
             </Link>
           </Box>
-          <Button className="mb--30">Войти</Button>
+          <Button id="login-button" className="mb--30">
+            Войти
+          </Button>
           <Box sx={{ textAlign: "center" }}>
             Новый пользователь?&nbsp;
-            <Link href="#" color="secondary">
+            <Link id="registration-link" href="#" color="secondary" onClick={handleFormSubmit}>
               Регистрация
             </Link>
           </Box>

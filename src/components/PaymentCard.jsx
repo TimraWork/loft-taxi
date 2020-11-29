@@ -1,10 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const PaymentCard = ({number, expiration}) => (
+const PaymentCard = ({ number, expiration }) => (
   <div className="card white_container">
-    <div className="card__expiration">{expiration}</div>
-    <div className="card__number">{number}</div>
+    <div className="card__expiration" data-testid="expiration">
+      {expiration}
+    </div>
+    <div className="card__number" data-testid="number">
+      {number}
+    </div>
   </div>
 );
 

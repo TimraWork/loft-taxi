@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, Input, InputLabel, Paper, TextField, Typography } from "@material-ui/core";
+import { Button, FormControl, Grid, Input, InputLabel, Paper, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import PaymentCard from "./PaymentCard";
 import PropTypes from "prop-types";
@@ -22,23 +22,23 @@ const Profile = ({ handleFormSubmit }) => {
           <Grid item xs={12} sm={6}>
             <FormControl>
               <InputLabel htmlFor="name">Имя владельца</InputLabel>
-              <Input id="name" name="name" placeholder="Loft" />
+              <Input id="name" name="name" placeholder="Loft" required />
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="number">Номер карты</InputLabel>
-              <Input id="number" name="number" placeholder={number} onChange={(e) => setNumber(e.target.value)} />
+              <Input id="number" name="number" placeholder={number} onChange={(e) => setNumber(e.target.value)} required />
             </FormControl>
             <Grid container spacing={3} className="mb--30">
               <Grid item xs={12} sm={6}>
                 <FormControl>
                   <InputLabel htmlFor="expiration">MM/YY</InputLabel>
-                  <Input id="expiration" name="expiration" placeholder={expiration} onChange={(e) => setExpiration(e.target.value)} />
+                  <Input id="expiration" name="expiration" placeholder={expiration} onChange={(e) => setExpiration(e.target.value)} required />
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl>
                   <InputLabel htmlFor="cvc">CVC</InputLabel>
-                  <Input id="cvc" name="cvc" placeholder="667" />
+                  <Input id="cvc" name="cvc" placeholder="667" required />
                 </FormControl>
               </Grid>
             </Grid>
@@ -48,7 +48,9 @@ const Profile = ({ handleFormSubmit }) => {
           </Grid>
         </Grid>
         <div align="center">
-          <Button className="w--350">Сохранить</Button>
+          <Button id="save-button" className="w--350">
+            Сохранить
+          </Button>
         </div>
       </form>
     </Paper>
@@ -56,7 +58,7 @@ const Profile = ({ handleFormSubmit }) => {
 };
 
 Profile.propTypes = {
-  handleFormSubmit: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func,
 };
 
 export default Profile;

@@ -9,7 +9,7 @@ const ProfileSuccess = () => (
     <Typography variant="subtitle1" align="center">
       Платёжные данные обновлены. Теперь вы можете заказывать такси.
     </Typography>
-    <Button className="w--350" href="/map/">
+    <Button className="w--350" href="/map/" data-testid="ok-button">
       Перейти на карту
     </Button>
   </Paper>
