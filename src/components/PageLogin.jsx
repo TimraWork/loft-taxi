@@ -1,11 +1,11 @@
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import { Box, Button, FormControl, Input, InputLabel, Link, Typography } from "@material-ui/core";
+import React from 'react';
+import Paper from '@material-ui/core/Paper';
+import {Box, Button, FormControl, Input, InputLabel, Link, Typography} from '@material-ui/core';
 
-const PageLogin = ({ handleFormSubmit }) => {
+export const PageLogin = ({handleFormSubmit}) => {
   return (
     <div className="center_block">
-      <Paper style={{ padding: "70px" }}>
+      <Paper style={{padding: '70px'}}>
         <form className="form w--350" onSubmit={handleFormSubmit}>
           <Typography variant="h1" align="center">
             Войти
@@ -18,7 +18,7 @@ const PageLogin = ({ handleFormSubmit }) => {
             <InputLabel htmlFor="password">Пароль*</InputLabel>
             <Input id="password" name="password" type="password" placeholder="*************" required />
           </FormControl>
-          <Box sx={{ mb: 5, textAlign: "right" }}>
+          <Box sx={{mb: 5, textAlign: 'right'}}>
             <Link href="#" color="secondary">
               Забыли пароль?
             </Link>
@@ -26,7 +26,7 @@ const PageLogin = ({ handleFormSubmit }) => {
           <Button id="login-button" className="mb--30">
             Войти
           </Button>
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{textAlign: 'center'}}>
             Новый пользователь?&nbsp;
             <Link id="registration-link" href="#" color="secondary" onClick={handleFormSubmit}>
               Регистрация
@@ -37,5 +37,3 @@ const PageLogin = ({ handleFormSubmit }) => {
     </div>
   );
 };
-
-export default PageLogin;

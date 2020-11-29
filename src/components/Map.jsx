@@ -9,6 +9,8 @@ const Map = () => {
     const map = new mapboxgl.Map({
       container: mapRef.current,
       style: 'mapbox://styles/timrawork123/ckhxhn8r30ukv19khb7ah55qr',
+      center: [30.3056504, 59.9429126],
+      zoom: 10,
     });
 
     return () => {

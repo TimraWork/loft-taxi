@@ -1,18 +1,24 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
+import ErrorBoundary from './ErrorBoundary';
+import Header from './Header';
 
-import Header from "./Header";
-
-import PageMap from "./PageMap";
-import PageLogin from "./PageLogin";
-import PageProfile from "./PageProfile";
-import { navUrl as navPath } from "./Nav";
-import { authHOC } from "./hoc/AuthContext";
+import {PageMap} from './PageMap';
+import {PageLogin} from './PageLogin';
+import {PageProfile} from './PageProfile';
+import {navUrl as navPath} from './Nav';
+import {authHOC} from './hoc/AuthContext';
 
 let REDIRECT_URL = navPath.MAP.path;
 
 class App extends Component {
   state = {
-    navUrl: REDIRECT_URL,
+    currentUrl: REDIRECT_URL,
+  };
+
+  PAGES = {
+    '/map/': <PageMap />,
+    '/logout/': <PageLogin handleFormSubmit={this.handleFormSubmit} />,
+    '/profile/': <PageProfile handleFormSubmit={this.handleFormSubmit} />,
   };
 
   handleNavClick = (e, navUrl) => {
@@ -21,36 +27,34 @@ class App extends Component {
       this.props.logout();
     }
     this.setState({
-      navUrl: navUrl,
+      currentUrl: navUrl,
     });
   };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const { email, password } = e.target;
-    if (email.value === "test@test.com" && password.value === "123") {
-      this.props.login();
-      REDIRECT_URL = navPath.MAP.path;
-      this.setState({
-        navUrl: REDIRECT_URL,
-      });
-    }
+    const {email, password} = e.target;
+    // if (email.value === 'test@test.com' && password.value === '123') {
+    this.props.login();
+    REDIRECT_URL = navPath.MAP.path;
+    this.setState({
+      currentUrl: REDIRECT_URL,
+    });
+    // }
   };
 
   render() {
-    const { navUrl } = this.state;
+    const {currentUrl} = this.state;
 
     const pagesWithoutHeader = new Set([navPath.LOGOUT.path]);
-    const layoutWithoutHeader = pagesWithoutHeader.has(navUrl) ? " layout--without_header" : "";
+    const layoutWithoutHeader = pagesWithoutHeader.has(currentUrl) ? ' layout--without_header' : '';
 
     return (
-      <div className={"layout" + layoutWithoutHeader}>
-        <Header handleNavClick={this.handleNavClick} navUrl={navUrl} />
+      <div className={'layout' + layoutWithoutHeader}>
+        <Header handleNavClick={this.handleNavClick} navUrl={currentUrl} />
         <main className="main">
-          {navUrl === navPath.MAP.path && <PageMap />}
-          {navUrl === navPath.PROFILE.path && <PageProfile handleFormSubmit={this.handleFormSubmit} />}
-          {navUrl === navPath.LOGOUT.path && <PageLogin handleFormSubmit={this.handleFormSubmit} />}
+          <ErrorBoundary>{this.PAGES[currentUrl]}</ErrorBoundary>
         </main>
       </div>
     );

@@ -1,25 +1,23 @@
-import React, { Component } from "react";
-import Profile from "./Profile";
-import ProfileSuccess from "./ProfileSuccess";
+import React, {Component} from 'react';
+import Profile from './Profile';
+import ProfileSuccess from './ProfileSuccess';
 
-class PageProfile extends Component {
+export class PageProfile extends Component {
   state = {
-    status: "",
+    status: '',
   };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.setState({
-      status: "success",
+      status: 'success',
     });
   };
 
   render() {
-    const { status } = this.state;
+    const {status} = this.state;
     return (
-      <div className="center_block bg--cover">{status === "success" ? <ProfileSuccess /> : <Profile handleFormSubmit={this.handleFormSubmit} />}</div>
+      <div className="center_block bg--cover">{status === 'success' ? <ProfileSuccess /> : <Profile handleFormSubmit={this.handleFormSubmit} />}</div>
     );
   }
 }
-
-export default PageProfile;
