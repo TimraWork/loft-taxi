@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Profile from './Profile';
-import ProfileSuccess from './ProfileSuccess';
+import {Profile} from './Profile';
+import {ProfileSuccess} from './ProfileSuccess';
 
 export class PageProfile extends Component {
   state = {

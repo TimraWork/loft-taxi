@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileSuccess from './ProfileSuccess.jsx';
+import {ProfileSuccess} from './ProfileSuccess.jsx';
 import {render} from '@testing-library/react';
 
 describe('ProfileSuccess', () => {

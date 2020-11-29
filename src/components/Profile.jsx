@@ -1,14 +1,14 @@
-import { Button, FormControl, Grid, Input, InputLabel, Paper, Typography } from "@material-ui/core";
-import React, { useState } from "react";
-import PaymentCard from "./PaymentCard";
-import PropTypes from "prop-types";
+import {Button, FormControl, Grid, Input, InputLabel, Paper, Typography} from '@material-ui/core';
+import React, {useState} from 'react';
+import PaymentCard from './PaymentCard';
+import PropTypes from 'prop-types';
 
-const Profile = ({ handleFormSubmit }) => {
-  const [number, setNumber] = useState("5545  2300  3432  4521");
-  const [expiration, setExpiration] = useState("05/08");
+export const Profile = ({handleFormSubmit}) => {
+  const [number, setNumber] = useState('5545  2300  3432  4521');
+  const [expiration, setExpiration] = useState('05/08');
 
   return (
-    <Paper className="text--center w--880" style={{ padding: "70px" }}>
+    <Paper className="text--center w--880" style={{padding: '70px'}}>
       <form className="form" onSubmit={handleFormSubmit}>
         <div align="center">
           <Typography variant="h1" align="center">
@@ -60,5 +60,3 @@ const Profile = ({ handleFormSubmit }) => {
 Profile.propTypes = {
   handleFormSubmit: PropTypes.func,
 };
-
-export default Profile;

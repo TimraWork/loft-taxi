@@ -1,8 +1,8 @@
-import { Button, Paper, Typography } from "@material-ui/core";
-import React from "react";
+import {Button, Paper, Typography} from '@material-ui/core';
+import React from 'react';
 
-const ProfileSuccess = () => (
-  <Paper className="text--center w--880" style={{ padding: "70px" }}>
+export const ProfileSuccess = () => (
+  <Paper className="text--center w--880" style={{padding: '70px'}}>
     <Typography variant="h1" align="center">
       Профиль
     </Typography>
@@ -14,5 +14,3 @@ const ProfileSuccess = () => (
     </Button>
   </Paper>
 );
-
-export default ProfileSuccess;
