@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Nav from './Nav';
+import {Nav} from './Nav';
 import logoIcon from '../assets/img/logo-icon.svg';
 import logoText from '../assets/img/logo-text.svg';
 

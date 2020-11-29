@@ -35,13 +35,13 @@ class App extends Component {
     e.preventDefault();
 
     const {email, password} = e.target;
-    // if (email.value === 'test@test.com' && password.value === '123') {
-    this.props.login();
-    REDIRECT_URL = navPath.MAP.path;
-    this.setState({
-      currentUrl: REDIRECT_URL,
-    });
-    // }
+    if (email.value === 'test@test.com' && password.value === '123') {
+      this.props.login();
+      REDIRECT_URL = navPath.MAP.path;
+      this.setState({
+        currentUrl: REDIRECT_URL,
+      });
+    }
   };
 
   render() {

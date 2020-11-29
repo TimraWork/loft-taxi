@@ -12,9 +12,9 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    // if (this.state.hasError) {
-    //   return <p>Error occurred!</p>;
-    // }
+    if (this.state.hasError) {
+      return <p>Error occurred!</p>;
+    }
 
     return this.props.children;
   }
