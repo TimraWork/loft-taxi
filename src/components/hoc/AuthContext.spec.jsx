@@ -1,9 +1,7 @@
 import React from 'react';
-import {AuthProvider, AuthContext} from './hoc/AuthContext';
+import {AuthProvider, AuthContext} from './AuthContext';
 import {render} from '@testing-library/react';
 import {act} from 'react-dom/test-utils';
-
-import {PageProfile} from './PageProfile';
 
 describe('AuthContext', () => {
   describe('#login', () => {
@@ -22,6 +20,7 @@ describe('AuthContext', () => {
         </AuthProvider>
       );
 
+      expect(isLoggedIn).toBe(false);
       act(() => {
         login('test@test.com', '123');
       });

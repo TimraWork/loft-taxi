@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Profile} from './Profile';
 import {ProfileSuccess} from './ProfileSuccess';
+import {withAuth} from './hoc/AuthContext';
 
 export class PageProfile extends Component {
   state = {
@@ -21,3 +22,5 @@ export class PageProfile extends Component {
     );
   }
 }
+
+export const PageProfileWithAuth = withAuth(PageProfile);

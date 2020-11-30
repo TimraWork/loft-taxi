@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 
-import {PageMap} from './PageMap';
+import {PageMapWithAuth} from './PageMap';
 import {PageLogin} from './PageLogin';
-import {PageProfile} from './PageProfile';
+import {PageProfileWithAuth} from './PageProfile';
 import {navUrl as navPath} from './Nav';
-import {authHOC} from './hoc/AuthContext';
+import {withAuth} from './hoc/AuthContext';
 
-let REDIRECT_URL = navPath.MAP.path;
+let REDIRECT_URL = navPath.LOGOUT.path;
 
 class App extends Component {
   state = {
@@ -16,31 +16,18 @@ class App extends Component {
   };
 
   PAGES = {
-    '/map/': <PageMap />,
-    '/logout/': <PageLogin handleFormSubmit={this.handleFormSubmit} />,
-    '/profile/': <PageProfile handleFormSubmit={this.handleFormSubmit} />,
+    '/map/': (props) => <PageMapWithAuth {...props} />,
+    '/logout/': (props) => <PageLogin {...props} />,
+    '/profile/': (props) => <PageProfileWithAuth handleFormSubmit={this.navigateTo} {...props} />,
   };
 
-  handleNavClick = (e, navUrl) => {
+  navigateTo = (e, currentPage) => {
     e.preventDefault();
-    if (navUrl === navPath.LOGOUT.path) {
+    if (this.props.isLoggedIn && currentPage !== '/logout/') {
+      this.setState({currentUrl: currentPage});
+    } else {
       this.props.logout();
-    }
-    this.setState({
-      currentUrl: navUrl,
-    });
-  };
-
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    const {email, password} = e.target;
-    if (email.value === 'test@test.com' && password.value === '123') {
-      this.props.login();
-      REDIRECT_URL = navPath.MAP.path;
-      this.setState({
-        currentUrl: REDIRECT_URL,
-      });
+      this.setState({currentUrl: REDIRECT_URL});
     }
   };
 
@@ -52,13 +39,13 @@ class App extends Component {
 
     return (
       <div className={'layout' + layoutWithoutHeader}>
-        <Header handleNavClick={this.handleNavClick} navUrl={currentUrl} />
+        <Header handleNavClick={this.navigateTo} navUrl={currentUrl} />
         <main className="main">
-          <ErrorBoundary>{this.PAGES[currentUrl]}</ErrorBoundary>
+          <ErrorBoundary>{this.PAGES[currentUrl]({navigate: this.navigateTo})}</ErrorBoundary>
         </main>
       </div>
     );
   }
 }
 
-export default authHOC(App);
+export default withAuth(App);
