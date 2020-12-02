@@ -3,12 +3,12 @@ import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
 import '../setupTests';
 
-import {Profile} from './Profile';
+import {ProfileForm} from './ProfileForm';
 
 describe('Profile', () => {
   let wrapper;
   it('renders correctly', () => {
-    wrapper = shallow(<Profile />);
+    wrapper = shallow(<ProfileForm />);
     expect(wrapper.find('#name').prop('name')).toEqual('name');
     expect(wrapper.find('#number').prop('name')).toEqual('number');
     expect(wrapper.find('#expiration').prop('name')).toEqual('expiration');

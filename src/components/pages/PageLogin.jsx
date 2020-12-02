@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Paper, Button, Typography} from '@material-ui/core';
-import {AuthContext, withAuth} from './hoc/AuthContext';
-import {LoginForm} from './LoginForm';
+import {AuthContext, withAuth} from '../hoc/AuthContext';
+import {LoginForm} from '../LoginForm';
 
 export const PageLogin = ({navigate}) => {
   const contextValue = useContext(AuthContext);

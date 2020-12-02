@@ -1,6 +1,6 @@
 import React from 'react';
-import {ProfileForm} from './ProfileForm';
-import {withAuth} from './hoc/AuthContext';
+import {ProfileForm} from '../ProfileForm';
+import {withAuth} from '../hoc/AuthContext';
 import PropTypes from 'prop-types';
 
 export const PageProfile = ({navigate}) => {

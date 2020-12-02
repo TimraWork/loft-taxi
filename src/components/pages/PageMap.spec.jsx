@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import {PageMap} from './PageMap';
+import {PageMap} from '../pages/PageMap';
 
-jest.mock('./Map', () => ({Map: () => <div>Map component</div>}));
-jest.mock('./MapForm', () => ({MapForm: () => <div>MapForm component</div>}));
+jest.mock('../Map', () => ({Map: () => <div>Map component</div>}));
+jest.mock('../MapForm', () => ({MapForm: () => <div>MapForm component</div>}));
 
 describe('PageMap', () => {
   it('renders correctly', () => {

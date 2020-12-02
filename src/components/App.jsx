@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 
-import {PageMapWithAuth} from './PageMap';
-import {PageLogin} from './PageLogin';
-import {PageProfileWithAuth} from './PageProfile';
-import {ProfileSuccess} from './ProfileSuccess';
+import {PageMapWithAuth} from './pages/PageMap';
+import {PageLogin} from './pages/PageLogin';
+import {PageProfileWithAuth} from './pages/PageProfile';
+import {PageProfileSuccess} from './pages/PageProfileSuccess';
 import {navUrl as navPath} from './Nav';
 import {withAuth} from './hoc/AuthContext';
 
@@ -20,7 +20,7 @@ class App extends Component {
     '/map/': (props) => <PageMapWithAuth {...props} />,
     '/logout/': (props) => <PageLogin {...props} />,
     '/profile/': (props) => <PageProfileWithAuth {...props} />,
-    '/profile-success/': (props) => <ProfileSuccess {...props} />
+    '/profile-success/': (props) => <PageProfileSuccess {...props} />
   };
 
   navigateTo = (e, currentPage) => {

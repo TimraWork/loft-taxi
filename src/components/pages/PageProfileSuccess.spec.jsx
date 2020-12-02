@@ -1,10 +1,10 @@
 import React from 'react';
-import {ProfileSuccess} from './ProfileSuccess.jsx';
+import {PageProfileSuccess} from './PageProfileSuccess.jsx';
 import {render} from '@testing-library/react';
 
-describe('ProfileSuccess', () => {
+describe('PageProfileSuccess', () => {
   it('renders correctly', () => {
-    const {getByTestId} = render(<ProfileSuccess />);
+    const {getByTestId} = render(<PageProfileSuccess />);
     const button = getByTestId('ok-button');
     expect(button.innerHTML).toMatch('Перейти на карту');
   });
