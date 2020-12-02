@@ -1,26 +1,18 @@
-import React, {Component} from 'react';
-import {Profile} from './Profile';
-import {ProfileSuccess} from './ProfileSuccess';
+import React from 'react';
+import {ProfileForm} from './ProfileForm';
 import {withAuth} from './hoc/AuthContext';
+import PropTypes from 'prop-types';
 
-export class PageProfile extends Component {
-  state = {
-    status: '',
+export const PageProfile = ({navigate}) => {
+  const setNavigateTo = (e) => {
+    navigate(e, '/profile-success/');
   };
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      status: 'success',
-    });
-  };
+  return <ProfileForm handleFormSubmit={setNavigateTo} />;
+};
 
-  render() {
-    const {status} = this.state;
-    return (
-      <div className="center_block bg--cover">{status === 'success' ? <ProfileSuccess /> : <Profile handleFormSubmit={this.handleFormSubmit} />}</div>
-    );
-  }
-}
+PageProfile.propTypes = {
+  navigate: PropTypes.func
+};
 
 export const PageProfileWithAuth = withAuth(PageProfile);

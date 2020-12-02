@@ -5,6 +5,7 @@ import Header from './Header';
 import {PageMapWithAuth} from './PageMap';
 import {PageLogin} from './PageLogin';
 import {PageProfileWithAuth} from './PageProfile';
+import {ProfileSuccess} from './ProfileSuccess';
 import {navUrl as navPath} from './Nav';
 import {withAuth} from './hoc/AuthContext';
 
@@ -12,18 +13,19 @@ let REDIRECT_URL = navPath.LOGOUT.path;
 
 class App extends Component {
   state = {
-    currentUrl: REDIRECT_URL,
+    currentUrl: REDIRECT_URL
   };
 
   PAGES = {
     '/map/': (props) => <PageMapWithAuth {...props} />,
     '/logout/': (props) => <PageLogin {...props} />,
-    '/profile/': (props) => <PageProfileWithAuth handleFormSubmit={this.navigateTo} {...props} />,
+    '/profile/': (props) => <PageProfileWithAuth {...props} />,
+    '/profile-success/': (props) => <ProfileSuccess {...props} />
   };
 
   navigateTo = (e, currentPage) => {
     e.preventDefault();
-    if (this.props.isLoggedIn && currentPage !== '/logout/') {
+    if (this.props.isLoggedIn) {
       this.setState({currentUrl: currentPage});
     } else {
       this.props.logout();

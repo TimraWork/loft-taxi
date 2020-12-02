@@ -6,16 +6,16 @@ import {withAuth} from './hoc/AuthContext';
 export const navUrl = {
   MAP: {
     name: 'Карта',
-    path: '/map/',
+    path: '/map/'
   },
   PROFILE: {
     name: 'Профиль',
-    path: '/profile/',
+    path: '/profile/'
   },
   LOGOUT: {
     name: 'Выйти',
-    path: '/logout/',
-  },
+    path: '/logout/'
+  }
 };
 
 const NAVIGATION_ITEMS = Object.values(navUrl);
@@ -40,10 +40,10 @@ export const Nav = ({handleNavClick, navUrl}) => {
   );
 };
 
-const PATHS = NAVIGATION_ITEMS.map((item) => item.path);
+// const PATHS = NAVIGATION_ITEMS.map((item) => item.path);
 Nav.propTypes = {
-  navUrl: PropTypes.oneOf(PATHS),
-  handleFormSubmit: PropTypes.func,
+  navUrl: PropTypes.string,
+  handleFormSubmit: PropTypes.func
 };
 
 export const NavWithAuth = withAuth(Nav);

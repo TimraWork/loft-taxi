@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
-import './../setupTests';
+import '../setupTests';
 
 import {Profile} from './Profile';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {PageMap} from './PageMap';
 
 jest.mock('./Map', () => ({Map: () => <div>Map component</div>}));
