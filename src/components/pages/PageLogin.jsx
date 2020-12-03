@@ -1,34 +1,26 @@
-import React, {useContext} from 'react';
-import {Paper, Button, Typography} from '@material-ui/core';
-import {AuthContext, withAuth} from '../hoc/AuthContext';
+import React, {useEffect} from 'react';
+import {Paper} from '@material-ui/core';
+import {withAuth} from '../hoc/AuthContext';
 import {LoginForm} from '../LoginForm';
-import {NavLink} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
-export const PageLogin = ({navigate}) => {
-  const contextValue = useContext(AuthContext);
-
+export const PageLogin = (props) => {
+  const {isLoggedIn, login, logout, location} = props;
   const authentificate = (e) => {
     e.preventDefault();
     const {email, password} = e.target;
-    contextValue.login(email.value, password.value);
+    login(email.value, password.value);
   };
+
+  useEffect(() => {
+    if (location.pathname === '/logout/') {
+      logout();
+    }
+  }, [logout, location.pathname]);
 
   return (
     <div className="center_block">
-      <Paper style={{padding: '70px'}}>
-        {contextValue.isLoggedIn ? (
-          <>
-            <Typography variant="h1" align="center">
-              Вы успешно авторизованы
-            </Typography>
-            <Button component={NavLink} to="/profile/">
-              На страницу профиля
-            </Button>
-          </>
-        ) : (
-          <LoginForm authentificate={authentificate} />
-        )}
-      </Paper>
+      <Paper style={{padding: '70px'}}>{isLoggedIn ? <Redirect to="/map/" /> : <LoginForm authentificate={authentificate} />}</Paper>
     </div>
   );
 };

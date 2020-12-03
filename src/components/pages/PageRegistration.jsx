@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PageRegistration = ({handleFormSubmit}) => (
+export const PageRegistration = ({handleFormSubmit}) => (
   <div className="center_block">
     <div className="white_container w--580">
       <form className="form w--350" onSubmit={handleFormSubmit}>
@@ -28,5 +28,3 @@ const PageRegistration = ({handleFormSubmit}) => (
     </div>
   </div>
 );
-
-export default PageRegistration;
