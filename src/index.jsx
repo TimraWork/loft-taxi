@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {theme} from './theme';
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import './assets/style/main.scss';
 
-import App from './components/App';
-import {AuthProvider} from './components/hoc/AuthContext';
+import {App} from './components/App';
 import {CssBaseline} from '@material-ui/core';
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+
+import {store} from './store';
+import {theme} from './theme';
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <AuthProvider>
+    <Provider store={store}>
       <CssBaseline />
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </AuthProvider>
+    </Provider>
   </MuiThemeProvider>,
   document.getElementById('root')
 );

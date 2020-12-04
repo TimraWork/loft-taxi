@@ -2,12 +2,14 @@ import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 
-import {PageMapWithAuth} from './pages/PageMap';
+import {PageMap} from './pages/PageMap';
 import {PageLoginWithAuth} from './pages/PageLogin';
 import {PageProfileWithAuth} from './pages/PageProfile';
 import {PageProfileSuccess} from './pages/PageProfileSuccess';
 import {PageRegistration} from './pages/PageRegistration';
-import {withAuth} from './hoc/AuthContext';
+
+import {logIn} from '../actions';
+import {connect} from 'react-redux';
 
 import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
@@ -15,9 +17,9 @@ let PrivateRoute = (props) => {
   const {component: RouteComponent, isLoggedIn, ...rest} = props;
   return <Route {...rest} render={(routeProps) => (isLoggedIn ? <RouteComponent {...routeProps} /> : <Redirect to="/login/" />)} />;
 };
-PrivateRoute = withAuth(PrivateRoute);
+PrivateRoute = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {logIn})(PrivateRoute);
 
-const App = () => {
+export const App = () => {
   const currentPath = useLocation().pathname;
   const pagesWithoutHeader = new Set(['/login/', '/logout/']);
   const layoutWithoutHeader = pagesWithoutHeader.has(currentPath) ? ' layout--without_header' : '';
@@ -32,7 +34,7 @@ const App = () => {
             <Route path="/login/" exact component={PageLoginWithAuth} />
             <Route path="/logout/" exact component={PageLoginWithAuth} />
 
-            <PrivateRoute path="/map/" component={PageMapWithAuth} />
+            <PrivateRoute path="/map/" component={PageMap} />
             <PrivateRoute path="/profile/" component={PageProfileWithAuth} />
             <PrivateRoute path="/profile-success/" component={PageProfileSuccess} />
 
@@ -44,4 +46,4 @@ const App = () => {
   );
 };
 
-export default withAuth(App);
+export default connect((state) => ({isLoggedIn: state.auth.isLoggedIn}))(App);

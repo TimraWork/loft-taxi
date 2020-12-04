@@ -1,6 +1,5 @@
 import {Button, Paper, Typography} from '@material-ui/core';
 import React from 'react';
-import {withAuth} from '../hoc/AuthContext';
 
 export const PageProfileSuccess = () => (
   <Paper className="text--center w--880" style={{padding: '70px'}}>
@@ -15,5 +14,3 @@ export const PageProfileSuccess = () => (
     </Button>
   </Paper>
 );
-
-export const PageProfileSuccessWithAuth = withAuth(PageProfileSuccess);

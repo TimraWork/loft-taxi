@@ -1,7 +1,6 @@
 import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import PropTypes from 'prop-types';
-import {withAuth} from './hoc/AuthContext';
 import {NavLink} from 'react-router-dom';
 
 export const navUrl = {
@@ -40,5 +39,3 @@ Nav.propTypes = {
   navUrl: PropTypes.string,
   handleFormSubmit: PropTypes.func
 };
-
-export const NavWithAuth = withAuth(Nav);

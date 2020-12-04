@@ -1,7 +1,8 @@
 import React from 'react';
 import {ProfileForm} from '../ProfileForm';
-import {withAuth} from '../hoc/AuthContext';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {logOut} from '../../actions';
 
 export const PageProfile = ({navigate}) => {
   const setNavigateTo = (e) => {
@@ -15,4 +16,4 @@ PageProfile.propTypes = {
   navigate: PropTypes.func
 };
 
-export const PageProfileWithAuth = withAuth(PageProfile);
+export const PageProfileWithAuth = connect(null, {logOut})(PageProfile);

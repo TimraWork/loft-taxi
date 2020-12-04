@@ -1,20 +1,24 @@
 import React, {useEffect} from 'react';
 import {Paper} from '@material-ui/core';
-import {withAuth} from '../hoc/AuthContext';
 import {LoginForm} from '../LoginForm';
 import {Redirect} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+import {logIn} from '../../actions';
+
 export const PageLogin = (props) => {
-  const {isLoggedIn, login, logout, location} = props;
+  const {isLoggedIn, logIn, logout, location} = props;
+  console.log('LOGIN - ', props);
+
   const authentificate = (e) => {
     e.preventDefault();
     const {email, password} = e.target;
-    login(email.value, password.value);
+    logIn(email.value, password.value);
   };
 
   useEffect(() => {
     if (location.pathname === '/logout/') {
-      logout();
+      // logout();
     }
   }, [logout, location.pathname]);
 
@@ -25,4 +29,4 @@ export const PageLogin = (props) => {
   );
 };
 
-export const PageLoginWithAuth = withAuth(PageLogin);
+export const PageLoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {logIn})(PageLogin);
