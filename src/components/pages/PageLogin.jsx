@@ -4,23 +4,23 @@ import {LoginForm} from '../LoginForm';
 import {Redirect} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {logIn} from '../../actions';
+import {authenticate, logOut} from '../../actions';
 
 export const PageLogin = (props) => {
-  const {isLoggedIn, logIn, logout, location} = props;
-  console.log('LOGIN - ', props);
+  const {isLoggedIn, authenticate, logOut, location} = props;
+  console.log('🚀 ~ isLoggedIn', isLoggedIn);
 
   const authentificate = (e) => {
     e.preventDefault();
     const {email, password} = e.target;
-    logIn(email.value, password.value);
+    authenticate(email.value, password.value);
   };
 
   useEffect(() => {
     if (location.pathname === '/logout/') {
-      // logout();
+      logOut();
     }
-  }, [logout, location.pathname]);
+  }, [logOut, location.pathname]);
 
   return (
     <div className="center_block">
@@ -29,4 +29,4 @@ export const PageLogin = (props) => {
   );
 };
 
-export const PageLoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {logIn})(PageLogin);
+export const PageLoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate, logOut})(PageLogin);
