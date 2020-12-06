@@ -5,7 +5,7 @@ import {PageMap} from './pages/PageMap';
 import {PageLoginWithAuth} from './pages/PageLogin';
 import {PageProfileWithAuth} from './pages/PageProfile';
 import {PageProfileSuccess} from './pages/PageProfileSuccess';
-import {PageRegistration} from './pages/PageRegistration';
+import {PageRegistrationWithAuth} from './pages/PageRegistration';
 
 import PropTypes from 'prop-types';
 
@@ -29,18 +29,17 @@ export const App = () => {
     <div className={'layout' + layoutWithoutHeader}>
       <Header />
       <main className="main">
-          <Switch>
-            <Route path="/" component={PageLoginWithAuth} exact/>
-            <Route path="/registration/" component={PageRegistration} />
-            <Route path="/login/" exact component={PageLoginWithAuth} />
-            <Route path="/logout/" exact component={PageLoginWithAuth} />
+        <Switch>
+          <Route path="/registration/" component={PageRegistrationWithAuth} />
+          <Route path="/login/" exact component={PageLoginWithAuth} />
+          <Route path="/logout/" exact component={PageLoginWithAuth} />
 
-            <PrivateRoute path="/map/" component={PageMap} />
-            <PrivateRoute path="/profile/" component={PageProfileWithAuth} />
-            <PrivateRoute path="/profile-success/" component={PageProfileSuccess} />
+          <PrivateRoute path="/map/" component={PageMap} />
+          <PrivateRoute path="/profile/" component={PageProfileWithAuth} />
+          <PrivateRoute path="/profile-success/" component={PageProfileSuccess} />
 
-            <Redirect to="/login/" component={PageLoginWithAuth} />
-          </Switch>
+          <Redirect to="/login/" component={PageLoginWithAuth} />
+        </Switch>
       </main>
     </div>
   );
