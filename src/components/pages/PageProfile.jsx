@@ -13,7 +13,7 @@ export const PageProfile = ({navigate}) => {
 };
 
 PageProfile.propTypes = {
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
 };
 
 export const PageProfileWithAuth = connect(null, {logOut})(PageProfile);

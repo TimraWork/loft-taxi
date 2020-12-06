@@ -1,30 +1,36 @@
 import React from 'react';
+import {Paper, Box, Button, FormControl, Input, InputLabel, Typography} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
-export const PageRegistration = ({handleFormSubmit}) => (
+export const PageRegistration = () => (
   <div className="center_block">
-    <div className="white_container w--580">
-      <form className="form w--350" onSubmit={handleFormSubmit}>
-        <h1 className="title title--h1 text--center">Регистрация</h1>
-        <label className="form__label" htmlFor="email">
-          Email*
-        </label>
-        <input className="form__input" id="email" type="email" placeholder="mail@mail.ru" />
-        <label className="form__label" htmlFor="name">
-          Как вас зовут?*
-        </label>
-        <input className="form__input" id="name" type="text" placeholder="Петр Александрович" />
-        <label className="form__label" htmlFor="password">
-          Придумайте пароль*
-        </label>
-        <input className="form__input mb--50" id="password" type="password" placeholder="*************" />
-        <input className="form__submit mb--50" type="submit" value="Зарегистрироваться" />
-        <div className="text--center form__text form__text--last mb--0">
-          Уже зарегистрированы? &nbsp;
-          <a href="/" className="form__link">
+    <Paper style={{padding: '70px'}}>
+      <form className="form w--350">
+        <Typography variant="h1" align="center">
+          Регистрация
+        </Typography>
+        <FormControl>
+          <InputLabel htmlFor="email">Email*</InputLabel>
+          <Input id="email" name="email" type="email" placeholder="mail@mail.ru" required />
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="name">Как вас зовут?*</InputLabel>
+          <Input id="name" name="name" type="text" placeholder="Петр Александрович" required />
+        </FormControl>
+        <FormControl style={{marginBottom: '50px'}}>
+          <InputLabel htmlFor="password">Придумайте пароль*</InputLabel>
+          <Input id="password" name="password" type="password" placeholder="*************" required />
+        </FormControl>
+        <Button id="login-button" className="mb--30">
+          Зарегистрироваться
+        </Button>
+        <Box sx={{textAlign: 'center'}}>
+          Уже зарегистрированы?&nbsp;
+          <Link to="/login/" id="login-link" href="#" color="secondary">
             Войти
-          </a>
-        </div>
+          </Link>
+        </Box>
       </form>
-    </div>
+    </Paper>
   </div>
 );

@@ -14,14 +14,14 @@ import {connect} from 'react-redux';
 import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
 let PrivateRoute = (props) => {
-  const {component: RouteComponent, isLoggedIn, ...rest} = props;
-  return <Route {...rest} render={(routeProps) => (isLoggedIn ? <RouteComponent {...routeProps} /> : <Redirect to="/login/" />)} />;
+  const {component: Component, isLoggedIn, ...rest} = props;
+  return <Route {...rest} render={(routeProps) => (isLoggedIn ? <Component {...routeProps} /> : <Redirect to="/login/" />)} />;
 };
 PrivateRoute = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {logIn})(PrivateRoute);
 
 export const App = () => {
   const currentPath = useLocation().pathname;
-  const pagesWithoutHeader = new Set(['/login/', '/logout/']);
+  const pagesWithoutHeader = new Set(['/login/', '/logout/', '/registration/']);
   const layoutWithoutHeader = pagesWithoutHeader.has(currentPath) ? ' layout--without_header' : '';
 
   return (

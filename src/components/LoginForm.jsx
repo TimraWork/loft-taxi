@@ -1,5 +1,6 @@
 import React from 'react';
-import {Paper, Box, Button, FormControl, Input, InputLabel, Link, Typography} from '@material-ui/core';
+import {Paper, Box, Button, FormControl, Input, InputLabel, Typography} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
 export const LoginForm = ({authentificate}) => (
   <div className="center_block">
@@ -12,21 +13,16 @@ export const LoginForm = ({authentificate}) => (
           <InputLabel htmlFor="email">Email*</InputLabel>
           <Input id="email" name="email" type="email" placeholder="mail@mail.ru" required />
         </FormControl>
-        <FormControl>
+        <FormControl style={{marginBottom: '50px'}}>
           <InputLabel htmlFor="password">Пароль*</InputLabel>
           <Input id="password" name="password" type="password" placeholder="*************" required />
         </FormControl>
-        <Box sx={{mb: 5, textAlign: 'right'}}>
-          <Link href="#" color="secondary">
-            Забыли пароль?
-          </Link>
-        </Box>
         <Button id="login-button" className="mb--30">
           Войти
         </Button>
         <Box sx={{textAlign: 'center'}}>
           Новый пользователь?&nbsp;
-          <Link id="registration-link" href="#" color="secondary">
+          <Link to="/registration/" id="registration-link" href="#" color="secondary">
             Регистрация
           </Link>
         </Box>
