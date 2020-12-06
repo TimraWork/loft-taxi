@@ -18,7 +18,7 @@ export const navUrl = {
   }
 };
 
-const NAVIGATION_ITEMS = Object.values(navUrl);
+export const NAVIGATION_ITEMS = Object.values(navUrl);
 
 export const Nav = () => {
   return (

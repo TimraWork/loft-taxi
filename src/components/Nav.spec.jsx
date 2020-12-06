@@ -1,18 +1,19 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
-import {Nav} from './Nav';
+import {render} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {NAVIGATION_ITEMS, Nav} from './Nav';
+import {createMemoryHistory} from 'history';
 
 describe('Nav', () => {
   it('renders correctly', () => {
-    const {container} = render(<Nav />);
+    const history = createMemoryHistory();
 
-    expect(container.innerHTML).toMatch('Карта');
-    expect(screen.getByTitle(/map/i)).toBeTruthy();
+    const {getByText} = render(
+      <Router history={history}>
+        <Nav />
+      </Router>
+    );
 
-    expect(container.innerHTML).toMatch('Профиль');
-    expect(screen.getByTitle(/profile/i)).toBeTruthy();
-
-    expect(container.innerHTML).toMatch('Выйти');
-    expect(screen.getByTitle(/logout/i)).toBeTruthy();
+    NAVIGATION_ITEMS.map((item) => expect(getByText(`${item.name}`).closest('a').pathname).toBe(`${item.path}`));
   });
 });

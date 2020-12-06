@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 
 import {PageMap} from './pages/PageMap';
@@ -7,6 +6,8 @@ import {PageLoginWithAuth} from './pages/PageLogin';
 import {PageProfileWithAuth} from './pages/PageProfile';
 import {PageProfileSuccess} from './pages/PageProfileSuccess';
 import {PageRegistration} from './pages/PageRegistration';
+
+import PropTypes from 'prop-types';
 
 import {logIn} from '../actions';
 import {connect} from 'react-redux';
@@ -28,8 +29,8 @@ export const App = () => {
     <div className={'layout' + layoutWithoutHeader}>
       <Header />
       <main className="main">
-        <ErrorBoundary>
           <Switch>
+            <Route path="/" component={PageLoginWithAuth} exact/>
             <Route path="/registration/" component={PageRegistration} />
             <Route path="/login/" exact component={PageLoginWithAuth} />
             <Route path="/logout/" exact component={PageLoginWithAuth} />
@@ -40,10 +41,13 @@ export const App = () => {
 
             <Redirect to="/login/" component={PageLoginWithAuth} />
           </Switch>
-        </ErrorBoundary>
       </main>
     </div>
   );
+};
+
+App.propTypes = {
+  isLoggedIn: PropTypes.bool
 };
 
 export default connect((state) => ({isLoggedIn: state.auth.isLoggedIn}))(App);
