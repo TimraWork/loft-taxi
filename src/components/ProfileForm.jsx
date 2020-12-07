@@ -7,6 +7,11 @@ export const ProfileForm = ({handleFormSubmit}) => {
   const [number, setNumber] = useState('5545  2300  3432  4521');
   const [expiration, setExpiration] = useState('05/08');
 
+  const cardNumberOnchange = (e) => {
+    let cardNumberFormatter = e.target.value.match(/.{1,4}/g).join(' ');
+    setNumber(cardNumberFormatter);
+  };
+
   return (
     <div className="center_block bg--cover">
       <Paper className="text--center w--880" style={{padding: '70px'}}>
@@ -27,7 +32,7 @@ export const ProfileForm = ({handleFormSubmit}) => {
               </FormControl>
               <FormControl>
                 <InputLabel htmlFor="number">Номер карты</InputLabel>
-                <Input id="number" name="number" placeholder={number} onChange={(e) => setNumber(e.target.value)} required />
+                <Input id="number" name="number" placeholder={number} onChange={cardNumberOnchange} required />
               </FormControl>
               <Grid container spacing={3} className="mb--30">
                 <Grid item xs={12} sm={6}>
@@ -60,5 +65,5 @@ export const ProfileForm = ({handleFormSubmit}) => {
 };
 
 ProfileForm.propTypes = {
-  handleFormSubmit: PropTypes.func
+  handleFormSubmit: PropTypes.func,
 };

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {authenticate, logOut} from '../../actions';
 
 export const PageLogin = (props) => {
-  console.log('🚀 ~PageLogin ~ props', props);
+  // console.log('🚀 ~PageLogin ~ props', props);
   const {isLoggedIn, authenticate, logOut, location} = props;
 
   const authentificate = (e) => {

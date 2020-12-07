@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {register} from '../../actions';
 
 export const PageRegistration = (props) => {
-  console.log('🚀 ~PageRegis ~ props', props);
+  // console.log('🚀 ~PageRegis ~ props', props);
 
   const {isLoggedIn, register} = props;
 

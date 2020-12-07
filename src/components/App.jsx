@@ -16,11 +16,17 @@ import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
 let PrivateRoute = (props) => {
   const {component: Component, isLoggedIn, ...rest} = props;
-  return <Route {...rest} render={(routeProps) => (isLoggedIn ? <Component {...routeProps} /> : <Redirect to="/login/" />)} />;
+  return (
+    <Route
+      {...rest}
+      render={(routeProps) => (isLoggedIn || localStorage.getItem('state') ? <Component {...routeProps} /> : <Redirect to="/login/" />)}
+    />
+  );
 };
 PrivateRoute = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {logIn})(PrivateRoute);
 
 export const App = () => {
+  // console.log('STORE .getState() ', store.getState());
   const currentPath = useLocation().pathname;
   const pagesWithoutHeader = new Set(['/login/', '/logout/', '/registration/']);
   const layoutWithoutHeader = pagesWithoutHeader.has(currentPath) ? ' layout--without_header' : '';
@@ -30,6 +36,7 @@ export const App = () => {
       <Header />
       <main className="main">
         <Switch>
+          {/* <Route path="/" component={PageMap} /> */}
           <Route path="/registration/" component={PageRegistrationWithAuth} />
           <Route path="/login/" exact component={PageLoginWithAuth} />
           <Route path="/logout/" exact component={PageLoginWithAuth} />
@@ -46,7 +53,7 @@ export const App = () => {
 };
 
 App.propTypes = {
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
 };
 
 export default connect((state) => ({isLoggedIn: state.auth.isLoggedIn}))(App);
