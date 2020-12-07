@@ -7,9 +7,22 @@ export const ProfileForm = ({handleFormSubmit}) => {
   const [number, setNumber] = useState('5545  2300  3432  4521');
   const [expiration, setExpiration] = useState('05/08');
 
+  const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
+  const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
+
   const cardNumberOnchange = (e) => {
-    let cardNumberFormatter = e.target.value.match(/.{1,4}/g).join(' ');
-    setNumber(cardNumberFormatter);
+    let inputValue = e.target.value;
+
+    inputValue = validateNumbers(inputValue);
+    inputValue = validateWhiteSpace(inputValue);
+
+    setNumber(inputValue);
+  };
+
+  const cardExpirationOnchange = (e) => {
+    let inputExpValue = e.target.value;
+    inputExpValue = validateNumbers(inputExpValue);
+    setExpiration(inputExpValue);
   };
 
   return (
@@ -32,19 +45,35 @@ export const ProfileForm = ({handleFormSubmit}) => {
               </FormControl>
               <FormControl>
                 <InputLabel htmlFor="number">Номер карты</InputLabel>
-                <Input id="number" name="number" placeholder={number} onChange={cardNumberOnchange} required />
+                <Input
+                  inputProps={{maxLength: 22}}
+                  id="number"
+                  name="number"
+                  placeholder={number}
+                  value={number}
+                  onChange={cardNumberOnchange}
+                  required
+                />
               </FormControl>
               <Grid container spacing={3} className="mb--30">
                 <Grid item xs={12} sm={6}>
                   <FormControl>
                     <InputLabel htmlFor="expiration">MM/YY</InputLabel>
-                    <Input id="expiration" name="expiration" placeholder={expiration} onChange={(e) => setExpiration(e.target.value)} required />
+                    <Input
+                      inputProps={{maxLength: 5}}
+                      id="expiration"
+                      name="expiration"
+                      placeholder={expiration}
+                      value={expiration}
+                      onChange={cardExpirationOnchange}
+                      required
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl>
                     <InputLabel htmlFor="cvc">CVC</InputLabel>
-                    <Input id="cvc" name="cvc" placeholder="667" required />
+                    <Input inputProps={{maxLength: 3}} id="cvc" name="cvc" placeholder="667" required />
                   </FormControl>
                 </Grid>
               </Grid>
@@ -65,5 +94,5 @@ export const ProfileForm = ({handleFormSubmit}) => {
 };
 
 ProfileForm.propTypes = {
-  handleFormSubmit: PropTypes.func,
+  handleFormSubmit: PropTypes.func
 };
