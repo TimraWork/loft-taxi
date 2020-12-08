@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {ProfileForm} from '../ProfileForm';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {profile} from '../../actions';
+import {profile} from '../redux/actions';
 
-export const PageProfile = ({token, profile}) => {
+import {ProfileForm} from '../components/ProfileForm';
+
+export const Profile = ({token, profile}) => {
   const profileCard = (e) => {
     e.preventDefault();
     const {number, expiration, name, cvc} = e.target;
@@ -43,10 +44,10 @@ export const PageProfile = ({token, profile}) => {
   );
 };
 
-PageProfile.propTypes = {
+Profile.propTypes = {
   token: PropTypes.string,
   profile: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token});
-export const PageProfileWithAuth = connect(mapStateToProps, {profile})(PageProfile);
+export const ProfileWithAuth = connect(mapStateToProps, {profile})(Profile);

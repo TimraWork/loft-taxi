@@ -1,6 +1,6 @@
 import {Button, Grid, Paper, TextField, Typography} from '@material-ui/core';
 import React from 'react';
-import PaymentCard from './PaymentCard';
+import {PaymentCard} from './PaymentCard';
 import PropTypes from 'prop-types';
 
 export const ProfileForm = ({handleFormSubmit, number, cardNumberOnChange, expiration, cardExpirationOnChange}) => (
@@ -59,5 +59,9 @@ export const ProfileForm = ({handleFormSubmit, number, cardNumberOnChange, expir
 );
 
 ProfileForm.propTypes = {
-  handleFormSubmit: PropTypes.func
+  handleFormSubmit: PropTypes.func,
+  cardNumberOnChange: PropTypes.func,
+  cardExpirationOnChange: PropTypes.func,
+  number: PropTypes.string,
+  expiration: PropTypes.string
 };

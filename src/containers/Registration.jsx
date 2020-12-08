@@ -1,9 +1,9 @@
 import React from 'react';
-import {RegistrationForm} from '../RegistrationForm';
 import {Redirect} from 'react-router-dom';
-
 import {connect} from 'react-redux';
-import {register} from '../../actions';
+import {register} from '../redux/actions';
+
+import {RegistrationForm} from '../components/RegistrationForm';
 
 export const PageRegistration = ({isLoggedIn, register}) => {
   const registerUser = (e) => {
@@ -15,4 +15,4 @@ export const PageRegistration = ({isLoggedIn, register}) => {
   return <>{isLoggedIn ? <Redirect to="/map/" /> : <RegistrationForm register={registerUser} />}</>;
 };
 
-export const PageRegistrationWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {register})(PageRegistration);
+export const RegistrationWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {register})(PageRegistration);

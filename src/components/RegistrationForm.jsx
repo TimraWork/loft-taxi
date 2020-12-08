@@ -1,5 +1,5 @@
 import React from 'react';
-import {Paper, Box, Button, FormControl, Input, InputLabel, Typography} from '@material-ui/core';
+import {Paper, Box, Button, Typography, TextField} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
 export const RegistrationForm = ({register}) => (
@@ -9,22 +9,17 @@ export const RegistrationForm = ({register}) => (
         <Typography variant="h1" align="center">
           Регистрация
         </Typography>
-        <FormControl>
-          <InputLabel htmlFor="email">Email*</InputLabel>
-          <Input id="email" name="email" type="email" placeholder="mail@mail.ru" required />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="name">Имя*</InputLabel>
-          <Input id="name" name="name" type="text" placeholder="Петр" required />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="surname">Фамилия*</InputLabel>
-          <Input id="surname" name="surname" type="text" placeholder="Фамилия" required />
-        </FormControl>
-        <FormControl style={{marginBottom: '50px'}}>
-          <InputLabel htmlFor="password">Придумайте пароль*</InputLabel>
-          <Input id="password" name="password" type="password" placeholder="*************" required />
-        </FormControl>
+        <TextField variant="standard" label="Email" name="email" inputProps={{type: 'email'}} required />
+        <TextField variant="standard" label="Имя" name="name" required />
+        <TextField variant="standard" label="Фамилия" name="surname" />
+        <TextField
+          variant="standard"
+          label="Придумайте пароль"
+          name="password"
+          inputProps={{type: 'password'}}
+          style={{marginBottom: '50px'}}
+          required
+        />
         <Button id="login-button" className="mb--30">
           Зарегистрироваться
         </Button>

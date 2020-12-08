@@ -5,8 +5,8 @@ import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 
-jest.mock('./pages/PageMap', () => ({PageMap: () => <div>PageMap component</div>}));
-jest.mock('./pages/PageLogin', () => ({PageLoginWithAuth: () => <div>PageLoginWithAuth component</div>}));
+jest.mock('../components/Map', () => ({Map: () => <div>Map component</div>}));
+jest.mock('./components/LoginWithAuth', () => ({LoginWithAuth: () => <div>LoginWithAuth component</div>}));
 
 describe('App', () => {
   it('renders correctly', () => {
@@ -26,6 +26,6 @@ describe('App', () => {
       </Router>
     );
     debug();
-    expect(container.innerHTML).toMatch('PageLoginWithAuth component');
+    expect(container.innerHTML).toMatch('LoginWithAuth component');
   });
 });

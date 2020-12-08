@@ -2,8 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {logOut} from '../actions';
-import {store} from '../store';
+import {logOut} from '../redux/actions';
+import {store} from '../redux/store';
 
 export const navUrl = {
   MAP: {

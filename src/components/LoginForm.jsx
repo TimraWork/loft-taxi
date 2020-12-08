@@ -1,5 +1,5 @@
 import React from 'react';
-import {Paper, Box, Button, FormControl, Input, InputLabel, Typography} from '@material-ui/core';
+import {Paper, Box, Button, Typography, TextField} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
 export const LoginForm = ({authentificate}) => (
@@ -9,14 +9,8 @@ export const LoginForm = ({authentificate}) => (
         <Typography variant="h1" align="center">
           Войти
         </Typography>
-        <FormControl>
-          <InputLabel htmlFor="email">Email*</InputLabel>
-          <Input id="email" name="email" type="email" placeholder="mail@mail.ru" required />
-        </FormControl>
-        <FormControl style={{marginBottom: '50px'}}>
-          <InputLabel htmlFor="password">Пароль*</InputLabel>
-          <Input id="password" name="password" type="password" placeholder="*************" required />
-        </FormControl>
+        <TextField variant="standard" label="Email" name="email" inputProps={{type: 'email'}} required />
+        <TextField style={{marginBottom: '50px'}} variant="standard" label="Пароль" name="password" inputProps={{type: 'password'}} required />
         <Button id="login-button" className="mb--30">
           Войти
         </Button>

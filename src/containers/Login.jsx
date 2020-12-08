@@ -1,9 +1,9 @@
 import React from 'react';
-import {LoginForm} from '../LoginForm';
 import {Redirect} from 'react-router-dom';
-
 import {connect} from 'react-redux';
-import {authenticate, logOut} from '../../actions';
+import {authenticate, logOut} from '../redux/actions';
+
+import {LoginForm} from '../components/LoginForm';
 
 export const PageLogin = ({isLoggedIn, authenticate}) => {
   const authentificate = (e) => {
@@ -15,4 +15,4 @@ export const PageLogin = ({isLoggedIn, authenticate}) => {
   return <>{isLoggedIn ? <Redirect to="/map/" /> : <LoginForm authentificate={authentificate} />}</>;
 };
 
-export const PageLoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate, logOut})(PageLogin);
+export const LoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate, logOut})(PageLogin);

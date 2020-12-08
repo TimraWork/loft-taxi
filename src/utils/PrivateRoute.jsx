@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 
-import {logIn} from '../actions';
+import {logIn} from '../redux/actions';
 
 export let PrivateRoute = (props) => {
   const {component: Component, isLoggedIn, ...rest} = props;

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import mapboxgl from 'mapbox-gl';
 
-export const Map = () => {
+export const MapBoxGL = () => {
   let mapRef = useRef();
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export const Map = () => {
       container: mapRef.current,
       style: 'mapbox://styles/timrawork123/ckhxhn8r30ukv19khb7ah55qr',
       center: [30.3056504, 59.9429126],
-      zoom: 10,
+      zoom: 10
     });
 
     return () => {
