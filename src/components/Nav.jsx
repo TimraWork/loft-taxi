@@ -1,7 +1,9 @@
 import React from 'react';
-import ErrorBoundary from './ErrorBoundary';
-import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
+
+import {connect} from 'react-redux';
+import {logOut} from '../actions';
+import {store} from '../store';
 
 export const navUrl = {
   MAP: {
@@ -21,21 +23,20 @@ export const navUrl = {
 export const NAVIGATION_ITEMS = Object.values(navUrl);
 
 export const Nav = () => {
+  const handleNavClick = (path) => {
+    if (path === '/logout/') {
+      store.dispatch(logOut());
+    }
+  };
   return (
-    <ErrorBoundary>
-      <nav className="nav">
-        {NAVIGATION_ITEMS.map((item) => (
-          <NavLink key={item.path} to={item.path} className="nav__item" exact>
-            {item.name}
-          </NavLink>
-        ))}
-      </nav>
-    </ErrorBoundary>
+    <nav className="nav">
+      {NAVIGATION_ITEMS.map((item) => (
+        <NavLink key={item.path} to={item.path} className="nav__item" exact onClick={() => handleNavClick(item.path)}>
+          {item.name}
+        </NavLink>
+      ))}
+    </nav>
   );
 };
 
-// const PATHS = NAVIGATION_ITEMS.map((item) => item.path);
-Nav.propTypes = {
-  navUrl: PropTypes.string,
-  handleFormSubmit: PropTypes.func
-};
+export const NavWithAuth = connect(null, {logOut})(Nav);

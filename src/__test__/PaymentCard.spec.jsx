@@ -1,5 +1,5 @@
 import React from 'react';
-import PaymentCard from './PaymentCard.jsx';
+import PaymentCard from '../components/PaymentCard.jsx';
 import {render} from '@testing-library/react';
 
 describe('PaymentCard', () => {

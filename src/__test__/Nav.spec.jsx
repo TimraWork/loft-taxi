@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from '@testing-library/react';
 import {Router} from 'react-router-dom';
-import {NAVIGATION_ITEMS, Nav} from './Nav';
+import {NAVIGATION_ITEMS, Nav} from '../components/Nav';
 import {createMemoryHistory} from 'history';
 
 describe('Nav', () => {

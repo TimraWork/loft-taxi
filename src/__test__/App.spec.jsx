@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import App from './App';
+import App from '../components/App';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
@@ -20,9 +20,9 @@ describe('App', () => {
 
     const {container, debug} = render(
       <Router history={history}>
-          <Provider store={mockStore}>
-            <App />
-          </Provider>
+        <Provider store={mockStore}>
+          <App />
+        </Provider>
       </Router>
     );
     debug();

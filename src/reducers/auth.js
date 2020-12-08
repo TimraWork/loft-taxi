@@ -7,8 +7,8 @@ const initialState = {
     cardNumber: '',
     expiryDate: '',
     cardName: '',
-    cvc: '',
-  },
+    cvc: ''
+  }
 };
 
 // eslint-disable-next-line
@@ -16,6 +16,10 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case LOG_IN: {
       return {...initialState, isLoggedIn: true, token: action.payload.token};
+    }
+    case LOG_OUT: {
+      localStorage.removeItem('state');
+      return {...initialState, isLoggedIn: false};
     }
     case PROFILE: {
       return {
@@ -25,13 +29,9 @@ export default function (state = initialState, action) {
           cardNumber: action.payload.cardNumber,
           expiryDate: action.payload.expiryDate,
           cardName: action.payload.cardName,
-          cvc: action.payload.cvc,
-        },
+          cvc: action.payload.cvc
+        }
       };
-    }
-    case LOG_OUT: {
-      localStorage.removeItem('state');
-      return initialState;
     }
     default:
       return state;

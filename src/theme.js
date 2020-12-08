@@ -50,18 +50,18 @@ export const theme = createMuiTheme({
         }
       }
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 10
+        }
+      }
+    },
     MuiFormControl: {
       styleOverrides: {
         root: {
           marginBottom: 20,
           width: '100%'
-        }
-      }
-    },
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          padding: 10
         }
       }
     },

@@ -5,11 +5,7 @@ import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {register} from '../../actions';
 
-export const PageRegistration = (props) => {
-  // console.log('🚀 ~PageRegis ~ props', props);
-
-  const {isLoggedIn, register} = props;
-
+export const PageRegistration = ({isLoggedIn, register}) => {
   const registerUser = (e) => {
     e.preventDefault();
     const {name, surname, email, password} = e.target;
