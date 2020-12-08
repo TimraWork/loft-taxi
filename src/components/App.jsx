@@ -1,53 +1,39 @@
-import React, {Component} from 'react';
-import ErrorBoundary from './ErrorBoundary';
-import Header from './Header';
+import React from 'react';
+import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
-import {PageMapWithAuth} from './PageMap';
-import {PageLogin} from './PageLogin';
-import {PageProfileWithAuth} from './PageProfile';
-import {ProfileSuccess} from './ProfileSuccess';
-import {navUrl as navPath} from './Nav';
-import {withAuth} from './hoc/AuthContext';
+import {HeaderView} from './Header';
 
-let REDIRECT_URL = navPath.LOGOUT.path;
+import {PageMap} from './pages/PageMap';
+import {PageLoginWithAuth} from './pages/PageLogin';
+import {PageProfileWithAuth} from './pages/PageProfile';
+import {PageProfileSuccess} from './pages/PageProfileSuccess';
+import {PageRegistrationWithAuth} from './pages/PageRegistration';
 
-class App extends Component {
-  state = {
-    currentUrl: REDIRECT_URL
-  };
+import {PrivateRoute} from './PrivateRoute';
 
-  PAGES = {
-    '/map/': (props) => <PageMapWithAuth {...props} />,
-    '/logout/': (props) => <PageLogin {...props} />,
-    '/profile/': (props) => <PageProfileWithAuth {...props} />,
-    '/profile-success/': (props) => <ProfileSuccess {...props} />
-  };
+export const App = () => {
+  const currentPath = useLocation().pathname;
+  const pagesWithoutHeader = new Set(['/login/', '/logout/', '/registration/']);
+  const layoutWithoutHeader = pagesWithoutHeader.has(currentPath) ? ' layout--without_header' : '';
 
-  navigateTo = (e, currentPage) => {
-    e.preventDefault();
-    if (this.props.isLoggedIn) {
-      this.setState({currentUrl: currentPage});
-    } else {
-      this.props.logout();
-      this.setState({currentUrl: REDIRECT_URL});
-    }
-  };
+  return (
+    <div className={'layout' + layoutWithoutHeader}>
+      <HeaderView />
+      <main className="main">
+        <Switch>
+          <Route path="/registration/" component={PageRegistrationWithAuth} />
+          <Route path="/login/" exact component={PageLoginWithAuth} />
+          <Route path="/logout/" component={PageLoginWithAuth} />
 
-  render() {
-    const {currentUrl} = this.state;
+          <PrivateRoute path="/map/" component={PageMap} />
+          <PrivateRoute path="/profile/" component={PageProfileWithAuth} />
+          <PrivateRoute path="/profile-success/" component={PageProfileSuccess} />
 
-    const pagesWithoutHeader = new Set([navPath.LOGOUT.path]);
-    const layoutWithoutHeader = pagesWithoutHeader.has(currentUrl) ? ' layout--without_header' : '';
+          <Redirect to="/login/" component={PageLoginWithAuth} />
+        </Switch>
+      </main>
+    </div>
+  );
+};
 
-    return (
-      <div className={'layout' + layoutWithoutHeader}>
-        <Header handleNavClick={this.navigateTo} navUrl={currentUrl} />
-        <main className="main">
-          <ErrorBoundary>{this.PAGES[currentUrl]({navigate: this.navigateTo})}</ErrorBoundary>
-        </main>
-      </div>
-    );
-  }
-}
-
-export default withAuth(App);
+export default App;

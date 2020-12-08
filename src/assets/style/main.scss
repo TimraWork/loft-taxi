@@ -6,7 +6,7 @@ $black: #1c1a19;
 $gray: #828282;
 $grayLight: #e4e4e4;
 $headerHeight: 100px;
-$defaultFont: "Roboto", "Helvetica", "Arial", sans-serif;
+$defaultFont: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
 * {
   box-sizing: border-box;
@@ -107,6 +107,7 @@ main {
   flex: 1 1 auto;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .nav {
@@ -115,7 +116,7 @@ main {
     color: #fff;
     transition: 0.3s ease-in-out;
     cursor: pointer;
-    &--active,
+    &.active,
     &:hover {
       color: $accent;
     }
@@ -165,7 +166,7 @@ main {
 .layout {
   display: flex;
   flex-direction: column;
-  background: url("../img/map.jpg") no-repeat 50% 50%;
+  background: url('../img/map.jpg') no-repeat 50% 50%;
   background-size: cover;
   height: 100vh;
   &--without_header {
@@ -273,8 +274,8 @@ main {
   padding: 20px;
   display: flex;
   align-items: center;
-  background: url("../img/logo-icon.svg") no-repeat 18px 18px/33px 33px, url("../img/card-chip.svg") no-repeat 18px calc(100% - 18px),
-    url("../img/card-circles.svg") no-repeat calc(100% - 18px) calc(100% - 18px);
+  background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/card-chip.svg') no-repeat 18px calc(100% - 18px),
+    url('../img/card-circles.svg') no-repeat calc(100% - 18px) calc(100% - 18px);
   &__expiration {
     position: absolute;
     right: 18px;

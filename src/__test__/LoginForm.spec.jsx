@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
 
-import {LoginForm} from './LoginForm';
+import {LoginForm} from '../components/LoginForm';
 
 describe('LoginForm', () => {
   let wrapper;

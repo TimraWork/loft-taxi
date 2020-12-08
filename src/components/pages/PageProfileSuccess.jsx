@@ -1,7 +1,7 @@
 import {Button, Paper, Typography} from '@material-ui/core';
 import React from 'react';
 
-export const ProfileSuccess = () => (
+export const PageProfileSuccess = () => (
   <Paper className="text--center w--880" style={{padding: '70px'}}>
     <Typography variant="h1" align="center">
       Профиль

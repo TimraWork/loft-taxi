@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 
-import {Car} from './Car';
+import {Car} from '../components/Car';
 
 describe('Car', () => {
   it('renders correctly', () => {

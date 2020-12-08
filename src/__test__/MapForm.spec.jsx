@@ -1,9 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
-import './../setupTests';
+import '../setupTests';
 
-import {MapForm} from './MapForm';
+import {MapForm} from '../components/MapForm';
 
 describe('MapForm', () => {
   let wrapper;
