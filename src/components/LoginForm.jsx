@@ -9,8 +9,16 @@ export const LoginForm = ({authentificate}) => (
         <Typography variant="h1" align="center">
           Войти
         </Typography>
-        <TextField variant="standard" label="Email" name="email" inputProps={{type: 'email'}} required />
-        <TextField style={{marginBottom: '50px'}} variant="standard" label="Пароль" name="password" inputProps={{type: 'password'}} required />
+        <TextField variant="standard" value="timra.work@gmail.com" label="Email" name="email" inputProps={{type: 'email'}} required />
+        <TextField
+          style={{marginBottom: '50px'}}
+          value="123"
+          variant="standard"
+          label="Пароль"
+          name="password"
+          inputProps={{type: 'password'}}
+          required
+        />
         <Button id="login-button" className="mb--30">
           Войти
         </Button>

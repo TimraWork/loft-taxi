@@ -5,10 +5,7 @@ const commonParams = {
   }
 };
 
-const fetchData = (dataUrl, params) =>
-  fetch(dataUrl, params)
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+const fetchData = (dataUrl, params) => fetch(dataUrl, params).then((res) => res.json());
 
 export const serverLogin = async (email, password) => {
   const params = {
@@ -18,6 +15,7 @@ export const serverLogin = async (email, password) => {
       password: password
     })
   };
+  console.log('serverLogin = email, password = ', email, password);
   return fetchData(`https://loft-taxi.glitch.me/auth`, params);
 };
 
