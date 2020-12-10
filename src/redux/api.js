@@ -32,6 +32,11 @@ export const serverRegister = async (name, surname, email, password) => {
   return fetchData(`https://loft-taxi.glitch.me/register`, params);
 };
 
+export const getServerCard = async (token) => {
+  const params = {};
+  return fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, params);
+};
+
 export const serverCard = async (token, cardNumber, expiryDate, cardName, cvc) => {
   const params = {
     ...commonParams,

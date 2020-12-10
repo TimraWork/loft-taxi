@@ -1,14 +1,14 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
-import {authenticate, logIn} from './actions';
-import {serverLogin} from './api';
+import {AUTHENTICATE, logIn} from './actions';
+import {serverLogin, getServerCard} from './api';
 
 export function* Sagas() {
-  yield takeEvery(authenticate, function* (action) {
-    console.log(action);
-    const data = yield call(serverLogin, ...Object.values(action.payload)); //
-    if (data.success) {
-      yield put(logIn(data.token));
+  yield takeEvery(AUTHENTICATE, function* (action) {
+    const authenticateData = yield call(serverLogin, ...Object.values(action.payload));
+    if (authenticateData.success) {
+      const profileData = yield call(getServerCard, authenticateData.token);
+      yield put(logIn(authenticateData.token, profileData));
+      localStorage.setItem('state', JSON.stringify({auth: {loggedIn: true, profile: profileData}}));
     }
-    console.log('result = ', data);
   });
 } // главная сага, которая вызывает другие саги.

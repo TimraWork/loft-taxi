@@ -3,7 +3,17 @@ import React from 'react';
 import {PaymentCard} from './PaymentCard';
 import PropTypes from 'prop-types';
 
-export const ProfileForm = ({handleFormSubmit, number, cardNumberOnChange, expiration, cardExpirationOnChange}) => (
+export const ProfileForm = ({
+  handleFormSubmit,
+  number,
+  cardNumberOnChange,
+  expiration,
+  cardExpirationOnChange,
+  name,
+  cardNameOnChange,
+  cvc,
+  cardCvcOnChange
+}) => (
   <div className="center_block bg--cover">
     <Paper className="text--center w--880" style={{padding: '70px'}}>
       <form className="form" onSubmit={handleFormSubmit}>
@@ -17,7 +27,7 @@ export const ProfileForm = ({handleFormSubmit, number, cardNumberOnChange, expir
         </div>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <TextField label="Имя владельца" name="name" placeholder="Loft" variant="standard" />
+            <TextField label="Имя владельца" value={name} name="name" variant="standard" onChange={cardNameOnChange} />
             <TextField
               variant="standard"
               label="Номер карты"
@@ -40,7 +50,7 @@ export const ProfileForm = ({handleFormSubmit, number, cardNumberOnChange, expir
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField variant="standard" label="CVC" name="cvc" inputProps={{maxLength: 3}} required />
+                <TextField variant="standard" label="CVC" value={cvc} name="cvc" inputProps={{maxLength: 3}} onChange={cardCvcOnChange} required />
               </Grid>
             </Grid>
           </Grid>

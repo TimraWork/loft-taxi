@@ -44,7 +44,7 @@ export const authMiddleware = (store) => (next) => async (action) => {
           })
         );
       }
-      console.log('Store getstate = ', store.getState());
+      // console.log('Store getstate = ', store.getState());
       break;
     }
     default:
