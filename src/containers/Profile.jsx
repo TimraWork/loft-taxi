@@ -7,13 +7,12 @@ import {store} from '../redux/store';
 import {ProfileForm} from '../components/ProfileForm';
 
 export const Profile = ({token, profile}) => {
-  const profileCard = (e) => {
+  console.log('TOKEN = ', token);
+  const saveProfile = (e) => {
     e.preventDefault();
     const {number, expiration, name, cvc} = e.target;
     profile(token, number.value, expiration.value, name.value, cvc.value);
   };
-
-  console.log('Store getstate = ', store.getState().auth);
 
   const storage = JSON.parse(localStorage.getItem('state')).auth.profile;
   const {cardNumber, expiryDate, cardName, cvc} = storage;
@@ -35,7 +34,7 @@ export const Profile = ({token, profile}) => {
 
   const cardExpirationOnChange = (e) => {
     let inputExpValue = e.target.value;
-    inputExpValue = validateNumbers(inputExpValue);
+    // inputExpValue = validateNumbers(inputExpValue);
     setExpiration(inputExpValue);
   };
 
@@ -51,7 +50,7 @@ export const Profile = ({token, profile}) => {
 
   return (
     <ProfileForm
-      handleFormSubmit={profileCard}
+      handleFormSubmit={saveProfile}
       number={number}
       cardNumberOnChange={cardNumberOnChange}
       expiration={expiration}
@@ -66,7 +65,7 @@ export const Profile = ({token, profile}) => {
 
 Profile.propTypes = {
   token: PropTypes.string,
-  profile: PropTypes.func
+  profile: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token});

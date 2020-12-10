@@ -14,7 +14,6 @@ export const PageLogin = ({isLoggedIn, authenticate}) => {
   };
 
   console.log('Store getstate = ', store.getState().auth);
-  console.log('localstorage = ', localStorage.getItem('state'));
 
   return <>{isLoggedIn ? <Redirect to="/map/" /> : <LoginForm authentificate={authentificate} />}</>;
 };
