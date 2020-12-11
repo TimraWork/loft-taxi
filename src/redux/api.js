@@ -32,8 +32,15 @@ export const serverRegister = async (name, surname, email, password) => {
 };
 
 export const getServerCard = async (token) => {
-  const params = {};
-  return fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, params);
+  return fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, {});
+};
+
+export const getServerAddressList = async () => {
+  return fetchData(`https://loft-taxi.glitch.me/addressList`, {});
+};
+
+export const getServerRoute = async (address1, address2) => {
+  return fetchData(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {});
 };
 
 export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cvc) => {
