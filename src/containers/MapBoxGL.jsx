@@ -40,43 +40,39 @@ export const MapBoxGL = () => {
       [30.272182, 59.800652],
     ];
 
-    setTimeout(function () {
-      map.on('styledata', function () {
-        map.flyTo({
-          center: coordinates[0],
-          zoom: 15,
-        });
-        map.addLayer({
-          id: 'route',
-          type: 'line',
-          source: {
-            type: 'geojson',
-            data: {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'LineString',
-                coordinates,
-              },
+    map.on('load', function () {
+      map.flyTo({
+        center: coordinates[0],
+        zoom: 15,
+      });
+
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates,
             },
           },
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-          },
-          paint: {
-            'line-color': '#ffc617',
-            'line-width': 8,
-          },
-        });
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#ffc617',
+          'line-width': 8,
+        },
       });
-    }, 500);
+    });
 
     return () => {
       map.remove();
-      if (map.getLayer('route')) {
-        map.removeLayer('route');
-      }
     };
   }, []);
 
