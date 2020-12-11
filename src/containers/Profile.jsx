@@ -2,18 +2,10 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {profile} from '../redux/actions';
-import {store} from '../redux/store';
 
 import {ProfileForm} from '../components/ProfileForm';
 
 export const Profile = ({token, profile}) => {
-  console.log('TOKEN = ', token);
-  const saveProfile = (e) => {
-    e.preventDefault();
-    const {number, expiration, name, cvc} = e.target;
-    profile(token, number.value, expiration.value, name.value, cvc.value);
-  };
-
   const storage = JSON.parse(localStorage.getItem('state')).auth.profile;
   const {cardNumber, expiryDate, cardName, cvc} = storage;
 
@@ -48,6 +40,12 @@ export const Profile = ({token, profile}) => {
     setCvcValue(inputValue);
   };
 
+  const saveProfile = (e) => {
+    e.preventDefault();
+    const {number, expiration, name, cvc} = e.target;
+    profile(token, number.value, expiration.value, name.value, cvc.value);
+  };
+
   return (
     <ProfileForm
       handleFormSubmit={saveProfile}
@@ -65,7 +63,7 @@ export const Profile = ({token, profile}) => {
 
 Profile.propTypes = {
   token: PropTypes.string,
-  profile: PropTypes.func,
+  profile: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token});

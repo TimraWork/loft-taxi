@@ -12,7 +12,7 @@ export const PageRegistration = ({isLoggedIn, register}) => {
     register(name.value, surname.value, email.value, password.value);
   };
 
-  return <>{isLoggedIn ? <Redirect to="/map/" /> : <RegistrationForm register={registerUser} />}</>;
+  return <>{isLoggedIn ? <Redirect to="/profile/" /> : <RegistrationForm register={registerUser} />}</>;
 };
 
 export const RegistrationWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {register})(PageRegistration);
