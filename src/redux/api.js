@@ -1,8 +1,8 @@
 const commonParams = {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 };
 
 const fetchData = (dataUrl, params) => fetch(dataUrl, params).then((res) => res.json());
@@ -12,8 +12,8 @@ export const serverLogin = async (email, password) => {
     ...commonParams,
     body: JSON.stringify({
       email: email,
-      password: password,
-    }),
+      password: password
+    })
   };
   return fetchData(`https://loft-taxi.glitch.me/auth`, params);
 };
@@ -25,22 +25,22 @@ export const serverRegister = async (name, surname, email, password) => {
       name: name,
       surname: surname,
       email: email,
-      password: password,
-    }),
+      password: password
+    })
   };
   return fetchData(`https://loft-taxi.glitch.me/register`, params);
 };
 
 export const getServerCard = async (token) => {
-  return fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, {});
+  return await fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, {});
 };
 
 export const getServerAddressList = async () => {
-  return fetchData(`https://loft-taxi.glitch.me/addressList`, {});
+  return await fetchData(`https://loft-taxi.glitch.me/addressList`, {});
 };
 
 export const getServerRoute = async (address1, address2) => {
-  return fetchData(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {});
+  return await fetchData(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {});
 };
 
 export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cvc) => {
@@ -53,8 +53,8 @@ export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cv
       cardNumber: cardNumber,
       expiryDate: expiryDate,
       cardName: cardName,
-      cvc: cvc,
-    }),
+      cvc: cvc
+    })
   };
-  return fetchData(`https://loft-taxi.glitch.me/card`, params);
+  return await fetchData(`https://loft-taxi.glitch.me/card`, params);
 };
