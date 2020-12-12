@@ -1,7 +1,6 @@
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const AUTHENTICATE = 'AUTHENTICATE';
-export const REGISTER = 'REGISTER';
 
 // экшн криейтеры
 export const logIn = (token, profile) => ({type: LOG_IN, payload: {token, profile}});

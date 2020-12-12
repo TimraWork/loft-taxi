@@ -1,7 +1,7 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from '../reducers';
+import rootReducer from '../modules/rootReducer';
 import rootSaga from '../modules/rootSaga'; // defaults to localStorage for web
 
 import {persistStore, persistReducer} from 'redux-persist';

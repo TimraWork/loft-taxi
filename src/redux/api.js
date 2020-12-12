@@ -37,8 +37,8 @@ export const getServerCard = async (token) => {
   return await fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, {});
 };
 
-export const getServerAddressList = async () => {
-  return await fetchData(`https://loft-taxi.glitch.me/addressList`, {});
+export const getServerAddressList = () => {
+  return fetchData(`https://loft-taxi.glitch.me/addressList`, {});
 };
 
 export const getServerRoute = async (address1, address2) => {
