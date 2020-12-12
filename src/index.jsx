@@ -14,9 +14,6 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './redux/store';
 import {theme} from './theme';
 
-console.log('Store', store);
-// console.log('Persistor', store.storepersistor);
-
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>

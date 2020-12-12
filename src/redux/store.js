@@ -9,7 +9,7 @@ import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -23,5 +23,5 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 const persistor = persistStore(store);
-console.log('persistor = ', persistor);
+
 export {store, persistor};

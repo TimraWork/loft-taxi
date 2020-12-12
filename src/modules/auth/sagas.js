@@ -5,6 +5,7 @@ import {serverLogin, getServerCard} from '../../redux/api';
 function* handleAuthorizationSaga(action) {
   try {
     const authenticateData = yield call(serverLogin, action.payload);
+
     if (authenticateData.success) {
       const profileData = yield call(getServerCard, authenticateData.token);
       yield put(logIn(authenticateData.token, profileData));

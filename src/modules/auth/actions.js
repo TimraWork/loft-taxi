@@ -7,7 +7,6 @@ export const REGISTER = 'REGISTER';
 export const logIn = (token, profile) => ({type: LOG_IN, payload: {token, profile}});
 export const authenticate = (email, password) => ({type: AUTHENTICATE, payload: {email, password}});
 export const logOut = () => ({type: LOG_OUT});
-export const register = (name, surname, email, password) => ({type: REGISTER, payload: {name, surname, email, password}});
 
 // import {createAction} from "redux-actions";
 // export const saveProfile = createAction("loft-taxi/profile/save");

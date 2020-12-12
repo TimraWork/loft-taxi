@@ -1,21 +1,23 @@
 const commonParams = {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 };
 
-const fetchData = (dataUrl, params) => fetch(dataUrl, params).then((res) => res.json());
+const fetchData = (dataUrl, params) =>
+  fetch(dataUrl, params)
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error('Could not fetch', err);
+    });
 
-export const serverLogin = async (email, password) => {
+export const serverLogin = async (payload) => {
   const params = {
     ...commonParams,
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
+    body: JSON.stringify(payload),
   };
-  return fetchData(`https://loft-taxi.glitch.me/auth`, params);
+  return await fetchData(`https://loft-taxi.glitch.me/auth`, params);
 };
 
 export const serverRegister = async (name, surname, email, password) => {
@@ -25,8 +27,8 @@ export const serverRegister = async (name, surname, email, password) => {
       name: name,
       surname: surname,
       email: email,
-      password: password
-    })
+      password: password,
+    }),
   };
   return fetchData(`https://loft-taxi.glitch.me/register`, params);
 };
@@ -53,8 +55,8 @@ export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cv
       cardNumber: cardNumber,
       expiryDate: expiryDate,
       cardName: cardName,
-      cvc: cvc
-    })
+      cvc: cvc,
+    }),
   };
   return await fetchData(`https://loft-taxi.glitch.me/card`, params);
 };
