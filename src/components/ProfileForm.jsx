@@ -4,7 +4,7 @@ import {PaymentCard} from './PaymentCard';
 import PropTypes from 'prop-types';
 
 export const ProfileForm = ({
-  handleFormSubmit,
+  saveProfile,
   number,
   cardNumberOnChange,
   expiration,
@@ -16,7 +16,7 @@ export const ProfileForm = ({
 }) => (
   <div className="center_block bg--cover">
     <Paper className="text--center w--880" style={{padding: '70px'}}>
-      <form className="form" onSubmit={handleFormSubmit}>
+      <form className="form">
         <div align="center">
           <Typography variant="h1" align="center">
             Профиль
@@ -59,7 +59,7 @@ export const ProfileForm = ({
           </Grid>
         </Grid>
         <div align="center">
-          <Button id="save-button" className="w--350">
+          <Button id="save-button" className="w--350" onClick={saveProfile}>
             Сохранить
           </Button>
         </div>

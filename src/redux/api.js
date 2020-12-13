@@ -11,7 +11,7 @@ const fetchData = (dataUrl, params) =>
   fetch(dataUrl, params)
     .then((res) => res.json())
     .catch((err) => {
-      console.error('Could not fetch', err);
+      console.log('Could not fetch', err);
     });
 
 export const serverLogin = async (payload) => {
@@ -22,7 +22,8 @@ export const serverLogin = async (payload) => {
   return await fetchData(`${BASE_API_URL}/auth`, params);
 };
 
-export const serverRegister = async (name, surname, email, password) => {
+export const serverRegister = async ({email, password, name, surname}) => {
+  console.log('🚀 email, password, name, surname', email, password, name, surname);
   const params = {
     ...commonParams,
     body: JSON.stringify({

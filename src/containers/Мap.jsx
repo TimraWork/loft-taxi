@@ -1,16 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {MapBoxGL} from './MapBoxGL';
 import {MapForm} from '../components/MapForm';
+import {MapProfile} from '../components/MapProfile';
 import ErrorBoundary from '../utils/ErrorBoundary';
 
 import {connect} from 'react-redux';
 import {getAddressList} from '../modules/addressList';
 import {getRoute} from '../modules/route';
 
-const Map = ({addressList, getAddressList, route, getRoute}) => {
+const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
   useEffect(() => {
     getAddressList();
   }, [getAddressList]);
+
+  useEffect(() => {
+    if (Object.keys(profile).length === 0) {
+      console.log('пуст');
+    }
+  }, [profile]);
 
   const [locationFrom, setLocationFrom] = useState('');
   const [locationTo, setLocationTo] = useState('');
@@ -42,18 +49,22 @@ const Map = ({addressList, getAddressList, route, getRoute}) => {
   return (
     <ErrorBoundary>
       <MapBoxGL coordinates={coordinates} />
-      <MapForm
-        locations={addressList}
-        locationsTo={locationsTo}
-        locationsFrom={locationsFrom}
-        handleLocationFromOnChange={handleLocationFromOnChange}
-        handleLocationToOnChange={handleLocationToOnChange}
-        handleOrderOnClick={handleOrderOnClick}
-      />
+      {Object.keys(profile).length !== 0 ? (
+        <MapForm
+          locations={addressList}
+          locationsTo={locationsTo}
+          locationsFrom={locationsFrom}
+          handleLocationFromOnChange={handleLocationFromOnChange}
+          handleLocationToOnChange={handleLocationToOnChange}
+          handleOrderOnClick={handleOrderOnClick}
+        />
+      ) : (
+        <MapProfile />
+      )}
     </ErrorBoundary>
   );
 };
 
-const mapStateToProps = (state) => ({addressList: state.addressList, route: state.route});
+const mapStateToProps = (state) => ({addressList: state.addressList, route: state.route, profile: state.profile});
 
 export const MapWithAuth = connect(mapStateToProps, {getAddressList, getRoute})(Map);
