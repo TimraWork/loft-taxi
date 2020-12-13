@@ -6,19 +6,20 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Car} from './Car';
 
-export const MapForm = ({locations, locationsTo, handleFromToSelectOnChange}) => (
+export const MapForm = ({locationsFrom, locationsTo, handleLocationFromOnChange, handleLocationToOnChange, handleOrderOnClick}) => (
   <form className="car form container--left w--400">
     <Paper style={{padding: '25px', marginBottom: '10px'}}>
       <Autocomplete
-        options={locations}
+        options={locationsFrom}
         id="from"
-        onChange={handleFromToSelectOnChange}
+        onChange={handleLocationFromOnChange}
         renderInput={(params) => (
           <TextField
             {...params}
             placeholder="Откуда"
             variant="standard"
             name="from"
+            required
             InputProps={{
               ...params.InputProps,
               startAdornment: <FiberManualRecordIcon fontSize="small" />
@@ -30,12 +31,14 @@ export const MapForm = ({locations, locationsTo, handleFromToSelectOnChange}) =>
       <Autocomplete
         options={locationsTo}
         id="to"
+        onChange={handleLocationToOnChange}
         renderInput={(params) => (
           <TextField
             {...params}
             placeholder="Куда"
             variant="standard"
             name="to"
+            required
             InputProps={{
               ...params.InputProps,
               startAdornment: <SendIcon fontSize="small" color="secondary" />
@@ -51,7 +54,9 @@ export const MapForm = ({locations, locationsTo, handleFromToSelectOnChange}) =>
         <Car price={250} name="Премиум" type="premium" />
         <Car price={350} name="Бизнес" type="business" />
       </Grid>
-      <Button id="order-button">Заказать</Button>
+      <Button id="order-button" onClick={handleOrderOnClick}>
+        Заказать
+      </Button>
     </Paper>
   </form>
 );

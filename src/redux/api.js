@@ -1,8 +1,10 @@
+const BASE_API_URL = `https://loft-taxi.glitch.me`;
+
 const commonParams = {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 };
 
 const fetchData = (dataUrl, params) =>
@@ -15,9 +17,9 @@ const fetchData = (dataUrl, params) =>
 export const serverLogin = async (payload) => {
   const params = {
     ...commonParams,
-    body: JSON.stringify(payload),
+    body: JSON.stringify(payload)
   };
-  return await fetchData(`https://loft-taxi.glitch.me/auth`, params);
+  return await fetchData(`${BASE_API_URL}/auth`, params);
 };
 
 export const serverRegister = async (name, surname, email, password) => {
@@ -27,22 +29,10 @@ export const serverRegister = async (name, surname, email, password) => {
       name: name,
       surname: surname,
       email: email,
-      password: password,
-    }),
+      password: password
+    })
   };
-  return fetchData(`https://loft-taxi.glitch.me/register`, params);
-};
-
-export const getServerCard = async (token) => {
-  return await fetchData(`https://loft-taxi.glitch.me/card?token=${token}`, {});
-};
-
-export const getServerAddressList = () => {
-  return fetchData(`https://loft-taxi.glitch.me/addressList`, {});
-};
-
-export const getServerRoute = async (address1, address2) => {
-  return await fetchData(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {});
+  return fetchData(`${BASE_API_URL}/register`, params);
 };
 
 export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cvc) => {
@@ -55,8 +45,20 @@ export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cv
       cardNumber: cardNumber,
       expiryDate: expiryDate,
       cardName: cardName,
-      cvc: cvc,
-    }),
+      cvc: cvc
+    })
   };
-  return await fetchData(`https://loft-taxi.glitch.me/card`, params);
+  return await fetchData(`${BASE_API_URL}/card`, params);
+};
+
+export const getServerCard = async (token) => {
+  return await fetchData(`${BASE_API_URL}/card?token=${token}`, {});
+};
+
+export const getServerAddressList = () => {
+  return fetchData(`${BASE_API_URL}/addressList`, {});
+};
+
+export const getServerRoute = async (payload) => {
+  return await fetchData(`${BASE_API_URL}/route?address1=${payload.address1}&address2=${payload.address2}`, {});
 };
