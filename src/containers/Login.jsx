@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {authenticate} from '../redux/actions';
+import {authenticate} from '../modules/auth/actions';
 
 import {LoginForm} from '../components/LoginForm';
 

@@ -1,11 +1,13 @@
-import {SET_PROFILE} from './actions';
+import {SET_PROFILE, REMOVE_PROFILE} from './actions';
 
 // eslint-disable-next-line
 export default function (state = {}, action) {
-  console.log('Reducers = ', action.payload);
   switch (action.type) {
     case SET_PROFILE: {
-      return action.payload;
+      return action.payload.profileData;
+    }
+    case REMOVE_PROFILE: {
+      return {};
     }
     default:
       return state;

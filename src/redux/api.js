@@ -3,8 +3,8 @@ const BASE_API_URL = `https://loft-taxi.glitch.me`;
 const commonParams = {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 };
 
 const fetchData = (dataUrl, params) =>
@@ -17,28 +17,25 @@ const fetchData = (dataUrl, params) =>
 export const serverLogin = async (payload) => {
   const params = {
     ...commonParams,
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   };
   return await fetchData(`${BASE_API_URL}/auth`, params);
 };
 
 export const serverRegister = async ({email, password, name, surname}) => {
-  console.log('🚀 email, password, name, surname', email, password, name, surname);
   const params = {
     ...commonParams,
     body: JSON.stringify({
       name: name,
       surname: surname,
       email: email,
-      password: password
-    })
+      password: password,
+    }),
   };
   return fetchData(`${BASE_API_URL}/register`, params);
 };
 
-export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cvc) => {
-  console.log('🚀 token, id,', token, id);
-
+export const serverCard = async (token, cardNumber, expiryDate, cardName, cvc) => {
   const params = {
     ...commonParams,
     body: JSON.stringify({
@@ -46,8 +43,8 @@ export const serverCard = async (token, id, cardNumber, expiryDate, cardName, cv
       cardNumber: cardNumber,
       expiryDate: expiryDate,
       cardName: cardName,
-      cvc: cvc
-    })
+      cvc: cvc,
+    }),
   };
   return await fetchData(`${BASE_API_URL}/card`, params);
 };

@@ -1,23 +1,24 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
-import {GET_PROFILE, SET_PROFILE, setProfile} from './actions';
+import {GET_PROFILE, EDIT_PROFILE, setProfile} from './actions';
 import {getServerCard, serverCard} from '../../redux/api';
 
-function* handleProfileSaga(action) {
+function* handleGetProfileSaga(action) {
   try {
-    const profileData = yield call(getServerCard, action.payload);
-    console.log('🚀 ~ file: sagas.js ~ line 8 ~ function*handleProfileSaga ~ profileData', profileData);
-    if (profileData.success) {
-      // yield put(setProfile(profileData));
+    const profileData = yield call(getServerCard, action.payload.token);
+    console.log('🚀  profileData', profileData);
+    if (profileData.id) {
+      yield put(setProfile(profileData));
     }
   } catch (e) {
     console.log(e);
   }
 }
 
-function* saveProfileSaga(action) {
+function* handleEditProfileSaga(action) {
+  console.log('handleSetProfileSaga action.payload = ', action.payload);
   const profileData = yield call(serverCard, action.payload.authToken, ...Object.values(action.payload));
-  console.log(profileData);
   if (profileData.success) {
+    console.log('profileSu');
     // localStorage.removeItem('state');
     // localStorage.setItem('state', JSON.stringify({auth: {loggedIn: true, token: action.payload.authToken, profile: action.payload}}));
     // yield put(logIn(action.payload.authToken, action.payload));
@@ -25,6 +26,6 @@ function* saveProfileSaga(action) {
 }
 
 export function* profileSaga() {
-  yield takeLatest(GET_PROFILE, handleProfileSaga);
-  yield takeLatest(SET_PROFILE, saveProfileSaga);
+  yield takeLatest(GET_PROFILE, handleGetProfileSaga);
+  yield takeLatest(EDIT_PROFILE, handleEditProfileSaga);
 }
