@@ -1,19 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setProfile} from '../modules/profile/actions';
+import {editProfile} from '../modules/profile/actions';
 
 import {ProfileForm} from '../components/ProfileForm';
 
-export const Profile = ({token, setProfile}) => {
-  // const storage = JSON.parse(localStorage.getItem('state')).auth.profile;
-  // const {cardNumber, expiryDate, cardName, cvc} = storage;
-  // const {cardNumber, expiryDate, cardName, cvc} = '';
+export const Profile = ({token, profile, editProfile}) => {
+  const {cardNumber, expiryDate, cardName, cvc} = profile;
 
-  const [number, setNumber] = useState('');
-  const [expiration, setExpiration] = useState('');
-  const [name, setName] = useState('');
-  const [cvcValue, setCvcValue] = useState('');
+  const [number, setNumber] = useState(cardNumber);
+  const [expiration, setExpiration] = useState(expiryDate);
+  const [name, setName] = useState(cardName);
+  const [cvcValue, setCvcValue] = useState(cvc);
 
   const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
   const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
@@ -43,7 +41,7 @@ export const Profile = ({token, setProfile}) => {
 
   const saveProfile = (e) => {
     e.preventDefault();
-    setProfile(token, number, expiration, name, cvcValue);
+    editProfile(token, number, expiration, name, cvcValue);
   };
 
   return (
@@ -63,8 +61,7 @@ export const Profile = ({token, setProfile}) => {
 
 Profile.propTypes = {
   token: PropTypes.string,
-  profile: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({token: state.auth.token});
-export const ProfileWithAuth = connect(mapStateToProps, {setProfile})(Profile);
+const mapStateToProps = (state) => ({token: state.auth.token, profile: state.profile});
+export const ProfileWithAuth = connect(mapStateToProps, {editProfile})(Profile);

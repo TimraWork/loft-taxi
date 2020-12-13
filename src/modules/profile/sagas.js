@@ -5,9 +5,9 @@ import {getServerCard, serverCard} from '../../redux/api';
 function* handleGetProfileSaga(action) {
   try {
     const profileData = yield call(getServerCard, action.payload.token);
-    console.log('🚀  profileData', profileData);
+    const {id, ...data} = profileData;
     if (profileData.id) {
-      yield put(setProfile(profileData));
+      yield put(setProfile(data));
     }
   } catch (e) {
     console.log(e);
@@ -15,13 +15,9 @@ function* handleGetProfileSaga(action) {
 }
 
 function* handleEditProfileSaga(action) {
-  console.log('handleSetProfileSaga action.payload = ', action.payload);
-  const profileData = yield call(serverCard, action.payload.authToken, ...Object.values(action.payload));
+  const profileData = yield call(serverCard, action.payload);
   if (profileData.success) {
-    console.log('profileSu');
-    // localStorage.removeItem('state');
-    // localStorage.setItem('state', JSON.stringify({auth: {loggedIn: true, token: action.payload.authToken, profile: action.payload}}));
-    // yield put(logIn(action.payload.authToken, action.payload));
+    yield put(setProfile(action.payload));
   }
 }
 

@@ -35,7 +35,7 @@ export const serverRegister = async ({email, password, name, surname}) => {
   return fetchData(`${BASE_API_URL}/register`, params);
 };
 
-export const serverCard = async (token, cardNumber, expiryDate, cardName, cvc) => {
+export const serverCard = async ({token, cardNumber, expiryDate, cardName, cvc}) => {
   const params = {
     ...commonParams,
     body: JSON.stringify({

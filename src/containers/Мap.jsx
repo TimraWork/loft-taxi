@@ -13,12 +13,6 @@ const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
     getAddressList();
   }, [getAddressList]);
 
-  useEffect(() => {
-    if (Object.keys(profile).length === 0) {
-      console.log('пуст');
-    }
-  }, [profile]);
-
   const [locationFrom, setLocationFrom] = useState('');
   const [locationTo, setLocationTo] = useState('');
 

@@ -1,6 +1,8 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
 import {AUTHENTICATE, LOG_OUT, logIn} from './actions';
 import {getProfile, removeProfile} from '../profile/actions';
+import {removeRoute} from '../route/actions';
+import {removeAddressList} from '../addressList/actions';
 import {serverLogin, getServerCard} from '../../redux/api';
 
 function* handleAuthorizationSaga(action) {
@@ -24,6 +26,8 @@ function* handleAuthorizationSaga(action) {
 function* handleLogOutSaga() {
   try {
     yield put(removeProfile());
+    yield put(removeRoute());
+    yield put(removeAddressList());
   } catch (e) {
     console.log(e);
   }
