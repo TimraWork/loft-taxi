@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {MapBoxGL} from './MapBoxGL';
 import {MapForm} from '../components/MapForm';
 import ErrorBoundary from '../utils/ErrorBoundary';
@@ -11,10 +11,17 @@ const Map = ({addressList, getAddressList}) => {
     getAddressList();
   }, [getAddressList]);
 
+  const [locationsTo, setLocationsTo] = useState(addressList);
+
+  const handleFromToSelectOnChange = (e) => {
+    const inputValue = addressList.filter((el) => el !== e.target.textContent);
+    setLocationsTo(inputValue);
+  };
+
   return (
     <ErrorBoundary>
       <MapBoxGL />
-      <MapForm locations={addressList} />
+      <MapForm locations={addressList} locationsTo={locationsTo} handleFromToSelectOnChange={handleFromToSelectOnChange} />
     </ErrorBoundary>
   );
 };

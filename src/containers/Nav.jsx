@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {logOut} from '../redux/actions';
+import {logOut} from '../modules/auth';
 import {store} from '../redux/store';
 
 export const navUrl = {

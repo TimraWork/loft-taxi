@@ -6,14 +6,13 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Car} from './Car';
 
-const LOCATIONS = ['Березовая роща 14', 'Лесная поляна 34, п.8'];
-
-export const MapForm = ({locations}) => (
+export const MapForm = ({locations, locationsTo, handleFromToSelectOnChange}) => (
   <form className="car form container--left w--400">
     <Paper style={{padding: '25px', marginBottom: '10px'}}>
       <Autocomplete
         options={locations}
         id="from"
+        onChange={handleFromToSelectOnChange}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -22,14 +21,14 @@ export const MapForm = ({locations}) => (
             name="from"
             InputProps={{
               ...params.InputProps,
-              startAdornment: <FiberManualRecordIcon fontSize="small" />,
+              startAdornment: <FiberManualRecordIcon fontSize="small" />
             }}
           />
         )}
         popupIcon={<ExpandMoreIcon />}
       />
       <Autocomplete
-        options={LOCATIONS}
+        options={locationsTo}
         id="to"
         renderInput={(params) => (
           <TextField
@@ -39,7 +38,7 @@ export const MapForm = ({locations}) => (
             name="to"
             InputProps={{
               ...params.InputProps,
-              startAdornment: <SendIcon fontSize="small" color="secondary" />,
+              startAdornment: <SendIcon fontSize="small" color="secondary" />
             }}
           />
         )}
