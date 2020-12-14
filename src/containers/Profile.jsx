@@ -4,9 +4,12 @@ import {connect} from 'react-redux';
 import {editProfile} from '../modules/profile/actions';
 
 import {ProfileForm} from '../components/ProfileForm';
+import {ProfileSuccess} from '../components/ProfileSuccess';
 
 export const Profile = ({token, profile, editProfile}) => {
   const {cardNumber, expiryDate, cardName, cvc} = profile;
+
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
   const [number, setNumber] = useState(cardNumber);
   const [expiration, setExpiration] = useState(expiryDate);
@@ -42,9 +45,12 @@ export const Profile = ({token, profile, editProfile}) => {
   const saveProfile = (e) => {
     e.preventDefault();
     editProfile(token, number, expiration, name, cvcValue);
+    setIsProfileUpdated(true);
   };
 
-  return (
+  return isProfileUpdated ? (
+    <ProfileSuccess />
+  ) : (
     <ProfileForm
       saveProfile={saveProfile}
       number={number}
@@ -60,7 +66,7 @@ export const Profile = ({token, profile, editProfile}) => {
 };
 
 Profile.propTypes = {
-  token: PropTypes.string,
+  token: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token, profile: state.profile});
