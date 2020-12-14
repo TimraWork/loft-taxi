@@ -12,7 +12,7 @@ export const ProfileForm = ({
   name,
   cardNameOnChange,
   cvc,
-  cardCvcOnChange
+  cardCvcOnChange,
 }) => (
   <div className="center_block bg--cover">
     <Paper className="text--center w--880" style={{padding: '70px'}}>
@@ -59,7 +59,7 @@ export const ProfileForm = ({
           </Grid>
         </Grid>
         <div align="center">
-          <Button id="save-button" className="w--350" onClick={saveProfile}>
+          <Button id="save-button" className="w--350" onClick={saveProfile} type="submit">
             Сохранить
           </Button>
         </div>
@@ -73,5 +73,5 @@ ProfileForm.propTypes = {
   cardNumberOnChange: PropTypes.func,
   cardExpirationOnChange: PropTypes.func,
   number: PropTypes.string,
-  expiration: PropTypes.string
+  expiration: PropTypes.string,
 };

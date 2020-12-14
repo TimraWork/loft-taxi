@@ -1,19 +1,19 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import App from '../components/App';
+import {App} from '../components/App';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 
-jest.mock('../components/Map', () => ({Map: () => <div>Map component</div>}));
-jest.mock('./components/LoginWithAuth', () => ({LoginWithAuth: () => <div>LoginWithAuth component</div>}));
+jest.mock('../containers/Мap', () => ({Map: () => <div>Map component</div>}));
+jest.mock('../containers/Login', () => ({LoginWithAuth: () => <div>LoginWithAuth component</div>}));
 
 describe('App', () => {
   it('renders correctly', () => {
     const mockStore = {
       getState: () => ({auth: {isLoggedIn: false}}),
       subscribe: () => {},
-      dispatch: () => {}
+      dispatch: () => {},
     };
 
     const history = createMemoryHistory();

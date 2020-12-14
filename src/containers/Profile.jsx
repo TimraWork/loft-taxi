@@ -11,10 +11,10 @@ export const Profile = ({token, profile, editProfile}) => {
 
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
-  const [number, setNumber] = useState(cardNumber);
-  const [expiration, setExpiration] = useState(expiryDate);
-  const [name, setName] = useState(cardName);
-  const [cvcValue, setCvcValue] = useState(cvc);
+  const [number, setNumber] = useState(cardNumber || '');
+  const [expiration, setExpiration] = useState(expiryDate || '');
+  const [name, setName] = useState(cardName || '');
+  const [cvcValue, setCvcValue] = useState(cvc || '');
 
   const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
   const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
@@ -43,9 +43,11 @@ export const Profile = ({token, profile, editProfile}) => {
   };
 
   const saveProfile = (e) => {
-    e.preventDefault();
-    editProfile(token, number, expiration, name, cvcValue);
-    setIsProfileUpdated(true);
+    if (number !== '' && expiration !== '' && cvcValue !== '') {
+      e.preventDefault();
+      editProfile(token, number, expiration, name, cvcValue);
+      setIsProfileUpdated(true);
+    }
   };
 
   return isProfileUpdated ? (
@@ -66,7 +68,7 @@ export const Profile = ({token, profile, editProfile}) => {
 };
 
 Profile.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token, profile: state.profile});

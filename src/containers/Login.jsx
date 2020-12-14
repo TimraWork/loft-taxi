@@ -5,7 +5,7 @@ import {authenticate} from '../modules/auth/actions';
 
 import {LoginForm} from '../components/LoginForm';
 
-export const PageLogin = ({isLoggedIn, authenticate}) => {
+export const Login = ({isLoggedIn, authenticate}) => {
   const authentificate = (e) => {
     e.preventDefault();
     const {email, password} = e.target;
@@ -15,4 +15,4 @@ export const PageLogin = ({isLoggedIn, authenticate}) => {
   return <>{isLoggedIn ? <Redirect to="/map/" /> : <LoginForm authentificate={authentificate} />}</>;
 };
 
-export const LoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate})(PageLogin);
+export const LoginWithAuth = connect((state) => ({isLoggedIn: state.auth.isLoggedIn}), {authenticate})(Login);
