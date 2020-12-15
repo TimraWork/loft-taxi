@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {connect} from 'react-redux';
 import {authenticate} from '../modules/auth/actions';
+import {ErrorMessage} from '@hookform/error-message';
 
 export const Form = ({authenticate}) => {
   const {register, handleSubmit} = useForm();
@@ -21,7 +22,32 @@ export const Form = ({authenticate}) => {
           <Typography variant="h1" align="center">
             Войти
           </Typography>
-          <TextField inputRef={register} variant="standard" label="Email" name="email" inputProps={{type: 'email'}} required />
+          <TextField
+            inputRef={register({
+              required: 'This input is required.',
+              pattern: {
+                value: /\d+/,
+                message: 'This input is number only.'
+              },
+              minLength: {
+                value: 11,
+                message: 'This input must exceed 10 characters'
+              }
+            })}
+            variant="standard"
+            label="Email"
+            name="email"
+            inputProps={{type: 'email'}}
+            // required
+          />
+          <ErrorMessage
+            errors={errors}
+            name="multipleErrorInput"
+            render={({messages}) => {
+              console.log('messages', messages);
+              return messages ? Object.entries(messages).map(([type, message]) => <p key={type}>{message}</p>) : null;
+            }}
+          />
           <TextField
             inputRef={register}
             style={{marginBottom: '50px'}}
@@ -29,7 +55,7 @@ export const Form = ({authenticate}) => {
             label="Пароль"
             name="password"
             inputProps={{type: 'password'}}
-            required
+            // required
           />
           <Button id="login-button" className="mb--30">
             Войти

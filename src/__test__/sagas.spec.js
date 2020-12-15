@@ -15,11 +15,13 @@ import {authSaga} from '../modules/auth/sagas';
 //   });
 // });
 
+jest.mock('../redux/api', () => ({serverLogin: jest.fn(() => true)}));
+
 describe('authSaga', () => {
   describe('#AUTHENTICATE', () => {
     it('authenticates through api', async () => {
       const dispatched = await recordSaga(authSaga, authenticate('test@test.ru', '123123'));
-      expect(dispatched).toEqual([{type: 'AUTHENTICATE'}]);
+      expect(dispatched).toEqual([{type: 'LOG_IN'}]);
     });
   });
 });
