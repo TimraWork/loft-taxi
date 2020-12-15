@@ -13,9 +13,6 @@ function* handleAuthorizationSaga(action) {
       yield put(getProfile(authenticateData.token));
 
       yield put(logIn(authenticateData.token));
-
-      localStorage.removeItem('state');
-      localStorage.setItem('state', JSON.stringify({auth: {loggedIn: true, token: authenticateData.token, profile: profileData}}));
     }
   } catch (e) {
     console.log(e);

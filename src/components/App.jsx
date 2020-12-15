@@ -6,7 +6,6 @@ import {Header} from './Header';
 import {MapWithAuth} from '../containers/Мap';
 import {LoginWithAuth} from '../containers/Login';
 import {ProfileWithAuth} from '../containers/Profile';
-import {ProfileSuccess} from '../components/ProfileSuccess';
 import {RegistrationWithAuth} from '../containers/Registration';
 
 import {PrivateRoute} from '../utils/PrivateRoute';
@@ -27,7 +26,6 @@ export const App = () => {
 
           <PrivateRoute path="/map/" component={MapWithAuth} />
           <PrivateRoute path="/profile/" component={ProfileWithAuth} />
-          <PrivateRoute path="/profile-success/" component={ProfileSuccess} />
 
           <Redirect to="/login/" component={LoginWithAuth} />
         </Switch>

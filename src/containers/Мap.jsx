@@ -34,7 +34,6 @@ const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
   };
 
   const handleOrderOnClick = (e) => {
-    console.log('locationFrom, locationTo =', locationFrom, locationTo);
     e.preventDefault();
     getRoute(locationFrom, locationTo);
     setCoordinates(route);

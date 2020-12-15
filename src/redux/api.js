@@ -57,6 +57,6 @@ export const getServerAddressList = () => {
   return fetchData(`${BASE_API_URL}/addressList`, {});
 };
 
-export const getServerRoute = async (payload) => {
-  return await fetchData(`${BASE_API_URL}/route?address1=${payload.address1}&address2=${payload.address2}`, {});
+export const getServerRoute = (payload) => {
+  return fetchData(`${BASE_API_URL}/route?address1=${payload.address1}&address2=${payload.address2}`, {});
 };
