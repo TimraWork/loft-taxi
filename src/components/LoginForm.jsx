@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {connect} from 'react-redux';
 import {authenticate} from '../modules/auth/actions';
-import {ErrorMessage} from '@hookform/error-message';
+// import {ErrorMessage} from '@hookform/error-message';
 
 export const Form = ({authenticate}) => {
   const {register, handleSubmit} = useForm();
@@ -23,30 +23,31 @@ export const Form = ({authenticate}) => {
             Войти
           </Typography>
           <TextField
-            inputRef={register({
-              required: 'This input is required.',
-              pattern: {
-                value: /\d+/,
-                message: 'This input is number only.'
-              },
-              minLength: {
-                value: 11,
-                message: 'This input must exceed 10 characters'
-              }
-            })}
+            inputRef={register}
+            // inputRef={register({
+            //   required: 'This input is required.',
+            //   pattern: {
+            //     value: /\d+/,
+            //     message: 'This input is number only.'
+            //   },
+            //   minLength: {
+            //     value: 11,
+            //     message: 'This input must exceed 10 characters'
+            //   }
+            // })}
             variant="standard"
             label="Email"
             name="email"
             inputProps={{type: 'email'}}
-            // required
+            required
           />
-          <ErrorMessage
+          {/* <ErrorMessage
             name="multipleErrorInput"
             render={({messages}) => {
               console.log('messages', messages);
               return messages ? Object.entries(messages).map(([type, message]) => <p key={type}>{message}</p>) : null;
             }}
-          />
+          /> */}
           <TextField
             inputRef={register}
             style={{marginBottom: '50px'}}

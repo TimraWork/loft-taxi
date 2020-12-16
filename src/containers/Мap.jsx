@@ -19,8 +19,6 @@ const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
   const [locationsFrom, setLocationsFrom] = useState(addressList);
   const [locationsTo, setLocationsTo] = useState(addressList);
 
-  const [coordinates, setCoordinates] = useState([]);
-
   const handleLocationFromOnChange = (e) => {
     setLocationFrom(e.target.textContent);
     const inputValue = addressList.filter((el) => el !== e.target.textContent);
@@ -35,13 +33,13 @@ const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
 
   const handleOrderOnClick = (e) => {
     e.preventDefault();
+
     getRoute(locationFrom, locationTo);
-    setCoordinates(route);
   };
 
   return (
     <ErrorBoundary>
-      <MapBoxGL coordinates={coordinates} />
+      <MapBoxGL />
       {Object.keys(profile).length !== 0 ? (
         <MapForm
           locations={addressList}
