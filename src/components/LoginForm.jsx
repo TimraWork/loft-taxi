@@ -41,7 +41,6 @@ export const Form = ({authenticate}) => {
             // required
           />
           <ErrorMessage
-            errors={errors}
             name="multipleErrorInput"
             render={({messages}) => {
               console.log('messages', messages);

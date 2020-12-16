@@ -13,7 +13,7 @@ describe('App', () => {
     const mockStore = {
       getState: () => ({auth: {isLoggedIn: false}}),
       subscribe: () => {},
-      dispatch: () => {},
+      dispatch: () => {}
     };
 
     const history = createMemoryHistory();
@@ -26,6 +26,7 @@ describe('App', () => {
       </Router>
     );
     debug();
+
     expect(container.innerHTML).toMatch('LoginWithAuth component');
   });
 });

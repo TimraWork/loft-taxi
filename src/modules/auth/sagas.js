@@ -4,12 +4,12 @@ import {getProfile, removeProfile} from '../profile/actions';
 import {removeRoute} from '../route/actions';
 import {serverLogin, getServerCard} from '../../redux/api';
 
-function* handleAuthorizationSaga(action) {
+export function* handleAuthorizationSaga(action) {
   try {
     const authenticateData = yield call(serverLogin, action.payload);
 
     if (authenticateData.success) {
-      const profileData = yield call(getServerCard, authenticateData.token);
+      yield call(getServerCard, authenticateData.token);
       yield put(getProfile(authenticateData.token));
 
       yield put(logIn(authenticateData.token));
