@@ -2,7 +2,7 @@ import {takeLatest, call, put} from 'redux-saga/effects';
 import {GET_ADDRESS_LIST, setAddressList} from './actions';
 import {getServerAddressList} from '../../redux/api';
 
-function* handleAddressListSaga() {
+export function* handleAddressListSaga() {
   try {
     const addressList = yield call(getServerAddressList);
     if (addressList.addresses) {

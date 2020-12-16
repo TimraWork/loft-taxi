@@ -1,8 +1,13 @@
 import {recordSaga} from './recordSaga';
-import {authenticate} from '../modules/auth/actions';
-import {handleAuthorizationSaga, handleLogOutSaga} from '../modules/auth/sagas';
 
-jest.mock('../redux/api', () => ({serverLogin: () => ({success: true, token: '123'}), getServerCard: () => {}}));
+import {handleAuthorizationSaga, handleLogOutSaga, authenticate} from '../modules/auth';
+import {handleAddressListSaga} from '../modules/addressList';
+
+jest.mock('../redux/api', () => ({
+  serverLogin: () => ({success: true, token: '123'}),
+  getServerCard: () => {},
+  getServerAddressList: () => ({addresses: []})
+}));
 
 describe('authSaga', () => {
   describe('#AUTHENTICATE', () => {
@@ -12,6 +17,22 @@ describe('authSaga', () => {
         {type: 'GET_PROFILE', payload: {token: '123'}},
         {type: 'LOG_IN', payload: {token: '123'}}
       ]);
+    });
+  });
+
+  describe('#LOG_OUT', () => {
+    it('removes data from store', async () => {
+      const dispatched = await recordSaga(handleLogOutSaga);
+      expect(dispatched).toEqual([{type: 'REMOVE_PROFILE'}, {type: 'REMOVE_ROUTE'}]);
+    });
+  });
+});
+
+describe('addressListSaga', () => {
+  describe('#GET_ADDRESS_LIST', () => {
+    it('get address list through api', async () => {
+      const dispatched = await recordSaga(handleAddressListSaga);
+      expect(dispatched).toEqual([{type: 'SET_ADDRESS_LIST', payload: {addressList: []}}]);
     });
   });
 });

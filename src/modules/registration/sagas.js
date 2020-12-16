@@ -3,7 +3,7 @@ import {REGISTER} from './actions';
 import {logIn} from '../../modules/auth/actions';
 import {serverRegister} from '../../redux/api';
 
-function* handleRegisterSaga(action) {
+export function* handleRegisterSaga(action) {
   try {
     const register = yield call(serverRegister, action.payload);
     if (register.success) {

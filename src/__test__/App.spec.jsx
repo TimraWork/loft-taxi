@@ -1,32 +1,27 @@
 import React from 'react';
 import {render} from '@testing-library/react';
 import {App} from '../components/App';
-import {Provider} from 'react-redux';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 
-jest.mock('../containers/Мap', () => ({Map: () => <div>Map component</div>}));
 jest.mock('../containers/Login', () => ({LoginWithAuth: () => <div>LoginWithAuth component</div>}));
+jest.mock('react-redux', () => ({connect: () => (Component) => Component}));
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({Map: () => ({})}));
 
 describe('App', () => {
+  beforeEach(() => {
+    window.mapboxgl = jest.fn();
+  });
   it('renders correctly', () => {
-    const mockStore = {
-      getState: () => ({auth: {isLoggedIn: false}}),
-      subscribe: () => {},
-      dispatch: () => {}
-    };
-
     const history = createMemoryHistory();
+    history.push('/login/');
 
-    const {container, debug} = render(
+    const {container} = render(
       <Router history={history}>
-        <Provider store={mockStore}>
-          <App />
-        </Provider>
+        <App />
       </Router>
     );
-    debug();
-
+    // debug();
     expect(container.innerHTML).toMatch('LoginWithAuth component');
   });
 });

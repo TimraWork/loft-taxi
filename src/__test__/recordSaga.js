@@ -4,10 +4,7 @@ export const recordSaga = async (saga, initialAction = null) => {
   const dispatched = [];
   await runSaga(
     {
-      dispatch: (action) => {
-        console.log('🚀 ~ file: recordSaga.js ~ line 6 ~ await runSaga ~ action', action);
-        return dispatched.push(action);
-      }
+      dispatch: (action) => dispatched.push(action)
     },
     saga,
     initialAction

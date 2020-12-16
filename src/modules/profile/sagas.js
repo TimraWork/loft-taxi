@@ -2,7 +2,7 @@ import {takeLatest, call, put} from 'redux-saga/effects';
 import {GET_PROFILE, EDIT_PROFILE, setProfile} from './actions';
 import {getServerCard, serverCard} from '../../redux/api';
 
-function* handleGetProfileSaga(action) {
+export function* handleGetProfileSaga(action) {
   try {
     const profileData = yield call(getServerCard, action.payload.token);
     const {id, ...data} = profileData;
@@ -14,7 +14,7 @@ function* handleGetProfileSaga(action) {
   }
 }
 
-function* handleEditProfileSaga(action) {
+export function* handleEditProfileSaga(action) {
   const profileData = yield call(serverCard, action.payload);
   if (profileData.success) {
     yield put(setProfile(action.payload));

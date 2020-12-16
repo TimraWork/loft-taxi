@@ -19,7 +19,7 @@ export function* handleAuthorizationSaga(action) {
   }
 }
 
-function* handleLogOutSaga() {
+export function* handleLogOutSaga() {
   try {
     yield put(removeProfile());
     yield put(removeRoute());

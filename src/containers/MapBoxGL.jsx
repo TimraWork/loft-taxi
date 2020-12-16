@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl';
 import {connect} from 'react-redux';
 import {getMapLayerParams} from '../utils/mapLayerParams';
+window.URL.createObjectURL = function () {};
 
 class Map extends Component {
   componentDidMount() {
