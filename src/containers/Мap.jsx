@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {getAddressList} from '../modules/addressList';
 import {getRoute} from '../modules/route';
 
-const Map = ({addressList, getAddressList, route, getRoute, profile}) => {
+const Map = ({addressList, getAddressList, getRoute, profile}) => {
   useEffect(() => {
     getAddressList();
   }, [getAddressList]);

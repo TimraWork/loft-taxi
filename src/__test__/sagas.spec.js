@@ -2,13 +2,17 @@ import {recordSaga} from './recordSaga';
 
 import {handleAuthorizationSaga, handleLogOutSaga, authenticate} from '../modules/auth';
 import {handleAddressListSaga} from '../modules/addressList';
-import {handleGetProfileSaga, handleEditProfileSaga, getProfile, editProfile, setProfile} from '../modules/profile';
+import {handleGetProfileSaga, handleEditProfileSaga, getProfile, editProfile} from '../modules/profile';
+import {handleRegisterSaga, register} from '../modules/registration';
+import {handleRouteSaga, getRoute} from '../modules/route';
 
 jest.mock('../redux/api', () => ({
   serverLogin: () => ({success: true, token: '123'}),
   getServerCard: () => ({id: '123'}),
   getServerAddressList: () => ({addresses: []}),
-  serverCard: () => ({success: true})
+  serverCard: () => ({success: true}),
+  serverRegister: () => ({success: true, token: '123'}),
+  getServerRoute: () => ({})
 }));
 
 describe('authSaga', () => {
@@ -32,7 +36,7 @@ describe('authSaga', () => {
 
 describe('addressListSaga', () => {
   describe('#GET_ADDRESS_LIST', () => {
-    it('get address list through api', async () => {
+    it('gets address list through api', async () => {
       const dispatched = await recordSaga(handleAddressListSaga);
       expect(dispatched).toEqual([{type: 'SET_ADDRESS_LIST', payload: {addressList: []}}]);
     });
@@ -51,6 +55,24 @@ describe('profileSaga', () => {
     it('puts data to store', async () => {
       const dispatched = await recordSaga(handleEditProfileSaga, editProfile());
       expect(dispatched).toEqual([{type: 'SET_PROFILE', payload: {profileData: {}}}]);
+    });
+  });
+});
+
+describe('registrationSaga', () => {
+  describe('#REGISTER', () => {
+    it('registers through api', async () => {
+      const dispatched = await recordSaga(handleRegisterSaga, register());
+      expect(dispatched).toEqual([{type: 'LOG_IN', payload: {token: '123'}}]);
+    });
+  });
+});
+
+describe('routeSaga', () => {
+  describe('#GET_ROUTE', () => {
+    it('gets route through api', async () => {
+      const dispatched = await recordSaga(handleRouteSaga, getRoute());
+      expect(dispatched).toEqual([{type: 'SET_ROUTE', payload: {route: {}}}]);
     });
   });
 });
