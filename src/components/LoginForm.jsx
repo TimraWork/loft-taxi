@@ -20,7 +20,6 @@ export const Form = ({authenticate}) => {
   });
 
   const onSubmit = (data) => {
-    console.log('DATA', data);
     const {email, password} = data;
     authenticate(email, password);
   };

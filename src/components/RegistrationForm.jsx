@@ -23,10 +23,7 @@ const Form = ({register: registerUser}) => {
   });
 
   const onSubmit = (data) => {
-    console.log('DATA', data);
-
     const {name, surname, email, password} = data;
-
     registerUser(email, password, name, surname);
   };
 

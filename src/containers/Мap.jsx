@@ -31,9 +31,7 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
     setLocationsFrom(inputValue);
   };
 
-  const handleOrderOnClick = (e) => {
-    e.preventDefault();
-
+  const handleOrderOnClick = () => {
     getRoute(locationFrom, locationTo);
   };
 
