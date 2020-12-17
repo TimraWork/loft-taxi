@@ -68,7 +68,7 @@ export const Profile = ({token, profile, editProfile}) => {
 };
 
 Profile.propTypes = {
-  token: PropTypes.string,
+  token: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token, profile: state.profile});
