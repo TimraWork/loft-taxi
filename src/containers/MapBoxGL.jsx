@@ -16,11 +16,10 @@ class Map extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const coordinates = this.props.route;
-    const prevCoordinates = prevProps.route;
 
-    if (coordinates && prevCoordinates.join('') !== coordinates.join('')) {
+    if (coordinates) {
       this.map.flyTo({
         center: coordinates[0],
         zoom: 13

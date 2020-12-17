@@ -10,7 +10,6 @@ export const Form = ({authenticate}) => {
   const {register, handleSubmit} = useForm();
 
   const onSubmit = (data) => {
-    console.log('data = ', data);
     const {email, password} = data;
     authenticate(email, password);
   };
