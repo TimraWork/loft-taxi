@@ -4,12 +4,23 @@ import {Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {connect} from 'react-redux';
 import {authenticate} from '../modules/auth/actions';
-// import {ErrorMessage} from '@hookform/error-message';
+
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+
+const schema = yup.object().shape({
+  email: yup.string().email('Электронная почта должна иметь правильный формат').required('Email - обязательное поле'),
+  password: yup.string().required('Пароль - обязательное поле')
+});
 
 export const Form = ({authenticate}) => {
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, errors} = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(schema)
+  });
 
   const onSubmit = (data) => {
+    console.log('DATA', data);
     const {email, password} = data;
     authenticate(email, password);
   };
@@ -23,30 +34,13 @@ export const Form = ({authenticate}) => {
           </Typography>
           <TextField
             inputRef={register}
-            // inputRef={register({
-            //   required: 'This input is required.',
-            //   pattern: {
-            //     value: /\d+/,
-            //     message: 'This input is number only.'
-            //   },
-            //   minLength: {
-            //     value: 11,
-            //     message: 'This input must exceed 10 characters'
-            //   }
-            // })}
             variant="standard"
             label="Email"
             name="email"
             inputProps={{type: 'email'}}
-            required
+            error={!!errors.email}
+            helperText={errors?.email?.message}
           />
-          {/* <ErrorMessage
-            name="multipleErrorInput"
-            render={({messages}) => {
-              console.log('messages', messages);
-              return messages ? Object.entries(messages).map(([type, message]) => <p key={type}>{message}</p>) : null;
-            }}
-          /> */}
           <TextField
             inputRef={register}
             style={{marginBottom: '50px'}}
@@ -54,7 +48,8 @@ export const Form = ({authenticate}) => {
             label="Пароль"
             name="password"
             inputProps={{type: 'password'}}
-            // required
+            error={!!errors.password}
+            helperText={errors?.password?.message}
           />
           <Button id="login-button" className="mb--30">
             Войти
