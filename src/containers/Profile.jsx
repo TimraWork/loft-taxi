@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {editProfile} from '../modules/profile/actions';
 
@@ -12,9 +11,10 @@ export const Profile = ({token, profile, editProfile}) => {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
   const [number, setNumber] = useState(cardNumber || '');
-  const [expiration, setExpiration] = useState(expiryDate || '');
   const [name, setName] = useState(cardName || '');
   const [cvcValue, setCvcValue] = useState(cvc || '');
+
+  const [expiration, setExpiration] = useState(expiryDate || new Date());
 
   const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
   const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
@@ -26,28 +26,21 @@ export const Profile = ({token, profile, editProfile}) => {
     setNumber(inputValue);
   };
 
-  const cardExpirationOnChange = (e) => {
-    let inputExpValue = e.target.value;
-    // inputExpValue = validateNumbers(inputExpValue);
-    setExpiration(inputExpValue);
-  };
-
   const cardNameOnChange = (e) => {
     const inputValue = e.target.value;
     setName(inputValue);
   };
 
   const cardCvcOnChange = (e) => {
-    const inputValue = e.target.value;
+    let inputValue = e.target.value;
+    inputValue = validateNumbers(inputValue);
     setCvcValue(inputValue);
   };
 
-  const saveProfile = (e) => {
-    if (number !== '' && expiration !== '' && cvcValue !== '') {
-      e.preventDefault();
-      editProfile(token, number, expiration, name, cvcValue);
-      setIsProfileUpdated(true);
-    }
+  const saveProfile = (selectedDate) => {
+    setExpiration(selectedDate);
+    editProfile(token, number, selectedDate, name, cvcValue);
+    setIsProfileUpdated(true);
   };
 
   return isProfileUpdated ? (
@@ -58,17 +51,12 @@ export const Profile = ({token, profile, editProfile}) => {
       number={number}
       cardNumberOnChange={cardNumberOnChange}
       expiration={expiration}
-      cardExpirationOnChange={cardExpirationOnChange}
       name={name}
       cardNameOnChange={cardNameOnChange}
       cvc={cvcValue}
       cardCvcOnChange={cardCvcOnChange}
     />
   );
-};
-
-Profile.propTypes = {
-  token: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({token: state.auth.token, profile: state.profile});
