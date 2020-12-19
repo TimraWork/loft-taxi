@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const PaymentCard = ({ number, expiration }) => (
+export const PaymentCard = ({number, expiration}) => (
   <div className="card white_container">
     <div className="card__expiration" data-testid="expiration">
       {expiration}
@@ -14,7 +14,5 @@ const PaymentCard = ({ number, expiration }) => (
 
 PaymentCard.propTypes = {
   number: PropTypes.string,
-  expiration: PropTypes.string,
+  expiration: PropTypes.string
 };
-
-export default PaymentCard;

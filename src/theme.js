@@ -88,8 +88,8 @@ export const theme = createMuiTheme({
   typography: {
     subtitle1: {
       fontSize: 18,
-      color: GRAY,
-      margin: '-10px 0 30px'
+      color: GRAY
+      // margin: '-10px 0 30px'
     },
     h1: {
       fontSize: 32,

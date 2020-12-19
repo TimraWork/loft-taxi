@@ -1,15 +1,14 @@
 import React from 'react';
 import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
-import {HeaderView} from './Header';
+import {Header} from './Header';
 
-import {PageMap} from './pages/PageMap';
-import {PageLoginWithAuth} from './pages/PageLogin';
-import {PageProfileWithAuth} from './pages/PageProfile';
-import {PageProfileSuccess} from './pages/PageProfileSuccess';
-import {PageRegistrationWithAuth} from './pages/PageRegistration';
+import {MapWithAuth} from '../containers/Мap';
+import {LoginWithAuth} from '../containers/Login';
+import {ProfileWithAuth} from '../containers/Profile';
+import {RegistrationWithAuth} from '../containers/Registration';
 
-import {PrivateRoute} from './PrivateRoute';
+import {PrivateRoute} from '../utils/PrivateRoute';
 
 export const App = () => {
   const currentPath = useLocation().pathname;
@@ -18,22 +17,19 @@ export const App = () => {
 
   return (
     <div className={'layout' + layoutWithoutHeader}>
-      <HeaderView />
+      <Header />
       <main className="main">
         <Switch>
-          <Route path="/registration/" component={PageRegistrationWithAuth} />
-          <Route path="/login/" exact component={PageLoginWithAuth} />
-          <Route path="/logout/" component={PageLoginWithAuth} />
+          <Route path="/registration/" component={RegistrationWithAuth} />
+          <Route path="/login/" exact component={LoginWithAuth} />
+          <Route path="/logout/" component={LoginWithAuth} />
 
-          <PrivateRoute path="/map/" component={PageMap} />
-          <PrivateRoute path="/profile/" component={PageProfileWithAuth} />
-          <PrivateRoute path="/profile-success/" component={PageProfileSuccess} />
+          <PrivateRoute path="/map/" component={MapWithAuth} />
+          <PrivateRoute path="/profile/" component={ProfileWithAuth} />
 
-          <Redirect to="/login/" component={PageLoginWithAuth} />
+          <Redirect to="/login/" component={LoginWithAuth} />
         </Switch>
       </main>
     </div>
   );
 };
-
-export default App;
