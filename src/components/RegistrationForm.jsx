@@ -13,7 +13,8 @@ import {useForm} from 'react-hook-form';
 const schema = yup.object().shape({
   email: yup.string().email('Электронная почта должна иметь правильный формат').required('Email - обязательное поле'),
   password: yup.string().required('Пароль - обязательное поле'),
-  name: yup.string().required('Имя - обязательное поле')
+  name: yup.string().required('Имя - обязательное поле'),
+  surname: yup.string().required('Фамилия - обязательное поле')
 });
 
 const Form = ({register: registerUser}) => {
@@ -44,7 +45,14 @@ const Form = ({register: registerUser}) => {
             helperText={errors?.email?.message}
           />
           <TextField variant="standard" label="Имя *" name="name" inputRef={register} error={!!errors.name} helperText={errors?.name?.message} />
-          <TextField variant="standard" label="Фамилия" name="surname" />
+          <TextField
+            variant="standard"
+            label="Фамилия *"
+            name="surname"
+            inputRef={register}
+            error={!!errors.surname}
+            helperText={errors?.surname?.message}
+          />
           <TextField
             style={{marginBottom: '50px'}}
             variant="standard"

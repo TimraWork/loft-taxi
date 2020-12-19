@@ -34,7 +34,7 @@ export const Form = ({authenticate}) => {
           <TextField
             inputRef={register}
             variant="standard"
-            label="Email"
+            label="Email *"
             name="email"
             inputProps={{type: 'email'}}
             error={!!errors.email}
@@ -44,7 +44,7 @@ export const Form = ({authenticate}) => {
             inputRef={register}
             style={{marginBottom: '50px'}}
             variant="standard"
-            label="Пароль"
+            label="Пароль *"
             name="password"
             inputProps={{type: 'password'}}
             error={!!errors.password}

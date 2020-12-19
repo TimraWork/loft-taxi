@@ -3,6 +3,7 @@ import {AUTHENTICATE, LOG_OUT, logIn, logInFailed} from './actions';
 import {getProfile, removeProfile} from '../profile/actions';
 import {removeRoute} from '../route/actions';
 import {serverLogin, getServerCard} from '../../redux/api';
+import {SERVER_ERROR_MESSAGE} from '../../utils/constants';
 
 export function* handleAuthorizationSaga(action) {
   try {
@@ -16,7 +17,7 @@ export function* handleAuthorizationSaga(action) {
       yield put(logInFailed(authenticateData.error));
     }
   } catch (e) {
-    yield put(logInFailed('Ошибка соединения с сервером. Проверьте параметры подключения к интернет.'));
+    yield put(logInFailed(SERVER_ERROR_MESSAGE));
   }
 }
 
