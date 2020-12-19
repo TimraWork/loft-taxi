@@ -1,6 +1,7 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
-import {GET_PROFILE, EDIT_PROFILE, setProfile} from './actions';
+import {GET_PROFILE, EDIT_PROFILE, setProfile, editProfileFailed} from './actions';
 import {getServerCard, serverCard} from '../../redux/api';
+import {SERVER_ERROR_MESSAGE} from '../../utils/constants';
 
 export function* handleGetProfileSaga(action) {
   try {
@@ -8,16 +9,24 @@ export function* handleGetProfileSaga(action) {
     const {id, ...data} = profileData;
     if (profileData.id) {
       yield put(setProfile(data));
+    } else {
+      yield put(editProfileFailed(profileData.error));
     }
   } catch (e) {
-    console.log(e);
+    yield put(editProfileFailed(SERVER_ERROR_MESSAGE));
   }
 }
 
 export function* handleEditProfileSaga(action) {
-  const profileData = yield call(serverCard, action.payload);
-  if (profileData.success) {
-    yield put(setProfile(action.payload));
+  try {
+    const profileData = yield call(serverCard, action.payload);
+    if (profileData.success) {
+      yield put(setProfile(action.payload));
+    } else {
+      yield put(editProfileFailed(profileData.error));
+    }
+  } catch (e) {
+    yield put(editProfileFailed(SERVER_ERROR_MESSAGE));
   }
 }
 

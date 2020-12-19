@@ -4,6 +4,7 @@ import {editProfile} from '../modules/profile/actions';
 
 import {ProfileForm} from '../components/ProfileForm';
 import {ProfileSuccess} from '../components/ProfileSuccess';
+import {Alert} from '@material-ui/core';
 
 export const Profile = ({token, profile, editProfile}) => {
   const {cardNumber, expiryDate, cardName, cvc} = profile;
@@ -38,24 +39,35 @@ export const Profile = ({token, profile, editProfile}) => {
   };
 
   const saveProfile = (selectedDate) => {
-    setExpiration(selectedDate);
-    editProfile(token, number, selectedDate, name, cvcValue);
-    setIsProfileUpdated(true);
+    if (!profile.error) {
+      setExpiration(selectedDate);
+      editProfile(token, number, selectedDate, name, cvcValue);
+      setIsProfileUpdated(true);
+    }
   };
 
-  return isProfileUpdated ? (
-    <ProfileSuccess />
-  ) : (
-    <ProfileForm
-      saveProfile={saveProfile}
-      number={number}
-      cardNumberOnChange={cardNumberOnChange}
-      expiration={expiration}
-      name={name}
-      cardNameOnChange={cardNameOnChange}
-      cvc={cvcValue}
-      cardCvcOnChange={cardCvcOnChange}
-    />
+  return (
+    <>
+      {isProfileUpdated ? (
+        <ProfileSuccess />
+      ) : (
+        <ProfileForm
+          saveProfile={saveProfile}
+          number={number}
+          cardNumberOnChange={cardNumberOnChange}
+          expiration={expiration}
+          name={name}
+          cardNameOnChange={cardNameOnChange}
+          cvc={cvcValue}
+          cardCvcOnChange={cardCvcOnChange}
+        />
+      )}
+      {profile.error && (
+        <Alert className="server_error" severity="error">
+          {profile.error}
+        </Alert>
+      )}
+    </>
   );
 };
 

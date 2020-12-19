@@ -38,7 +38,7 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
   return (
     <ErrorBoundary>
       <MapBoxGL />
-      {Object.keys(profile).length !== 0 ? (
+      {profile ? (
         <MapForm
           locations={addressList}
           locationsTo={locationsTo}

@@ -32,8 +32,8 @@ const schema = yup.object().shape({
 });
 
 export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration, name, cardNameOnChange, cvc, cardCvcOnChange}) => {
-  const {register, handleSubmit, errors} = useForm({
-    mode: 'onBlur',
+  const {register, handleSubmit, errors, formState} = useForm({
+    mode: 'onChange',
     resolver: yupResolver(schema)
   });
 
@@ -105,11 +105,17 @@ export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <PaymentCard number={number} expiration={moment(selectedDate).format('MM/YY')} />
+              <PaymentCard number={number} expiration={moment(selectedDate).format('MM/YY')} formState={formState} />
             </Grid>
           </Grid>
           <div align="center">
-            <Button id="save-button" className="w--350" onClick={handleSubmit(saveProfile.bind(this, selectedDate))} type="submit">
+            <Button
+              id="save-button"
+              className="w--350"
+              onClick={handleSubmit(saveProfile.bind(this, selectedDate))}
+              type="submit"
+              disabled={!formState.isValid}
+            >
               Сохранить
             </Button>
           </div>
@@ -124,5 +130,5 @@ ProfileForm.propTypes = {
   cardNumberOnChange: PropTypes.func,
   cardExpirationOnChange: PropTypes.func,
   number: PropTypes.string,
-  expiration: PropTypes.string
+  expiration: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
 };
