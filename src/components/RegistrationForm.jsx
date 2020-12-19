@@ -18,8 +18,8 @@ const schema = yup.object().shape({
 });
 
 const Form = ({register: registerUser}) => {
-  const {register, handleSubmit, errors} = useForm({
-    mode: 'onBlur',
+  const {register, handleSubmit, errors, formState} = useForm({
+    mode: 'onChange',
     resolver: yupResolver(schema)
   });
 
@@ -63,7 +63,7 @@ const Form = ({register: registerUser}) => {
             error={!!errors.password}
             helperText={errors?.password?.message}
           />
-          <Button id="login-button" className="mb--30">
+          <Button id="login-button" className="mb--30" disabled={!formState.isValid}>
             Зарегистрироваться
           </Button>
           <Box sx={{textAlign: 'center'}}>

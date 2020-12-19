@@ -7,11 +7,14 @@ import ErrorBoundary from '../utils/ErrorBoundary';
 import {connect} from 'react-redux';
 import {getAddressList} from '../modules/addressList';
 import {getRoute} from '../modules/route';
+import {MapFormSuccess} from '../components/MapFormSuccess';
 
 const Map = ({addressList, getAddressList, getRoute, profile}) => {
   useEffect(() => {
     getAddressList();
   }, [getAddressList]);
+
+  const [isMapUpdated, setMapUpdated] = useState(false);
 
   const [locationFrom, setLocationFrom] = useState('');
   const [locationTo, setLocationTo] = useState('');
@@ -33,23 +36,32 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
 
   const handleOrderOnClick = () => {
     getRoute(locationFrom, locationTo);
+    setMapUpdated(true);
+  };
+
+  const handleNewOrderClick = (e) => {
+    e.preventDefault();
+    getRoute(setLocationFrom(''), setLocationTo(''));
+    setMapUpdated(false);
   };
 
   return (
     <ErrorBoundary>
       <MapBoxGL />
-      {profile ? (
+      {isMapUpdated && <MapFormSuccess handleNewOrderClick={handleNewOrderClick} />}
+      {profile && !isMapUpdated && (
         <MapForm
           locations={addressList}
           locationsTo={locationsTo}
+          locationFrom={locationFrom}
+          locationTo={locationTo}
           locationsFrom={locationsFrom}
           handleLocationFromOnChange={handleLocationFromOnChange}
           handleLocationToOnChange={handleLocationToOnChange}
           handleOrderOnClick={handleOrderOnClick}
         />
-      ) : (
-        <MapProfile />
       )}
+      {!profile && !isMapUpdated && <MapProfile />}
     </ErrorBoundary>
   );
 };

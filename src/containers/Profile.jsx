@@ -6,6 +6,17 @@ import {ProfileForm} from '../components/ProfileForm';
 import {ProfileSuccess} from '../components/ProfileSuccess';
 import {Alert} from '@material-ui/core';
 
+const normalizeCardNumber = (value) => {
+  return (
+    value
+      .replace(/\s/g, '')
+      .replace(/[^\d]/g, '') // numbers
+      .match(/.{1,4}/g)
+      ?.join('  ')
+      .substr(0, 22) || ''
+  );
+};
+
 export const Profile = ({token, profile, editProfile}) => {
   const {cardNumber, expiryDate, cardName, cvc} = profile;
 
@@ -14,28 +25,20 @@ export const Profile = ({token, profile, editProfile}) => {
   const [number, setNumber] = useState(cardNumber || '');
   const [name, setName] = useState(cardName || '');
   const [cvcValue, setCvcValue] = useState(cvc || '');
-
-  const [expiration, setExpiration] = useState(expiryDate || new Date());
-
-  const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
-  const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
+  const [expiration, setExpiration] = useState(expiryDate || '');
 
   const cardNumberOnChange = (e) => {
-    let inputValue = e.target.value;
-    inputValue = validateNumbers(inputValue);
-    inputValue = validateWhiteSpace(inputValue);
-    setNumber(inputValue);
+    const {value} = e.target;
+    e.target.value = normalizeCardNumber(value);
+    setNumber(e.target.value);
   };
 
   const cardNameOnChange = (e) => {
-    const inputValue = e.target.value;
-    setName(inputValue);
+    setName(e.target.value);
   };
 
   const cardCvcOnChange = (e) => {
-    let inputValue = e.target.value;
-    inputValue = validateNumbers(inputValue);
-    setCvcValue(inputValue);
+    setCvcValue(e.target.value);
   };
 
   const saveProfile = (selectedDate) => {

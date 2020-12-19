@@ -19,27 +19,27 @@ const setMinMax = (countSymbols) => {
 };
 
 const schema = yup.object().shape({
+  name: yup.string(),
   number: yup
     .string()
     .required('Поле обязательно для заполнения')
-    .min(...Object.values(setMinMax(22)))
-    .max(...Object.values(setMinMax(22))),
+    .min(...Object.values(setMinMax(22))),
   cvc: yup
     .string()
     .required('Поле обязательно для заполнения')
     .min(...Object.values(setMinMax(3)))
-    .max(...Object.values(setMinMax(3)))
 });
 
-export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration, name, cardNameOnChange, cvc, cardCvcOnChange}) => {
+export const ProfileForm = ({number, expiration, name, cvc, cardNameOnChange, cardNumberOnChange, cardCvcOnChange, saveProfile}) => {
   const {register, handleSubmit, errors, formState} = useForm({
     mode: 'onChange',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
+    defaultValues: {name, number, cvc}
   });
 
   const [selectedDate, setSelectedDate] = React.useState(expiration || '');
 
-  const handleDateChange = (date) => {
+  const handleDateOnChange = (date) => {
     setSelectedDate(date.toISOString());
   };
 
@@ -57,14 +57,12 @@ export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration
           </div>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <TextField label="Имя владельца" value={name} name="name" variant="standard" onChange={cardNameOnChange} />
+              <TextField label="Имя владельца" name="name" variant="standard" onChange={cardNameOnChange} inputRef={register} />
               <TextField
                 variant="standard"
                 label="Номер карты"
                 name="number"
-                value={number}
                 onChange={cardNumberOnChange}
-                inputProps={{maxLength: 22}}
                 inputRef={register}
                 error={!!errors.number}
                 helperText={errors?.number?.message}
@@ -74,18 +72,15 @@ export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <DatePicker
                       inputVariant="standard"
-                      disableToolbar
-                      format="MM/yy"
                       margin="none"
                       name="expiration"
-                      id="date-picker-inline"
                       label="MM/YY"
+                      disableToolbar
+                      format="MM/yy"
                       value={selectedDate}
-                      onChange={handleDateChange}
-                      invalidDateMessage="Неверный формат даты"
                       views={['year', 'month']}
                       disablePast="true"
-                      minDateMessage="Дата не должна быть раньше текущей"
+                      onChange={handleDateOnChange}
                     />
                   </MuiPickersUtilsProvider>
                 </Grid>
@@ -93,13 +88,12 @@ export const ProfileForm = ({saveProfile, number, cardNumberOnChange, expiration
                   <TextField
                     variant="standard"
                     label="CVC"
-                    value={cvc}
                     name="cvc"
-                    inputProps={{maxLength: 3}}
-                    onChange={cardCvcOnChange}
+                    inputProps={{type: 'number', maxLength: 3}}
                     inputRef={register}
                     error={!!errors.cvc}
                     helperText={errors?.cvc?.message}
+                    onChange={cardCvcOnChange}
                   />
                 </Grid>
               </Grid>

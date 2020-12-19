@@ -1,70 +1,55 @@
 import React from 'react';
 import {Paper, Autocomplete, Button, Grid, TextField} from '@material-ui/core';
 
-import * as yup from 'yup';
-import {yupResolver} from '@hookform/resolvers/yup';
-
-import {useForm} from 'react-hook-form';
-
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Car} from './Car';
 
-const schema = yup.object().shape({
-  from: yup.string().required('Выберите значение из списка'),
-  to: yup.string().required('Выберите значение из списка')
-});
-
-export const MapForm = ({locationsFrom, locationsTo, handleLocationFromOnChange, handleLocationToOnChange, handleOrderOnClick}) => {
-  const {register, handleSubmit, errors} = useForm({
-    mode: 'onBlur',
-    resolver: yupResolver(schema)
-  });
-
+export const MapForm = ({
+  locationsFrom,
+  locationsTo,
+  locationFrom,
+  locationTo,
+  handleLocationFromOnChange,
+  handleLocationToOnChange,
+  handleOrderOnClick
+}) => {
   return (
     <form className="car form container--left w--400">
       <Paper style={{padding: '25px', marginBottom: '10px'}}>
         <Autocomplete
           options={locationsFrom}
-          id="from"
           onChange={handleLocationFromOnChange}
+          autoHighlight={true}
           renderInput={(params) => (
             <TextField
               {...params}
               placeholder="Откуда"
               variant="standard"
               name="from"
-              required
               InputProps={{
                 ...params.InputProps,
                 startAdornment: <FiberManualRecordIcon fontSize="small" />
               }}
-              inputRef={register}
-              error={!!errors.from}
-              helperText={errors?.from?.message}
             />
           )}
           popupIcon={<ExpandMoreIcon />}
         />
         <Autocomplete
           options={locationsTo}
-          id="to"
           onChange={handleLocationToOnChange}
+          autoHighlight={true}
           renderInput={(params) => (
             <TextField
               {...params}
               placeholder="Куда"
               variant="standard"
               name="to"
-              required
               InputProps={{
                 ...params.InputProps,
                 startAdornment: <SendIcon fontSize="small" color="secondary" />
               }}
-              inputRef={register}
-              error={!!errors.to}
-              helperText={errors?.to?.message}
             />
           )}
           popupIcon={<ExpandMoreIcon />}
@@ -76,7 +61,7 @@ export const MapForm = ({locationsFrom, locationsTo, handleLocationFromOnChange,
           <Car price={250} name="Премиум" type="premium" />
           <Car price={350} name="Бизнес" type="business" />
         </Grid>
-        <Button id="order-button" onClick={handleSubmit(handleOrderOnClick)}>
+        <Button id="order-button" onClick={handleOrderOnClick} disabled={!locationFrom || !locationTo}>
           Заказать
         </Button>
       </Paper>
