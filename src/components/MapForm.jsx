@@ -19,9 +19,10 @@ export const MapForm = ({
     <form className="car form container--left w--400">
       <Paper style={{padding: '25px', marginBottom: '10px'}}>
         <Autocomplete
-          options={locationsFrom}
+          options={locationsFrom || []}
           onChange={handleLocationFromOnChange}
           autoHighlight={true}
+          noOptionsText={'Выберите значение из списка'}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -37,9 +38,10 @@ export const MapForm = ({
           popupIcon={<ExpandMoreIcon />}
         />
         <Autocomplete
-          options={locationsTo}
+          options={locationsTo || []}
           onChange={handleLocationToOnChange}
           autoHighlight={true}
+          noOptionsText={'Выберите значение из списка'}
           renderInput={(params) => (
             <TextField
               {...params}
