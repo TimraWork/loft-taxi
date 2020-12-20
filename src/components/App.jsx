@@ -26,6 +26,7 @@ export const App = () => {
 
           <PrivateRoute path="/map/" component={MapWithAuth} />
           <PrivateRoute path="/profile/" component={ProfileWithAuth} />
+          <PrivateRoute path="/profile/" component={ProfileWithAuth} />
 
           <Redirect to="/login/" component={LoginWithAuth} />
         </Switch>
