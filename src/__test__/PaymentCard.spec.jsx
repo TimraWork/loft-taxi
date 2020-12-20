@@ -6,7 +6,8 @@ describe('PaymentCard', () => {
   it('renders correctly', () => {
     const props = {
       number: '',
-      expiration: ''
+      expiration: '',
+      formState: {}
     };
     const {container} = render(<PaymentCard {...props} />);
     expect(container.innerHTML).toMatch(props.number);

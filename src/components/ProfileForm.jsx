@@ -79,11 +79,7 @@ export const ProfileForm = ({
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <PaymentCard
-              number={number}
-              expiration={moment(expiration).format('MM/YY')}
-              validationErrors={formState && formState.errors.number}
-            />
+            <PaymentCard number={number} expiration={moment(expiration).format('MM/YY')} formState={formState} />
           </Grid>
         </Grid>
         <div align="center">

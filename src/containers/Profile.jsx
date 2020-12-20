@@ -30,14 +30,12 @@ const schema = yup.object().shape({
 });
 
 const Profile = ({token, profile, editProfile}) => {
-  const {cardName, cardNumber, expiryDate, cvc} = profile;
-
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
-  const [name, setName] = useState(cardName || '');
-  const [number, setNumber] = useState(cardNumber || '');
-  const [expiration, setExpiration] = useState(expiryDate || '');
-  const [cvcValue, setCvcValue] = useState(cvc || '');
+  const [name, setName] = useState((profile && profile.cardName) || '');
+  const [number, setNumber] = useState((profile && profile.cardNumber) || '');
+  const [expiration, setExpiration] = useState((profile && profile.expiryDate) || new Date());
+  const [cvc, setCvcValue] = useState((profile && profile.cvc) || '');
 
   const {register, handleSubmit, errors, formState} = useForm({
     mode: 'onChange',
@@ -66,10 +64,8 @@ const Profile = ({token, profile, editProfile}) => {
   };
 
   const saveProfile = () => {
-    if (!profile.error) {
-      editProfile(token, number, expiration, name, cvcValue);
-      setIsProfileUpdated(true);
-    }
+    editProfile(token, number, expiration, name, cvc);
+    setIsProfileUpdated(true);
   };
 
   return (
@@ -91,9 +87,9 @@ const Profile = ({token, profile, editProfile}) => {
           saveProfile={saveProfile}
         />
       )}
-      {profile.error && (
+      {profile && profile.error && (
         <Alert className="server_error" severity="error">
-          {profile.error}
+          {profile && profile.error}
         </Alert>
       )}
     </>

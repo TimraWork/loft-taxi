@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {getAddressList} from '../modules/addressList';
 import {getRoute} from '../modules/route';
 import {MapFormSuccess} from '../components/MapFormSuccess';
+import {isObjEmpty} from '../utils/functions';
 
 const Map = ({addressList, getAddressList, getRoute, profile}) => {
   useEffect(() => {
@@ -16,11 +17,10 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
 
   const [isMapUpdated, setMapUpdated] = useState(false);
 
-  const [locationFrom, setLocationFrom] = useState('');
-  const [locationTo, setLocationTo] = useState('');
-
   const [locationsFrom, setLocationsFrom] = useState(addressList);
   const [locationsTo, setLocationsTo] = useState(addressList);
+  const [locationFrom, setLocationFrom] = useState('');
+  const [locationTo, setLocationTo] = useState('');
 
   const handleLocationFromOnChange = (e) => {
     setLocationFrom(e.target.textContent);
@@ -49,7 +49,7 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
     <ErrorBoundary>
       <MapBoxGL />
       {isMapUpdated && <MapFormSuccess handleNewOrderClick={handleNewOrderClick} />}
-      {profile && !isMapUpdated && (
+      {isObjEmpty(profile) && !isMapUpdated && (
         <MapForm
           locations={addressList}
           locationsTo={locationsTo}
@@ -61,11 +61,10 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
           handleOrderOnClick={handleOrderOnClick}
         />
       )}
-      {!profile && !isMapUpdated && <MapProfile />}
+      {!isObjEmpty(profile) && !isMapUpdated && <MapProfile />}
     </ErrorBoundary>
   );
 };
 
 const mapStateToProps = (state) => ({addressList: state.addressList, route: state.route, profile: state.profile});
-
 export const MapWithAuth = connect(mapStateToProps, {getAddressList, getRoute})(Map);
