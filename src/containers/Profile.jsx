@@ -5,18 +5,31 @@ import {editProfile} from '../modules/profile/actions';
 import {ProfileForm} from '../components/ProfileForm';
 import {ProfileSuccess} from '../components/ProfileSuccess';
 import {Alert} from '@material-ui/core';
+import {normalizeCardNumber, normalizeCVC} from '../utils/functions';
 
-const normalizeCardNumber = (value) =>
-  value
-    .replace(/\s/g, '')
-    .replace(/[^\d]/g, '') // numbers
-    .match(/.{1,4}/g)
-    ?.join('  ')
-    .substr(0, 22) || '';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 
-const normalizeCVC = (value) => value.replace(/\s/g, '').replace(/[^\d]/g, '').substr(0, 3) || ''; // numbers
+import {useForm} from 'react-hook-form';
 
-export const Profile = ({token, profile, editProfile}) => {
+const setMinValidation = (countSymbols) => {
+  const message = `Должно быть ровно ${countSymbols} символа`;
+  return {countSymbols, message};
+};
+
+const schema = yup.object().shape({
+  name: yup.string(),
+  number: yup
+    .string()
+    .required('Поле обязательно для заполнения')
+    .min(...Object.values(setMinValidation(22))),
+  cvc: yup
+    .string()
+    .required('Поле обязательно для заполнения')
+    .min(...Object.values(setMinValidation(3)))
+});
+
+const Profile = ({token, profile, editProfile}) => {
   const {cardName, cardNumber, expiryDate, cvc} = profile;
 
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
@@ -25,6 +38,12 @@ export const Profile = ({token, profile, editProfile}) => {
   const [number, setNumber] = useState(cardNumber || '');
   const [expiration, setExpiration] = useState(expiryDate || '');
   const [cvcValue, setCvcValue] = useState(cvc || '');
+
+  const {register, handleSubmit, errors, formState} = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+    defaultValues: {name, number, cvc, expiration}
+  });
 
   const cardNameOnChange = (e) => {
     setName(e.target.value);
@@ -38,7 +57,6 @@ export const Profile = ({token, profile, editProfile}) => {
 
   const cardExpirationOnChange = (date) => {
     setExpiration(date.toISOString());
-    console.log(expiration);
   };
 
   const cardCvcOnChange = (e) => {
@@ -60,14 +78,16 @@ export const Profile = ({token, profile, editProfile}) => {
         <ProfileSuccess />
       ) : (
         <ProfileForm
-          name={name}
-          number={number}
+          errors={errors}
+          register={register}
+          formState={formState}
+          handleSubmit={handleSubmit}
           expiration={expiration}
-          cvc={cvcValue}
+          number={number}
           cardNameOnChange={cardNameOnChange}
-          cardCvcOnChange={cardCvcOnChange}
-          cardExpirationOnChange={cardExpirationOnChange}
           cardNumberOnChange={cardNumberOnChange}
+          cardExpirationOnChange={cardExpirationOnChange}
+          cardCvcOnChange={cardCvcOnChange}
           saveProfile={saveProfile}
         />
       )}

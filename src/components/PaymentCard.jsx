@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PaymentCard = ({number, expiration, formState}) => (
-  <div className={`card white_container ${formState && !formState.errors.number ? 'card--visa' : ''}`}>
+export const PaymentCard = ({number, expiration, validationErrors}) => (
+  <div className={`card white_container ${!validationErrors ? 'card--visa' : ''}`}>
     <div className="card__expiration">{expiration}</div>
     <div className="card__number">{number}</div>
   </div>
@@ -10,5 +10,6 @@ export const PaymentCard = ({number, expiration, formState}) => (
 
 PaymentCard.propTypes = {
   number: PropTypes.string,
-  expiration: PropTypes.string
+  expiration: PropTypes.string,
+  validationErrors: PropTypes.object
 };

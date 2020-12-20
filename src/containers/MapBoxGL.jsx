@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl';
 import {connect} from 'react-redux';
 import {getMapLayerParams} from '../utils/mapLayerParams';
-window.URL.createObjectURL = function () {};
-
 class Map extends Component {
   initialCenterMap = [30.3056504, 59.9429126];
   initialZoom = 10;
@@ -16,7 +14,8 @@ class Map extends Component {
   };
 
   componentDidMount() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoidGltcmF3b3JrMTIzIiwiYSI6ImNraHhoZjB6ODAxMnQycnM3b2lvcWlwemYifQ.vsaprJd2gGI-DvkUfwxDeA';
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoidGltcmF3b3JrMTIzIiwiYSI6ImNraHhoZjB6ODAxMnQycnM3b2lvcWlwemYifQ.vsaprJd2gGI-DvkUfwxDeA';
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,

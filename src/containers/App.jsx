@@ -1,15 +1,13 @@
 import React from 'react';
 import {Route, Switch, Redirect, useLocation} from 'react-router-dom';
 
-import {Header} from './Header';
-
-import {MapWithAuth} from '../containers/Мap';
-import {LoginWithAuth} from '../containers/Login';
-import {ProfileWithAuth} from '../containers/Profile';
-import {RegistrationWithAuth} from '../containers/Registration';
+import {Header} from '../components/Header';
+import {MapWithAuth} from './Мap';
+import {LoginWithAuth} from './Login';
+import {ProfileWithAuth} from './Profile';
+import {RegistrationWithAuth} from './Registration';
 
 import {PrivateRoute} from '../utils/PrivateRoute';
-import {ProfileSuccess} from './ProfileSuccess';
 
 export const App = () => {
   const currentPath = useLocation().pathname;
@@ -21,13 +19,12 @@ export const App = () => {
       <Header />
       <main className="main">
         <Switch>
-          <Route path="/registration/" component={RegistrationWithAuth} />
           <Route path="/login/" exact component={LoginWithAuth} />
           <Route path="/logout/" component={LoginWithAuth} />
+          <Route path="/registration/" component={RegistrationWithAuth} />
 
           <PrivateRoute path="/map/" component={MapWithAuth} />
           <PrivateRoute path="/profile/" component={ProfileWithAuth} />
-          <PrivateRoute path="/profile/" component={ProfileSuccess} />
 
           <Redirect to="/login/" component={LoginWithAuth} />
         </Switch>

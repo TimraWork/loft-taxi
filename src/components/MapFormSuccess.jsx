@@ -1,5 +1,6 @@
 import {Button, Paper, Typography} from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const MapFormSuccess = ({handleNewOrderClick}) => (
   <Paper className="text--center w--400 container--left" style={{padding: '30px'}}>
@@ -14,3 +15,7 @@ export const MapFormSuccess = ({handleNewOrderClick}) => (
     </Button>
   </Paper>
 );
+
+MapFormSuccess.propTypes = {
+  handleNewOrderClick: PropTypes.func
+};
