@@ -13,7 +13,6 @@ describe('Profile', () => {
     expect(wrapper.find('[name="number"]')).toHaveLength(1);
     expect(wrapper.find('[name="expiration"]')).toHaveLength(1);
     expect(wrapper.find('[name="cvc"]')).toHaveLength(1);
-
     expect(wrapper.find('#save-button')).toHaveLength(1);
   });
 });

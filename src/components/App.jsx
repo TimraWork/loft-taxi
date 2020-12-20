@@ -9,6 +9,7 @@ import {ProfileWithAuth} from '../containers/Profile';
 import {RegistrationWithAuth} from '../containers/Registration';
 
 import {PrivateRoute} from '../utils/PrivateRoute';
+import {ProfileSuccess} from './ProfileSuccess';
 
 export const App = () => {
   const currentPath = useLocation().pathname;
@@ -26,7 +27,7 @@ export const App = () => {
 
           <PrivateRoute path="/map/" component={MapWithAuth} />
           <PrivateRoute path="/profile/" component={ProfileWithAuth} />
-          <PrivateRoute path="/profile/" component={ProfileWithAuth} />
+          <PrivateRoute path="/profile/" component={ProfileSuccess} />
 
           <Redirect to="/login/" component={LoginWithAuth} />
         </Switch>

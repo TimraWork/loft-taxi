@@ -15,13 +15,11 @@ describe('App', () => {
   it('renders correctly', () => {
     const history = createMemoryHistory();
     history.push('/login/');
-
     const {container} = render(
       <Router history={history}>
         <App />
       </Router>
     );
-    // debug();
     expect(container.innerHTML).toMatch('LoginWithAuth component');
   });
 });

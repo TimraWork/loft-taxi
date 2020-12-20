@@ -30,18 +30,22 @@ const schema = yup.object().shape({
     .min(...Object.values(setMinMax(3)))
 });
 
-export const ProfileForm = ({number, expiration, name, cvc, cardNameOnChange, cardNumberOnChange, cardCvcOnChange, saveProfile}) => {
+export const ProfileForm = ({
+  name,
+  number,
+  expiration,
+  cvc,
+  cardNameOnChange,
+  cardNumberOnChange,
+  cardExpirationOnChange,
+  cardCvcOnChange,
+  saveProfile
+}) => {
   const {register, handleSubmit, errors, formState} = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema),
-    defaultValues: {name, number, cvc}
+    defaultValues: {name, number, cvc, expiration}
   });
-
-  const [selectedDate, setSelectedDate] = React.useState(expiration || '');
-
-  const handleDateOnChange = (date) => {
-    setSelectedDate(date.toISOString());
-  };
 
   return (
     <div className="center_block bg--cover">
@@ -60,12 +64,12 @@ export const ProfileForm = ({number, expiration, name, cvc, cardNameOnChange, ca
               <TextField label="Имя владельца" name="name" variant="standard" onChange={cardNameOnChange} inputRef={register} />
               <TextField
                 variant="standard"
-                label="Номер карты"
+                label="Номер карты *"
                 name="number"
-                onChange={cardNumberOnChange}
                 inputRef={register}
                 error={!!errors.number}
                 helperText={errors?.number?.message}
+                onChange={cardNumberOnChange}
               />
               <Grid container spacing={3} className="mb--30">
                 <Grid item xs={12} sm={6}>
@@ -74,22 +78,21 @@ export const ProfileForm = ({number, expiration, name, cvc, cardNameOnChange, ca
                       inputVariant="standard"
                       margin="none"
                       name="expiration"
-                      label="MM/YY"
+                      value={expiration}
+                      label="MM/YY *"
                       disableToolbar
                       format="MM/yy"
-                      value={selectedDate}
                       views={['year', 'month']}
                       disablePast="true"
-                      onChange={handleDateOnChange}
+                      onChange={cardExpirationOnChange}
                     />
                   </MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     variant="standard"
-                    label="CVC"
+                    label="CVC *"
                     name="cvc"
-                    inputProps={{type: 'number', maxLength: 3}}
                     inputRef={register}
                     error={!!errors.cvc}
                     helperText={errors?.cvc?.message}
@@ -99,17 +102,11 @@ export const ProfileForm = ({number, expiration, name, cvc, cardNameOnChange, ca
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <PaymentCard number={number} expiration={moment(selectedDate).format('MM/YY')} formState={formState} />
+              <PaymentCard number={number} expiration={moment(expiration).format('MM/YY')} formState={formState} />
             </Grid>
           </Grid>
           <div align="center">
-            <Button
-              id="save-button"
-              className="w--350"
-              onClick={handleSubmit(saveProfile.bind(this, selectedDate))}
-              type="submit"
-              disabled={!formState.isValid}
-            >
+            <Button id="save-button" className="w--350" onClick={handleSubmit(saveProfile)} type="submit" disabled={!formState.isValid}>
               Сохранить
             </Button>
           </div>
