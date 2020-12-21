@@ -35,7 +35,13 @@ export const Login = ({isLoggedIn, error, logOut, authenticate}) => {
       {isLoggedIn ? (
         <Redirect to="/map/" />
       ) : (
-        <LoginForm errors={errors} register={register} formState={formState} onSubmit={onSubmit} handleSubmit={handleSubmit} />
+        <LoginForm
+          errors={errors}
+          register={register}
+          formState={formState}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+        />
       )}
       {error && (
         <Alert className="server_error" severity="error">
