@@ -12,7 +12,7 @@ export const MapProfile = () => (
         Укажите информацию о банковской карте, чтобы сделать заказ.
       </Typography>
       <Link to="/profile/">
-        <Button className="w--350" style={{marginBottom: '10px'}}>
+        <Button className="w--350" style={{marginBottom: '10px'}} data-testid="ok-button">
           Перейти в профиль
         </Button>
       </Link>
