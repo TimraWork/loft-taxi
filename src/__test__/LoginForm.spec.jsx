@@ -1,13 +1,12 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-import {act} from '@testing-library/react';
+import {shallow} from 'enzyme';
 import {LoginForm} from '../components/LoginForm';
 import '@testing-library/jest-dom/extend-expect';
 
 jest.mock('react-redux', () => ({connect: () => (Component) => Component}));
 
 describe('LoginForm', () => {
-  let form, wrapper, props, inputEmail, inputPassword, submitButton, registrationLink;
+  let wrapper, props, inputEmail, inputPassword, submitButton, registrationLink;
 
   beforeAll(() => {
     props = {
@@ -17,7 +16,6 @@ describe('LoginForm', () => {
     };
     wrapper = shallow(<LoginForm {...props} />);
 
-    form = wrapper.find('.form');
     inputEmail = wrapper.find('[name="email"]');
     inputPassword = wrapper.find('[name="password"]');
     submitButton = wrapper.find('#login-button');
