@@ -31,15 +31,4 @@ describe('LoginForm', () => {
     expect(submitButton.is('[disabled]')).toBe(true);
     expect(registrationLink).toHaveLength(1);
   });
-
-  it('calls the submit with valid data', async () => {
-    await act(async () => {
-      inputEmail.simulate('change', {target: {value: 'test@test.com_'}});
-      inputPassword.simulate('change', {target: {value: '123123'}});
-      //Тут у сабмита должно быть disabled, тк неправильный логин
-      expect(form.simulate('submit')).toBeTruthy();
-      // console.log('submitButton = ', submitButton.debug());
-      // console.log('inputEmail = ', inputEmail.debug());
-    });
-  });
 });
