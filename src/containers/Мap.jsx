@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {getAddressList} from '../modules/addressList';
 import {getRoute} from '../modules/route';
 import {MapFormSuccess} from '../components/MapFormSuccess';
-import {isObjEmpty} from '../utils/functions';
+import {isObjNotEmpty} from '../utils/functions';
 
 const Map = ({addressList, getAddressList, getRoute, profile}) => {
   useEffect(() => {
@@ -49,7 +49,7 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
     <ErrorBoundary>
       <MapBoxGL />
       {isMapUpdated && <MapFormSuccess handleNewOrderClick={handleNewOrderClick} />}
-      {isObjEmpty(profile) && !isMapUpdated && (
+      {isObjNotEmpty(profile) && !isMapUpdated && (
         <MapForm
           locations={addressList}
           locationsTo={locationsTo}
@@ -61,7 +61,7 @@ const Map = ({addressList, getAddressList, getRoute, profile}) => {
           handleOrderOnClick={handleOrderOnClick}
         />
       )}
-      {!isObjEmpty(profile) && !isMapUpdated && <MapProfile />}
+      {!isObjNotEmpty(profile) && !isMapUpdated && <MapProfile />}
     </ErrorBoundary>
   );
 };

@@ -8,4 +8,4 @@ export const normalizeCardNumber = (value) =>
 
 export const normalizeCVC = (value) => value.replace(/\s/g, '').replace(/[^\d]/g, '').substr(0, 3) || ''; // numbers
 
-export const isObjEmpty = (obj) => Object.keys(obj).length;
+export const isObjNotEmpty = (obj) => Object.keys(obj).length;

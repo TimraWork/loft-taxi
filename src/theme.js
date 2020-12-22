@@ -97,7 +97,10 @@ export const theme = createMuiTheme({
           }
         },
         yearDisabled: {
-          color: GRAY_LIGHT
+          color: GRAY_LIGHT,
+          '&:hover, &.MuiPickersYear-yearSelected': {
+            background: 'transparent'
+          }
         }
       }
     },
@@ -108,6 +111,12 @@ export const theme = createMuiTheme({
           transition: 'all .4s',
           '&:hover, &.MuiPickersMonth-monthSelected': {
             background: GRAY_LIGHT
+          }
+        },
+        monthDisabled: {
+          color: GRAY_LIGHT,
+          '&:hover, &.MuiPickersMonth-monthSelected': {
+            background: 'transparent'
           }
         }
       }
