@@ -34,6 +34,7 @@ export const ProfileForm = ({
           <Grid item xs={12} sm={6}>
             <TextField
               label="Имя владельца"
+              id="name"
               name="name"
               variant="standard"
               onChange={cardNameOnChange}
@@ -42,6 +43,7 @@ export const ProfileForm = ({
             <TextField
               variant="standard"
               label="Номер карты *"
+              id="number"
               name="number"
               inputRef={register}
               error={!!errors.number}
@@ -55,6 +57,7 @@ export const ProfileForm = ({
                     inputVariant="standard"
                     margin="none"
                     name="expiration"
+                    id="expiration"
                     value={expiration}
                     label="MM/YY *"
                     disableToolbar
@@ -69,6 +72,7 @@ export const ProfileForm = ({
                 <TextField
                   variant="standard"
                   label="CVC *"
+                  id="cvc"
                   name="cvc"
                   inputRef={register}
                   error={!!errors.cvc}
