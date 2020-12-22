@@ -38,7 +38,13 @@ const Registration = ({isLoggedIn, error, logOut, register: registerUser}) => {
       {isLoggedIn ? (
         <Redirect to="/map/" />
       ) : (
-        <RegistrationForm errors={errors} register={register} formState={formState} onSubmit={onSubmit} handleSubmit={handleSubmit} />
+        <RegistrationForm
+          errors={errors}
+          register={register}
+          formState={formState}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+        />
       )}
       {error && (
         <Alert className="server_error" severity="error">
