@@ -1,12 +1,8 @@
 <svg width="46" height="28" viewBox="0 0 46 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g style="mix-blend-mode:multiply">
-<g style="mix-blend-mode:multiply">
-<path d="M14 28C21.732 28 28 21.732 28 14C28 6.26801 21.732 0 14 0C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28Z" fill="#F1F1F1"/>
-</g>
+<path d="M14 28C21.732 28 28 21.732 28 14C28 6.26801 21.732 0 14 0C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28Z" fill="#eb001b" fill-opacity="0.7"/>
 </g>
 <g style="mix-blend-mode:multiply">
-<g style="mix-blend-mode:multiply">
-<path d="M32 28C39.732 28 46 21.732 46 14C46 6.26801 39.732 0 32 0C24.268 0 18 6.26801 18 14C18 21.732 24.268 28 32 28Z" fill="#F1F1F1"/>
-</g>
+<path d="M32 28C39.732 28 46 21.732 46 14C46 6.26801 39.732 0 32 0C24.268 0 18 6.26801 18 14C18 21.732 24.268 28 32 28Z" fill="#f79e1b" fill-opacity="0.7"/>
 </g>
 </svg>

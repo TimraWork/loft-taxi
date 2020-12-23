@@ -1,9 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
-import '../setupTests';
 
-import {ProfileForm} from '../components/ProfileForm';
+import {RegistrationForm} from '../components/RegistrationForm';
 
 describe('Profile', () => {
   it('renders correctly', () => {
@@ -16,11 +15,11 @@ describe('Profile', () => {
         errors: {}
       }
     };
-    const wrapper = shallow(<ProfileForm {...props} />);
+    const wrapper = shallow(<RegistrationForm {...props} />);
+    expect(wrapper.find('[name="email"]')).toHaveLength(1);
     expect(wrapper.find('[name="name"]')).toHaveLength(1);
-    expect(wrapper.find('[name="number"]')).toHaveLength(1);
-    expect(wrapper.find('[name="expiration"]')).toHaveLength(1);
-    expect(wrapper.find('[name="cvc"]')).toHaveLength(1);
-    expect(wrapper.find('#save-button')).toHaveLength(1);
+    expect(wrapper.find('[name="surname"]')).toHaveLength(1);
+    expect(wrapper.find('[name="password"]')).toHaveLength(1);
+    expect(wrapper.find('#login-button')).toHaveLength(1);
   });
 });

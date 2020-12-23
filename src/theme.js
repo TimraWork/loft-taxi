@@ -31,7 +31,10 @@ export const theme = createMuiTheme({
           fontSize: '21px',
           fontWeight: 400,
           width: '100%',
-          backgroundColor: ACCENT
+          backgroundColor: ACCENT,
+          '&.Mui-disabled ': {
+            backgroundColor: GRAY_LIGHT
+          }
         },
         textPrimary: {
           '&:hover': {
@@ -80,6 +83,40 @@ export const theme = createMuiTheme({
         underline: {
           '&:before': {
             borderBottom: `1px solid ${GRAY_LIGHT}`
+          }
+        }
+      }
+    },
+    MuiPickersYear: {
+      styleOverrides: {
+        root: {
+          color: TEXT,
+          transition: 'all .3s',
+          '&:hover, &.MuiPickersYear-yearSelected': {
+            background: GRAY_LIGHT
+          }
+        },
+        yearDisabled: {
+          color: GRAY_LIGHT,
+          '&:hover, &.MuiPickersYear-yearSelected': {
+            background: 'transparent'
+          }
+        }
+      }
+    },
+    MuiPickersMonth: {
+      styleOverrides: {
+        root: {
+          color: TEXT,
+          transition: 'all .4s',
+          '&:hover, &.MuiPickersMonth-monthSelected': {
+            background: GRAY_LIGHT
+          }
+        },
+        monthDisabled: {
+          color: GRAY_LIGHT,
+          '&:hover, &.MuiPickersMonth-monthSelected': {
+            background: 'transparent'
           }
         }
       }

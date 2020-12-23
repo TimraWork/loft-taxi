@@ -4,58 +4,95 @@ import {editProfile} from '../modules/profile/actions';
 
 import {ProfileForm} from '../components/ProfileForm';
 import {ProfileSuccess} from '../components/ProfileSuccess';
+import {Alert} from '@material-ui/core';
+import {normalizeCardNumber, normalizeCVC} from '../utils/functions';
 
-export const Profile = ({token, profile, editProfile}) => {
-  const {cardNumber, expiryDate, cardName, cvc} = profile;
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 
+import {useForm} from 'react-hook-form';
+
+const setMinValidation = (countSymbols) => {
+  const message = `Должно быть ровно ${countSymbols} символа`;
+  return {countSymbols, message};
+};
+
+const schema = yup.object().shape({
+  name: yup.string(),
+  number: yup
+    .string()
+    .required('Поле обязательно для заполнения')
+    .min(...Object.values(setMinValidation(22))),
+  cvc: yup
+    .string()
+    .required('Поле обязательно для заполнения')
+    .min(...Object.values(setMinValidation(3)))
+});
+
+const Profile = ({token, profile, editProfile}) => {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false);
 
-  const [number, setNumber] = useState(cardNumber || '');
-  const [name, setName] = useState(cardName || '');
-  const [cvcValue, setCvcValue] = useState(cvc || '');
+  const [name, setName] = useState((profile && profile.cardName) || '');
+  const [number, setNumber] = useState((profile && profile.cardNumber) || '');
+  const [expiration, setExpiration] = useState((profile && profile.expiryDate) || new Date());
+  const [cvc, setCvcValue] = useState((profile && profile.cvc) || '');
 
-  const [expiration, setExpiration] = useState(expiryDate || new Date());
-
-  const validateNumbers = (inputValue) => inputValue.replace(/[^\d]/g, '');
-  const validateWhiteSpace = (inputValue) => (inputValue.length > 3 ? inputValue.match(/.{1,4}/g).join('  ') : inputValue);
-
-  const cardNumberOnChange = (e) => {
-    let inputValue = e.target.value;
-    inputValue = validateNumbers(inputValue);
-    inputValue = validateWhiteSpace(inputValue);
-    setNumber(inputValue);
-  };
+  const {register, handleSubmit, errors, formState} = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+    defaultValues: {name, number, cvc, expiration}
+  });
 
   const cardNameOnChange = (e) => {
-    const inputValue = e.target.value;
-    setName(inputValue);
+    setName(e.target.value);
+  };
+
+  const cardNumberOnChange = (e) => {
+    const {value} = e.target;
+    e.target.value = normalizeCardNumber(value);
+    setNumber(e.target.value);
+  };
+
+  const cardExpirationOnChange = (date) => {
+    setExpiration(date.toISOString());
   };
 
   const cardCvcOnChange = (e) => {
-    let inputValue = e.target.value;
-    inputValue = validateNumbers(inputValue);
-    setCvcValue(inputValue);
+    const {value} = e.target;
+    e.target.value = normalizeCVC(value);
+    setCvcValue(e.target.value);
   };
 
-  const saveProfile = (selectedDate) => {
-    setExpiration(selectedDate);
-    editProfile(token, number, selectedDate, name, cvcValue);
+  const saveProfile = () => {
+    editProfile(token, number, expiration, name, cvc);
     setIsProfileUpdated(true);
   };
 
-  return isProfileUpdated ? (
-    <ProfileSuccess />
-  ) : (
-    <ProfileForm
-      saveProfile={saveProfile}
-      number={number}
-      cardNumberOnChange={cardNumberOnChange}
-      expiration={expiration}
-      name={name}
-      cardNameOnChange={cardNameOnChange}
-      cvc={cvcValue}
-      cardCvcOnChange={cardCvcOnChange}
-    />
+  return (
+    <>
+      {isProfileUpdated ? (
+        <ProfileSuccess />
+      ) : (
+        <ProfileForm
+          errors={errors}
+          register={register}
+          formState={formState}
+          handleSubmit={handleSubmit}
+          expiration={expiration}
+          number={number}
+          cardNameOnChange={cardNameOnChange}
+          cardNumberOnChange={cardNumberOnChange}
+          cardExpirationOnChange={cardExpirationOnChange}
+          cardCvcOnChange={cardCvcOnChange}
+          saveProfile={saveProfile}
+        />
+      )}
+      {profile && profile.error && (
+        <Alert className="server_error" severity="error">
+          {profile && profile.error}
+        </Alert>
+      )}
+    </>
   );
 };
 

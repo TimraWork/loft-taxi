@@ -1,6 +1,4 @@
-import React from 'react';
-import '@testing-library/jest-dom';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import '../setupTests';
 
 import {MapForm} from '../components/MapForm';
@@ -8,9 +6,9 @@ import {MapForm} from '../components/MapForm';
 describe('MapForm', () => {
   let wrapper;
   it('renders correctly', () => {
-    wrapper = shallow(<MapForm />);
-    expect(wrapper.find('#from')).toHaveLength(1);
-    expect(wrapper.find('#to')).toHaveLength(1);
-    expect(wrapper.find('#order-button')).toHaveLength(1);
+    wrapper = mount(<MapForm />);
+    expect(wrapper.find('input[name="from"]')).toHaveLength(1);
+    expect(wrapper.find('input[name="to"]')).toHaveLength(1);
+    expect(wrapper.find('button#order-button')).toHaveLength(1);
   });
 });

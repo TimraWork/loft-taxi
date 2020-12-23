@@ -4,8 +4,13 @@ import {render} from '@testing-library/react';
 
 describe('PaymentCard', () => {
   it('renders correctly', () => {
-    const {getByTestId} = render(<PaymentCard />);
-    expect(getByTestId('expiration')).toBeTruthy();
-    expect(getByTestId('number')).toBeTruthy();
+    const props = {
+      number: '',
+      expiration: '',
+      formState: {}
+    };
+    const {container} = render(<PaymentCard {...props} />);
+    expect(container.innerHTML).toMatch(props.number);
+    expect(container.innerHTML).toMatch(props.expiration);
   });
 });

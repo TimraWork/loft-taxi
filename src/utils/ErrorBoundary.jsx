@@ -1,19 +1,24 @@
+import {Alert} from '@material-ui/core';
 import React, {Component} from 'react';
 
 class ErrorBoundary extends Component {
   state = {
-    hasError: false,
+    hasError: false
   };
 
   componentDidCatch() {
     this.setState({
-      hasError: true,
+      hasError: true
     });
   }
 
   render() {
     if (this.state.hasError) {
-      return <p>Error occurred!</p>;
+      return (
+        <Alert className="server_error" severity="error">
+          Ошибка рендера компонента
+        </Alert>
+      );
     }
 
     return this.props.children;

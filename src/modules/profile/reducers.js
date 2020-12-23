@@ -1,4 +1,4 @@
-import {SET_PROFILE, REMOVE_PROFILE} from './actions';
+import {SET_PROFILE, REMOVE_PROFILE, EDIT_PROFILE_FAILED} from './actions';
 
 // eslint-disable-next-line
 export default function (state = {}, action) {
@@ -8,6 +8,9 @@ export default function (state = {}, action) {
     }
     case REMOVE_PROFILE: {
       return {};
+    }
+    case EDIT_PROFILE_FAILED: {
+      return {error: action.payload.error};
     }
     default:
       return state;

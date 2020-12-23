@@ -1,8 +1,9 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
-import {AUTHENTICATE, LOG_OUT, logIn} from './actions';
+import {AUTHENTICATE, LOG_OUT, logIn, logInFailed} from './actions';
 import {getProfile, removeProfile} from '../profile/actions';
 import {removeRoute} from '../route/actions';
 import {serverLogin, getServerCard} from '../../redux/api';
+import {SERVER_ERROR_MESSAGE} from '../../utils/constants';
 
 export function* handleAuthorizationSaga(action) {
   try {
@@ -11,11 +12,12 @@ export function* handleAuthorizationSaga(action) {
     if (authenticateData.success) {
       yield call(getServerCard, authenticateData.token);
       yield put(getProfile(authenticateData.token));
-
       yield put(logIn(authenticateData.token));
+    } else {
+      yield put(logInFailed(authenticateData.error));
     }
   } catch (e) {
-    console.log(e);
+    yield put(logInFailed(SERVER_ERROR_MESSAGE));
   }
 }
 

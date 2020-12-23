@@ -276,6 +276,12 @@ main {
   align-items: center;
   background: url('../img/logo-icon.svg') no-repeat 18px 18px/33px 33px, url('../img/card-chip.svg') no-repeat 18px calc(100% - 18px),
     url('../img/card-circles.svg') no-repeat calc(100% - 18px) calc(100% - 18px);
+  filter: grayscale(1);
+  opacity: 0.8;
+  &--visa {
+    filter: none;
+    opacity: 1;
+  }
   &__expiration {
     position: absolute;
     right: 18px;
@@ -309,4 +315,9 @@ main {
     object-fit: contain;
     margin: -5px 0 -10px;
   }
+}
+
+.server_error {
+  position: absolute !important;
+  top: 15px;
 }

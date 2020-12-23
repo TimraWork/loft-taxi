@@ -1,8 +1,9 @@
-import {LOG_IN, LOG_OUT} from './actions';
+import {LOG_IN, LOG_OUT, LOG_IN_FAILED} from './actions';
 
 const initialState = {
   isLoggedIn: false,
   token: '',
+  error: ''
 };
 
 // eslint-disable-next-line
@@ -12,7 +13,10 @@ export default function (state = initialState, action) {
       return {isLoggedIn: true, token: action.payload.token};
     }
     case LOG_OUT: {
-      return {isLoggedIn: false, token: ''};
+      return {isLoggedIn: false, token: '', error: ''};
+    }
+    case LOG_IN_FAILED: {
+      return {isLoggedIn: false, token: '', error: action.payload.error};
     }
     default:
       return state;

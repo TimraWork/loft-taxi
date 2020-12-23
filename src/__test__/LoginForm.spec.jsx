@@ -1,18 +1,32 @@
 import React from 'react';
-import '@testing-library/jest-dom';
 import {shallow} from 'enzyme';
-
 import {LoginForm} from '../components/LoginForm';
+import '@testing-library/jest-dom/extend-expect';
 
 jest.mock('react-redux', () => ({connect: () => (Component) => Component}));
 
 describe('LoginForm', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(<LoginForm />);
+  let wrapper, props, inputEmail, inputPassword, submitButton, registrationLink;
 
-    expect(wrapper.find('[name="email"]')).toHaveLength(1);
-    expect(wrapper.find('[name="password"]')).toHaveLength(1);
-    expect(wrapper.find('#login-button')).toHaveLength(1);
-    expect(wrapper.find('#registration-link')).toHaveLength(1);
+  beforeAll(() => {
+    props = {
+      handleSubmit: jest.fn(),
+      errors: {},
+      formState: {}
+    };
+    wrapper = shallow(<LoginForm {...props} />);
+
+    inputEmail = wrapper.find('[name="email"]');
+    inputPassword = wrapper.find('[name="password"]');
+    submitButton = wrapper.find('#login-button');
+    registrationLink = wrapper.find('#registration-link');
+  });
+
+  it('renders correctly', async () => {
+    expect(inputEmail).toHaveLength(1);
+    expect(inputPassword).toHaveLength(1);
+    expect(submitButton).toHaveLength(1);
+    expect(submitButton.is('[disabled]')).toBe(true);
+    expect(registrationLink).toHaveLength(1);
   });
 });

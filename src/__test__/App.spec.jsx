@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import {App} from '../components/App';
+import {App} from '../containers/App';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 
@@ -15,13 +15,11 @@ describe('App', () => {
   it('renders correctly', () => {
     const history = createMemoryHistory();
     history.push('/login/');
-
     const {container} = render(
       <Router history={history}>
         <App />
       </Router>
     );
-    // debug();
     expect(container.innerHTML).toMatch('LoginWithAuth component');
   });
 });
