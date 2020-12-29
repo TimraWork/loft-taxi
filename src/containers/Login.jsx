@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {LoginForm} from '../components/LoginForm';
-import {Alert} from '@material-ui/core';
+import {Alert, CircularProgress} from '@material-ui/core';
 import {logOut, authenticate} from '../modules/auth';
 
 import {useForm} from 'react-hook-form';
@@ -20,12 +20,19 @@ const Login = ({isLoggedIn, error, logOut, authenticate}) => {
     logOut();
   }, [logOut]);
 
+  useEffect(() => {
+    if (error) setIsLoading(false);
+  }, [error]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const {register, handleSubmit, errors, formState} = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema)
   });
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     const {email, password} = data;
     authenticate(email, password);
   };
@@ -48,6 +55,7 @@ const Login = ({isLoggedIn, error, logOut, authenticate}) => {
           {error}
         </Alert>
       )}
+      {isLoading && <CircularProgress />}
     </>
   );
 };
