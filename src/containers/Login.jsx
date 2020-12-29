@@ -15,7 +15,7 @@ const schema = yup.object().shape({
   password: yup.string().required('Пароль - обязательное поле')
 });
 
-export const Login = ({isLoggedIn, error, logOut, authenticate}) => {
+const Login = ({isLoggedIn, error, logOut, authenticate}) => {
   useEffect(() => {
     logOut();
   }, [logOut]);
