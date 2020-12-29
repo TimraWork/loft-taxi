@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/loft-taxi/static/css/main.1cd12172.chunk.css",
+    "main.js": "/loft-taxi/static/js/main.bc971bfd.chunk.js",
+    "main.js.map": "/loft-taxi/static/js/main.bc971bfd.chunk.js.map",
+    "runtime-main.js": "/loft-taxi/static/js/runtime-main.ace393e4.js",
+    "runtime-main.js.map": "/loft-taxi/static/js/runtime-main.ace393e4.js.map",
+    "static/js/2.08369ceb.chunk.js": "/loft-taxi/static/js/2.08369ceb.chunk.js",
+    "static/js/2.08369ceb.chunk.js.map": "/loft-taxi/static/js/2.08369ceb.chunk.js.map",
+    "index.html": "/loft-taxi/index.html",
+    "static/css/main.1cd12172.chunk.css.map": "/loft-taxi/static/css/main.1cd12172.chunk.css.map",
+    "static/js/2.08369ceb.chunk.js.LICENSE.txt": "/loft-taxi/static/js/2.08369ceb.chunk.js.LICENSE.txt",
+    "static/media/car1.ff391623.png": "/loft-taxi/static/media/car1.ff391623.png",
+    "static/media/car2.31785f35.png": "/loft-taxi/static/media/car2.31785f35.png",
+    "static/media/car3.9b4f218d.png": "/loft-taxi/static/media/car3.9b4f218d.png",
+    "static/media/main.scss": "/loft-taxi/static/media/map.26186fcd.jpg",
+    "static/media/logo-text.960eac80.svg": "/loft-taxi/static/media/logo-text.960eac80.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ace393e4.js",
+    "static/js/2.08369ceb.chunk.js",
+    "static/css/main.1cd12172.chunk.css",
+    "static/js/main.bc971bfd.chunk.js"
+  ]
+}
