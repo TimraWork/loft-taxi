@@ -6,7 +6,7 @@ import './assets/style/main.scss';
 
 import {App} from './containers/App';
 import {CssBaseline} from '@material-ui/core';
-import {HashRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import {PersistGate} from 'redux-persist/integration/react';
@@ -19,9 +19,9 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <CssBaseline />
-        <HashRouter>
+        <BrowserRouter basename="/loft-taxi">
           <App />
-        </HashRouter>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </MuiThemeProvider>,
