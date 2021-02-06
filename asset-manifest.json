@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/loft-taxi/static/css/main.1cd12172.chunk.css",
-    "main.js": "/loft-taxi/static/js/main.6e44d03f.chunk.js",
-    "main.js.map": "/loft-taxi/static/js/main.6e44d03f.chunk.js.map",
+    "main.js": "/loft-taxi/static/js/main.bca532bc.chunk.js",
+    "main.js.map": "/loft-taxi/static/js/main.bca532bc.chunk.js.map",
     "runtime-main.js": "/loft-taxi/static/js/runtime-main.ace393e4.js",
     "runtime-main.js.map": "/loft-taxi/static/js/runtime-main.ace393e4.js.map",
     "static/js/2.a45a45d3.chunk.js": "/loft-taxi/static/js/2.a45a45d3.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.ace393e4.js",
     "static/js/2.a45a45d3.chunk.js",
     "static/css/main.1cd12172.chunk.css",
-    "static/js/main.6e44d03f.chunk.js"
+    "static/js/main.bca532bc.chunk.js"
   ]
 }
