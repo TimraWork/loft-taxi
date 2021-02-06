@@ -14,6 +14,18 @@ const fetchData = (dataUrl, params) =>
       console.log('Could not fetch', err);
     });
 
+export const getServerCard = async (token) => {
+  return await fetchData(`${BASE_API_URL}/card?token=${token}`, {});
+};
+
+export const getServerAddressList = () => {
+  return fetchData(`${BASE_API_URL}/addressList`, {});
+};
+
+export const getServerRoute = (payload) => {
+  return fetchData(`${BASE_API_URL}/route?address1=${payload.address1}&address2=${payload.address2}`, {});
+};
+
 export const serverLogin = async (payload) => {
   const params = {
     ...commonParams,
@@ -47,16 +59,4 @@ export const serverCard = async ({token, cardNumber, expiryDate, cardName, cvc})
     })
   };
   return await fetchData(`${BASE_API_URL}/card`, params);
-};
-
-export const getServerCard = async (token) => {
-  return await fetchData(`${BASE_API_URL}/card?token=${token}`, {});
-};
-
-export const getServerAddressList = () => {
-  return fetchData(`${BASE_API_URL}/addressList`, {});
-};
-
-export const getServerRoute = (payload) => {
-  return fetchData(`${BASE_API_URL}/route?address1=${payload.address1}&address2=${payload.address2}`, {});
 };
